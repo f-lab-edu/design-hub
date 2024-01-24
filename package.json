@@ -1,0 +1,11 @@
+{
+  "name": "design-hub",
+  "private": true,
+  "workspaces": [
+    "packages/**"
+  ],
+  "scripts": {
+    "a": "pnpm -F @hub/ark",
+    "p": "pnpm -F @hub/playground"
+  }
+}
