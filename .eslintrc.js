@@ -95,7 +95,6 @@ module.exports = {
     "@typescript-eslint/no-var-requires": ["error"],
     "@typescript-eslint/explicit-module-boundary-types": ["error"],
     "@typescript-eslint/no-non-null-assertion": ["error"],
-    "@typescript-eslint/explicit-function-return-type": ["error"],
     "@typescript-eslint/array-type": ["error", { default: "array" }],
 
     "import/prefer-default-export": "off",
