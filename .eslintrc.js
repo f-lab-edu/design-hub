@@ -93,7 +93,6 @@ module.exports = {
       },
     ],
     "@typescript-eslint/no-var-requires": ["error"],
-    "@typescript-eslint/explicit-module-boundary-types": ["error"],
     "@typescript-eslint/no-non-null-assertion": ["error"],
     "@typescript-eslint/array-type": ["error", { default: "array" }],
 
