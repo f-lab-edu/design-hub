@@ -20,7 +20,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "panda": "panda",
+    "panda:dev": "panda --watch",
+    "prepare": "panda codegen"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +44,6 @@
     ]
   },
   "devDependencies": {
-    "@pandacss/dev": "^0.27.3"
+    "@pandacss/dev": "^0.28.0"
   }
 }
