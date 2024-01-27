@@ -23,6 +23,9 @@
   "devDependencies": {
     "@hub/hds": "workspace:*",
     "@pandacss/dev": "^0.28.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
