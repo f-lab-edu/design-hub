@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 
 import styles from "@/styles/Home.module.css";
+import Button from "@hub/hds/components/button/Button";
 
 import { css } from "../../styled-system/css";
 
@@ -15,6 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={css({ bg: "red.200" })}>
+        <Button>버튼임</Button>
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
