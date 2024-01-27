@@ -5,7 +5,7 @@
     "packages/**"
   ],
   "scripts": {
-    "a": "pnpm -F @hub/ark",
+    "h": "pnpm -F @hub/hds",
     "p": "pnpm -F @hub/playground"
   }
 }
