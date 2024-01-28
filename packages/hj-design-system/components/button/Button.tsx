@@ -76,6 +76,8 @@ const StyledButton = styled.button<ButtonProps>`
 
   ${({ colorScheme = "blue", variant = "solid" }) =>
     getColorScheme(colorScheme, variant)};
+
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
 `;
 
 export default Button;

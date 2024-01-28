@@ -1,7 +1,7 @@
 import { type ElementType, type ReactElement } from "react";
 
 export type ButtonSizeSet = "xs" | "sm" | "md" | "lg";
-export type ButtonVariants = "solid" | "outline";
+export type ButtonVariants = "solid" | "outline" | "ghost" | "link";
 export type ButtonColorScheme =
   | "blue"
   | "gray"
@@ -19,7 +19,7 @@ export interface ButtonProps
    * The variant of the button style to use.
    * @default "solid"
    * */
-  variant?: "solid" | "outline";
+  variant?: ButtonVariants;
   /**
    * The size of the button.
    * @default "md"

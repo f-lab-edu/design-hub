@@ -19,10 +19,16 @@ Basic.args = {
 
 export const Variants = (props: ButtonProps) => (
   <>
-    <Button {...props} variant="outline" colorScheme="red">
+    <Button {...props} variant="solid" colorScheme="pink">
+      solid
+    </Button>
+    <Button {...props} variant="outline" colorScheme="pink">
       outline
     </Button>
-    <Button {...props} variant="solid" colorScheme="red">
+    <Button {...props} variant="ghost" colorScheme="pink">
+      ghost
+    </Button>
+    <Button {...props} variant="link" colorScheme="pink">
       solid
     </Button>
   </>
