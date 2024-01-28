@@ -9,11 +9,20 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      compilerOptions: {
+        allowSyntheticDefaultImports: false,
+        esModuleInterop: false,
+      },
+      propFilter: () => true,
+    }},
   docs: {
     autodocs: 'tag',
   },
   viteFinal: async (config) => {
-    return mergeConfig(config, { plugins: viteTsconfig(), define: { 'process.env': {} } });
+    return mergeConfig(config, { plugins: viteTsconfig({ projects: ['.storybook/tsconfig.json'] }), define: { 'process.env': {} } });
   },
 };
 

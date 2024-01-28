@@ -3,6 +3,7 @@
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "composite": true
+    "composite": true,
+    "baseUrl": ".",
   }
 }
