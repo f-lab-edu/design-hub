@@ -17,8 +17,9 @@ export default function Home() {
       </Head>
       <main className={css({ bg: "red.200" })}>
         <Button
+          disabled
           width="full"
-          colorScheme="purple"
+          colorScheme="blue"
           variant="outline"
           leftIcon={
             <svg
