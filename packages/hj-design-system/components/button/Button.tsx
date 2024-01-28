@@ -1,52 +1,77 @@
-import { type ElementType, type ReactElement } from "react";
-
 import styled from "@emotion/styled";
 
 import { foundations } from "../../theme/foundations";
-import { SIZE_MAP } from "./styles";
-import { type ButtonSizeSet } from "./types";
+import { getColorScheme, getWidth, SIZE_MAP } from "./styles";
+import { type ButtonProps } from "./types";
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variants?: "solid" | "outline";
-  /*
-   * The variant of the button.
-   */
-  size?: ButtonSizeSet;
-  /*
-   * The size of the button.
-   */
-  colorScheme?: "primary" | "secondary" | "danger";
-  /*
-   * The color scheme of the button.
-   */
-  leftIcon?: ReactElement;
-  /*
-   * If added, the icon will appear on the left.
-   */
-  rightIcon?: ReactElement;
-  /*
-   * If added, the icon will appear on the right.
-   */
-  as?: ElementType;
-}
+const Button = ({
+  variant = "solid",
+  size,
+  children,
+  width,
+  colorScheme,
+  as,
+  leftIcon,
+  rightIcon,
+  iconSpacing,
+}: ButtonProps) => {
+  const contentProps = { leftIcon, rightIcon, iconSpacing, children };
 
-const Button = ({ variants = "solid", size, children }: Props) => {
-  return <StyledButton size={size}>{children}</StyledButton>;
+  return (
+    <StyledButton
+      as={as}
+      size={size}
+      variant={variant}
+      width={width}
+      colorScheme={colorScheme}
+    >
+      <ButtonContent {...contentProps} />
+    </StyledButton>
+  );
 };
 
-const StyledButton = styled.button<Props>`
+type ButtonContentProps = Pick<
+  ButtonProps,
+  "leftIcon" | "rightIcon" | "children" | "iconSpacing"
+>;
+
+const ButtonContent = (props: ButtonContentProps) => {
+  const { leftIcon, rightIcon, children, iconSpacing } = props;
+  return (
+    <>
+      {leftIcon && (
+        <span style={{ marginRight: foundations.space[1] || iconSpacing }}>
+          {leftIcon}
+        </span>
+      )}
+      {children}
+      {rightIcon && (
+        <span style={{ marginLeft: foundations.space[1] || iconSpacing }}>
+          {rightIcon}
+        </span>
+      )}
+    </>
+  );
+};
+
+const StyledButton = styled.button<ButtonProps>`
   position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   border-radius: ${foundations.radii.md};
-  background-color: ${foundations.colors.blue[500]};
+
   padding-inline-start: ${foundations.space[4]};
   padding-inline-end: ${foundations.space[4]};
   color: ${foundations.colors.white};
   font-weight: ${foundations.fontWeights.semibold};
 
   ${({ size = "md" }) => SIZE_MAP[size]};
+
+  ${({ width = "auto" }) => getWidth(width)};
+
+  ${({ colorScheme = "blue", variant = "solid" }) =>
+    getColorScheme(colorScheme, variant)};
 `;
 
 export default Button;
