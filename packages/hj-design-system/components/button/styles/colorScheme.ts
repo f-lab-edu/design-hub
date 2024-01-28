@@ -11,10 +11,14 @@ type ColorSchemeWithVariant = {
   [variant in ButtonVariants]: SerializedStyles;
 };
 
-const ButtonColorScheme: Record<ButtonColorScheme, ColorSchemeWithVariant> = {
+const BUTTON_COLOR_SCHEME_MAP: Record<
+  ButtonColorScheme,
+  ColorSchemeWithVariant
+> = {
   blue: {
     solid: css({
       color: foundations.colors.white,
+      border: "none",
       backgroundColor: foundations.colors.blue[500],
       "@media(hover:hover)": {
         "&:hover": {
@@ -43,6 +47,7 @@ const ButtonColorScheme: Record<ButtonColorScheme, ColorSchemeWithVariant> = {
   gray: {
     solid: css({
       color: foundations.colors.white,
+      border: "none",
       backgroundColor: foundations.colors.gray[500],
       "@media(hover:hover)": {
         "&:hover": {
@@ -71,6 +76,7 @@ const ButtonColorScheme: Record<ButtonColorScheme, ColorSchemeWithVariant> = {
   teal: {
     solid: css({
       color: foundations.colors.white,
+      border: "none",
       backgroundColor: foundations.colors.teal[500],
       "@media(hover:hover)": {
         "&:hover": {
@@ -99,6 +105,7 @@ const ButtonColorScheme: Record<ButtonColorScheme, ColorSchemeWithVariant> = {
   red: {
     solid: css({
       color: foundations.colors.white,
+      border: "none",
       backgroundColor: foundations.colors.red[500],
       "@media(hover:hover)": {
         "&:hover": {
@@ -127,6 +134,7 @@ const ButtonColorScheme: Record<ButtonColorScheme, ColorSchemeWithVariant> = {
   orange: {
     solid: css({
       color: foundations.colors.white,
+      border: "none",
       backgroundColor: foundations.colors.orange[500],
       "@media(hover:hover)": {
         "&:hover": {
@@ -155,6 +163,7 @@ const ButtonColorScheme: Record<ButtonColorScheme, ColorSchemeWithVariant> = {
   yellow: {
     solid: css({
       color: foundations.colors.white,
+      border: "none",
       backgroundColor: foundations.colors.yellow[500],
       "@media(hover:hover)": {
         "&:hover": {
@@ -183,6 +192,7 @@ const ButtonColorScheme: Record<ButtonColorScheme, ColorSchemeWithVariant> = {
   pink: {
     solid: css({
       color: foundations.colors.white,
+      border: "none",
       backgroundColor: foundations.colors.pink[500],
       "@media(hover:hover)": {
         "&:hover": {
@@ -211,6 +221,7 @@ const ButtonColorScheme: Record<ButtonColorScheme, ColorSchemeWithVariant> = {
   purple: {
     solid: css({
       color: foundations.colors.white,
+      border: "none",
       backgroundColor: foundations.colors.purple[500],
       "@media(hover:hover)": {
         "&:hover": {
@@ -239,6 +250,7 @@ const ButtonColorScheme: Record<ButtonColorScheme, ColorSchemeWithVariant> = {
   green: {
     solid: css({
       color: foundations.colors.white,
+      border: "none",
       backgroundColor: foundations.colors.green[500],
       "@media(hover:hover)": {
         "&:hover": {
@@ -269,4 +281,4 @@ const ButtonColorScheme: Record<ButtonColorScheme, ColorSchemeWithVariant> = {
 export const getColorScheme = (
   colorScheme: Pick<ButtonProps, "colorScheme">["colorScheme"] = "blue",
   variant: Pick<ButtonProps, "variant">["variant"] = "solid",
-) => ButtonColorScheme[colorScheme][variant];
+) => BUTTON_COLOR_SCHEME_MAP[colorScheme][variant];
