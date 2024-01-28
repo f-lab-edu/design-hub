@@ -84,6 +84,17 @@ export const ColorSchemes = (props: ButtonProps) => (
   </>
 );
 
+export const Disabled = (props: ButtonProps) => (
+  <>
+    <Button {...props} disabled>
+      disabled
+    </Button>
+    <Button {...props} disabled variant="outline">
+      disabled
+    </Button>
+  </>
+);
+
 export const Width = (props: ButtonProps) => (
   <>
     <Button {...props} width="full">
