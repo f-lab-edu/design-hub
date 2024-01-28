@@ -14,6 +14,7 @@ const Button = ({
   leftIcon,
   rightIcon,
   iconSpacing,
+  onClick,
 }: ButtonProps) => {
   const contentProps = { leftIcon, rightIcon, iconSpacing, children };
 
@@ -24,6 +25,7 @@ const Button = ({
       variant={variant}
       width={width}
       colorScheme={colorScheme}
+      onClick={onClick}
     >
       <ButtonContent {...contentProps} />
     </StyledButton>
@@ -72,6 +74,8 @@ const StyledButton = styled.button<ButtonProps>`
 
   ${({ colorScheme = "blue", variant = "solid" }) =>
     getColorScheme(colorScheme, variant)};
+
+  cursor: pointer;
 `;
 
 export default Button;
