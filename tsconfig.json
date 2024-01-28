@@ -23,7 +23,7 @@
         "path": "./packages/hj-design-system"
       },
       {
-        "path": "./packages/playgrund"
+        "path": "./packages/playground"
       },
     ]
   }
