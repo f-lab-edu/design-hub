@@ -17,13 +17,5 @@
       "baseUrl": ".",
     },
     "exclude": ["node_modules"],
-    "files": [],
-    "references": [
-      {
-        "path": "./packages/hj-design-system"
-      },
-      {
-        "path": "./packages/playground"
-      },
-    ]
+    "files": []
   }
