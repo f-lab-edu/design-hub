@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 import { foundations } from "../../theme/foundations";
-import { getColorScheme, getWidth, SIZE_MAP } from "./styles";
+import { base, getColorScheme, getWidth, SIZE_MAP } from "./styles";
 import { type ButtonProps } from "./types";
 
 const Button = ({
@@ -59,16 +59,7 @@ const ButtonContent = (props: ButtonContentProps) => {
 };
 
 const StyledButton = styled.button<ButtonProps>`
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: ${foundations.radii.md};
-
-  padding-inline-start: ${foundations.space[4]};
-  padding-inline-end: ${foundations.space[4]};
-  color: ${foundations.colors.white};
-  font-weight: ${foundations.fontWeights.semibold};
+  ${base};
 
   ${({ size = "md" }) => SIZE_MAP[size]};
 
