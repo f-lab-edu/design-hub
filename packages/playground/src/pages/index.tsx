@@ -1,9 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
 
-const inter = Inter({ subsets: ["latin"] });
+import styles from "@/styles/Home.module.css";
+import Button from "@hub/hds/components/button/Button";
+
+import { css } from "../../styled-system/css";
 
 export default function Home() {
   return (
@@ -14,7 +15,30 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
+      <main className={css({ bg: "red.200" })}>
+        <Button
+          disabled
+          width="full"
+          colorScheme="blue"
+          variant="outline"
+          leftIcon={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#6b9bd2"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+            </svg>
+          }
+        >
+          버튼임
+        </Button>
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
