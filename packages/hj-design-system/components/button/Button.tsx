@@ -23,6 +23,7 @@ const Button: ButtonType = <C extends ElementType = "button">({
   iconSpacing,
   onClick,
   disabled,
+  ...rest
 }: ButtonProps<C>) => {
   const contentProps = { leftIcon, rightIcon, iconSpacing, children };
 
@@ -35,6 +36,7 @@ const Button: ButtonType = <C extends ElementType = "button">({
       colorScheme={colorScheme}
       onClick={onClick}
       disabled={disabled}
+      {...rest}
     >
       <ButtonContent {...contentProps} />
     </StyledButton>
