@@ -1,10 +1,17 @@
+import { type ElementType, type ReactElement } from "react";
+
 import styled from "@emotion/styled";
+import { type PolymorphicComponentProp } from "components/polymorphic";
 
 import { foundations } from "../../theme/foundations";
 import { base, getColorScheme, getWidth, SIZE_MAP } from "./styles";
 import { type ButtonProps } from "./types";
 
-const Button = ({
+type ButtonType = <C extends ElementType = "button">(
+  props: PolymorphicComponentProp<C, ButtonProps<C>>,
+) => ReactElement | null;
+
+const Button: ButtonType = <C extends ElementType = "button">({
   variant = "solid",
   size,
   children,
@@ -16,7 +23,7 @@ const Button = ({
   iconSpacing,
   onClick,
   disabled,
-}: ButtonProps) => {
+}: ButtonProps<C>) => {
   const contentProps = { leftIcon, rightIcon, iconSpacing, children };
 
   return (
@@ -35,7 +42,7 @@ const Button = ({
 };
 
 type ButtonContentProps = Pick<
-  ButtonProps,
+  ButtonProps<ElementType>,
   "leftIcon" | "rightIcon" | "children" | "iconSpacing"
 >;
 
@@ -58,7 +65,7 @@ const ButtonContent = (props: ButtonContentProps) => {
   );
 };
 
-const StyledButton = styled.button<ButtonProps>`
+const StyledButton = styled.button<ButtonProps<ElementType>>`
   ${base};
 
   ${({ size = "md" }) => SIZE_MAP[size]};
