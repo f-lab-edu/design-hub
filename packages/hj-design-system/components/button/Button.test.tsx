@@ -41,6 +41,17 @@ describe("Button", () => {
   });
 });
 
+describe("as", () => {
+  it("as 속성에 a를 넣으면 a 태그로 렌더링한다", () => {
+    render(
+      <Button as="a" href="https://f-lab.kr">
+        이건 링크임
+      </Button>,
+    );
+    expect(screen.getByRole("link")).toBeInTheDocument();
+  });
+});
+
 describe("Button Icon", () => {
   it("leftIcon을 렌더링한다", () => {
     render(<Button leftIcon={<span>leftIcon</span>}>버튼임</Button>);
