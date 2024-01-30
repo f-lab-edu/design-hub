@@ -1,3 +1,5 @@
+import { type ElementType } from "react";
+
 import { css, type SerializedStyles } from "@emotion/react";
 
 import { foundations } from "../../../theme/foundations";
@@ -679,6 +681,9 @@ const BUTTON_COLOR_SCHEME_MAP: Record<
 };
 
 export const getColorScheme = (
-  colorScheme: Pick<ButtonProps, "colorScheme">["colorScheme"] = "blue",
-  variant: Pick<ButtonProps, "variant">["variant"] = "solid",
+  colorScheme: Pick<
+    ButtonProps<ElementType>,
+    "colorScheme"
+  >["colorScheme"] = "blue",
+  variant: Pick<ButtonProps<ElementType>, "variant">["variant"] = "solid",
 ) => BUTTON_COLOR_SCHEME_MAP[colorScheme][variant];
