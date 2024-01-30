@@ -2,8 +2,8 @@
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
+*-storybook.log
+storybook-static
 
 # testing
 /coverage
