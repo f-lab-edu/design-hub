@@ -3,7 +3,6 @@ import { type ElementType, type ReactElement } from "react";
 import styled from "@emotion/styled";
 import { type PolymorphicComponentProp } from "components/polymorphic";
 
-import { foundations } from "../../theme/foundations";
 import { base, getColorScheme, getWidth, SIZE_MAP } from "./styles";
 import { type ButtonProps } from "./types";
 
@@ -20,12 +19,12 @@ const Button: ButtonType = <C extends ElementType = "button">({
   as,
   leftAddon,
   rightAddon,
-  iconSpacing,
+  addonStyles,
   onClick,
   disabled,
   ...rest
 }: ButtonProps<C>) => {
-  const contentProps = { leftAddon, rightAddon, iconSpacing, children };
+  const contentProps = { leftAddon, rightAddon, addonStyles, children };
 
   return (
     <StyledButton
@@ -45,24 +44,16 @@ const Button: ButtonType = <C extends ElementType = "button">({
 
 type ButtonContentProps = Pick<
   ButtonProps<ElementType>,
-  "leftAddon" | "rightAddon" | "children" | "iconSpacing"
+  "leftAddon" | "rightAddon" | "children" | "addonStyles"
 >;
 
 const ButtonContent = (props: ButtonContentProps) => {
-  const { leftAddon, rightAddon, children, iconSpacing } = props;
+  const { leftAddon, rightAddon, children, addonStyles } = props;
   return (
     <>
-      {leftAddon && (
-        <span style={{ marginRight: foundations.space[1] || iconSpacing }}>
-          {leftAddon}
-        </span>
-      )}
+      {leftAddon && <span style={{ ...addonStyles }}>{leftAddon}</span>}
       {children}
-      {rightAddon && (
-        <span style={{ marginLeft: foundations.space[1] || iconSpacing }}>
-          {rightAddon}
-        </span>
-      )}
+      {rightAddon && <span style={{ ...addonStyles }}>{rightAddon}</span>}
     </>
   );
 };

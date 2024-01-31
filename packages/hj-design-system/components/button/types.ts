@@ -1,4 +1,4 @@
-import { type ElementType, type ReactElement } from "react";
+import { type CSSProperties, type ElementType, type ReactElement } from "react";
 
 import { type PolymorphicComponentProp } from "components/polymorphic";
 
@@ -42,10 +42,10 @@ export type ButtonProps<C extends ElementType> = PolymorphicComponentProp<
      * */
     rightAddon?: ReactElement;
     /**
-     * The space between the button icon and label.
+     * The styles to apply to the add-on.
      * @default foundations.space[1]
      * */
-    iconSpacing?: number;
+    addonStyles?: CSSProperties;
     /**
      * The width of the button.
      * @default 'auto'
