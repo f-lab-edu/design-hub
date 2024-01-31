@@ -1,33 +1,47 @@
-import { type ElementType, type ReactElement } from "react";
+import {
+  type ElementType,
+  forwardRef,
+  type ForwardRefExoticComponent,
+  type RefAttributes,
+} from "react";
 
 import styled from "@emotion/styled";
-import { type PolymorphicComponentProp } from "components/polymorphic";
+import {
+  type PolymorphicComponentPropsWithRef,
+  type PolymorphicRef,
+} from "components/polymorphic";
 
 import { base, getColorScheme, getWidth, SIZE_MAP } from "./styles";
 import { type ButtonProps } from "./types";
 
-type ButtonType = <C extends ElementType = "button">(
-  props: PolymorphicComponentProp<C, ButtonProps<C>>
-) => ReactElement | null;
+type ButtonType<C extends ElementType = "button"> = ForwardRefExoticComponent<
+  PolymorphicComponentPropsWithRef<C, ButtonProps<C>> & RefAttributes<C>
+>;
 
-const Button: ButtonType = <C extends ElementType = "button">({
-  variant = "solid",
-  size,
-  children,
-  width,
-  colorScheme,
-  as,
-  leftAddon,
-  rightAddon,
-  addonStyles,
-  onClick,
-  disabled,
-  ...rest
-}: ButtonProps<C>) => {
+const Button: ButtonType = forwardRef(function Button<
+  C extends ElementType = "button",
+>(
+  {
+    variant = "solid",
+    size,
+    children,
+    width,
+    colorScheme,
+    as,
+    leftAddon,
+    rightAddon,
+    addonStyles,
+    onClick,
+    disabled,
+    ...rest
+  }: ButtonProps<C>,
+  ref?: PolymorphicRef<C>,
+) {
   const contentProps = { leftAddon, rightAddon, addonStyles, children };
 
   return (
     <StyledButton
+      ref={ref}
       as={as}
       size={size}
       variant={variant}
@@ -40,7 +54,7 @@ const Button: ButtonType = <C extends ElementType = "button">({
       <ButtonContent {...contentProps} />
     </StyledButton>
   );
-};
+});
 
 type ButtonContentProps = Pick<
   ButtonProps<ElementType>,

@@ -15,3 +15,10 @@ export type PolymorphicComponentProp<
   Props = object,
 > = PropsWithChildren<Props & AsProp<C>> &
   Omit<ComponentPropsWithoutRef<C>, PropsToOmit<C, Props>>;
+
+type PolymorphicRef<C extends ElementType> = ComponentPropsWithRef<C>["ref"];
+
+export type PolymorphicComponentPropsWithRef<
+  C extends React.ElementType,
+  Props = object,
+> = PolymorphicComponentProp<C, Props> & { ref?: PolymorphicRef<C> };
