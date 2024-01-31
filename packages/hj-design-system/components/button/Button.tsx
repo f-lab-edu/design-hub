@@ -8,7 +8,7 @@ import { base, getColorScheme, getWidth, SIZE_MAP } from "./styles";
 import { type ButtonProps } from "./types";
 
 type ButtonType = <C extends ElementType = "button">(
-  props: PolymorphicComponentProp<C, ButtonProps<C>>,
+  props: PolymorphicComponentProp<C, ButtonProps<C>>
 ) => ReactElement | null;
 
 const Button: ButtonType = <C extends ElementType = "button">({
@@ -18,14 +18,14 @@ const Button: ButtonType = <C extends ElementType = "button">({
   width,
   colorScheme,
   as,
-  leftIcon,
-  rightIcon,
+  leftAddon,
+  rightAddon,
   iconSpacing,
   onClick,
   disabled,
   ...rest
 }: ButtonProps<C>) => {
-  const contentProps = { leftIcon, rightIcon, iconSpacing, children };
+  const contentProps = { leftAddon, rightAddon, iconSpacing, children };
 
   return (
     <StyledButton
@@ -45,22 +45,22 @@ const Button: ButtonType = <C extends ElementType = "button">({
 
 type ButtonContentProps = Pick<
   ButtonProps<ElementType>,
-  "leftIcon" | "rightIcon" | "children" | "iconSpacing"
+  "leftAddon" | "rightAddon" | "children" | "iconSpacing"
 >;
 
 const ButtonContent = (props: ButtonContentProps) => {
-  const { leftIcon, rightIcon, children, iconSpacing } = props;
+  const { leftAddon, rightAddon, children, iconSpacing } = props;
   return (
     <>
-      {leftIcon && (
+      {leftAddon && (
         <span style={{ marginRight: foundations.space[1] || iconSpacing }}>
-          {leftIcon}
+          {leftAddon}
         </span>
       )}
       {children}
-      {rightIcon && (
+      {rightAddon && (
         <span style={{ marginLeft: foundations.space[1] || iconSpacing }}>
-          {rightIcon}
+          {rightAddon}
         </span>
       )}
     </>

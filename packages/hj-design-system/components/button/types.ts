@@ -34,13 +34,13 @@ export type ButtonProps<C extends ElementType> = PolymorphicComponentProp<
      * */
     colorScheme?: ButtonColorScheme;
     /**
-     * The left icon to display in the button.
+     * The left add-on to display in the button.
      * */
-    leftIcon?: ReactElement;
+    leftAddon?: ReactElement;
     /**
-     * The right icon to display in the button.
+     * The right add-on to display in the button.
      * */
-    rightIcon?: ReactElement;
+    rightAddon?: ReactElement;
     /**
      * The space between the button icon and label.
      * @default foundations.space[1]
