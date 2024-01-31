@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import {
   type ElementType,
   forwardRef,
@@ -5,13 +7,12 @@ import {
   type RefAttributes,
 } from "react";
 
-import styled from "@emotion/styled";
 import {
   type PolymorphicComponentPropsWithRef,
   type PolymorphicRef,
 } from "components/polymorphic";
 
-import { base, getColorScheme, getWidth, SIZE_MAP } from "./styles";
+import { base, getColorScheme, getSize, getWidth } from "./styles";
 import { type ButtonProps } from "./types";
 
 type ButtonType<C extends ElementType = "button"> = ForwardRefExoticComponent<
@@ -35,12 +36,23 @@ const Button: ButtonType = forwardRef(function Button<
     disabled,
     ...rest
   }: ButtonProps<C>,
-  ref?: PolymorphicRef<C>,
+  ref?: PolymorphicRef<C>
 ) {
-  const contentProps = { leftAddon, rightAddon, addonStyles, children };
+  const contentProps = { leftAddon, rightAddon, addonStyles, children, ref };
+
+  const Component = as || "button";
+
+  const buttonStyle = [
+    base,
+    getSize(size),
+    getWidth(width),
+    getColorScheme(colorScheme, variant),
+    disabled && { cursor: "not-allowed" },
+  ];
 
   return (
-    <StyledButton
+    <Component
+      css={buttonStyle}
       ref={ref}
       as={as}
       size={size}
@@ -52,7 +64,7 @@ const Button: ButtonType = forwardRef(function Button<
       {...rest}
     >
       <ButtonContent {...contentProps} />
-    </StyledButton>
+    </Component>
   );
 });
 
@@ -63,6 +75,7 @@ type ButtonContentProps = Pick<
 
 const ButtonContent = (props: ButtonContentProps) => {
   const { leftAddon, rightAddon, children, addonStyles } = props;
+
   return (
     <>
       {leftAddon && <span style={{ ...addonStyles }}>{leftAddon}</span>}
@@ -71,18 +84,5 @@ const ButtonContent = (props: ButtonContentProps) => {
     </>
   );
 };
-
-const StyledButton = styled.button<ButtonProps<ElementType>>`
-  ${base};
-
-  ${({ size = "md" }) => SIZE_MAP[size]};
-
-  ${({ width = "auto" }) => getWidth(width)};
-
-  ${({ colorScheme = "blue", variant = "solid" }) =>
-    getColorScheme(colorScheme, variant)};
-
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
-`;
 
 export default Button;

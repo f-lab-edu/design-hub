@@ -21,7 +21,6 @@ export default function Home() {
           width="full"
           colorScheme="blue"
           variant="outline"
-          addonStyles={{ background: "#3498db" }}
           leftAddon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
