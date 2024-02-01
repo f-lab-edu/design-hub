@@ -47,7 +47,6 @@ const Button: ButtonType = forwardRef(function Button<
     getSize(size),
     getWidth(width),
     getColorScheme(colorScheme, variant),
-    disabled && { cursor: "not-allowed" },
   ];
 
   return (
@@ -78,9 +77,9 @@ const ButtonContent = (props: ButtonContentProps) => {
 
   return (
     <>
-      {leftAddon && <span style={{ ...addonStyles }}>{leftAddon}</span>}
+      {leftAddon && <span css={{ ...addonStyles }}>{leftAddon}</span>}
       {children}
-      {rightAddon && <span style={{ ...addonStyles }}>{rightAddon}</span>}
+      {rightAddon && <span css={{ ...addonStyles }}>{rightAddon}</span>}
     </>
   );
 };
