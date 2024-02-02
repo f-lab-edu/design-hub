@@ -9,18 +9,18 @@ const XSmallSize = css({
 });
 
 const SmallSize = css({
+  width: "14px",
+  height: "14px",
+});
+
+const MediumSize = css({
   width: "16px",
   height: "16px",
 });
 
-const MediumSize = css({
-  width: "1.5rem",
-  height: "1.5rem",
-});
-
 const LargeSize = css({
-  width: "24px",
-  height: "24px",
+  width: "16px",
+  height: "16px",
 });
 
 const SIZE_MAP: Record<ButtonSizeSet, SerializedStyles> = {
