@@ -111,15 +111,15 @@ export const Width = (props: Args) => (
   </>
 );
 
-export const WithIcon = (props: Args) => (
+export const WithAddon = (props: Args) => (
   <>
-    <Button {...props} leftIcon={<div>🐶</div>}>
+    <Button {...props} leftAddon={<div>🐶</div>}>
       Left Icon
     </Button>
-    <Button {...props} rightIcon={<div>🐶</div>}>
+    <Button {...props} rightAddon={<div>🐶</div>}>
       Right Icon
     </Button>
-    <Button {...props} leftIcon={<div>🐶</div>} rightIcon={<div>😾</div>}>
+    <Button {...props} leftAddon={<div>🐶</div>} rightAddon={<div>😾</div>}>
       Left Icon and Right Icon
     </Button>
   </>
