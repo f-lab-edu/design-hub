@@ -12,6 +12,8 @@ import {
   type PolymorphicRef,
 } from "components/polymorphic";
 
+import { foundations } from "../../theme/foundations";
+import ButtonAddon from "./ButtonAddon";
 import { base, getColorScheme, getSize, getWidth } from "./styles";
 import { type ButtonProps } from "./types";
 
@@ -38,8 +40,6 @@ const Button: ButtonType = forwardRef(function Button<
   }: ButtonProps<C>,
   ref?: PolymorphicRef<C>
 ) {
-  const contentProps = { leftAddon, rightAddon, addonStyles, children, ref };
-
   const Component = as || "button";
 
   const buttonStyle = [
@@ -48,6 +48,17 @@ const Button: ButtonType = forwardRef(function Button<
     getWidth(width),
     getColorScheme(colorScheme, variant),
   ];
+
+  const contentProps = {
+    size,
+    variant,
+    colorScheme,
+    leftAddon,
+    rightAddon,
+    addonStyles,
+    children,
+    ref,
+  };
 
   return (
     <Component
@@ -69,17 +80,50 @@ const Button: ButtonType = forwardRef(function Button<
 
 type ButtonContentProps = Pick<
   ButtonProps<ElementType>,
-  "leftAddon" | "rightAddon" | "children" | "addonStyles"
+  | "leftAddon"
+  | "rightAddon"
+  | "children"
+  | "addonStyles"
+  | "size"
+  | "variant"
+  | "colorScheme"
 >;
 
 const ButtonContent = (props: ButtonContentProps) => {
-  const { leftAddon, rightAddon, children, addonStyles } = props;
+  const { leftAddon, rightAddon, children, addonStyles, size } = props;
+
+  const MARGIN_SIZE_MAP = {
+    xs: foundations.space[1],
+    sm: foundations.space[2],
+    md: foundations.space[3],
+    lg: foundations.space[4],
+  };
 
   return (
     <>
-      {leftAddon && <span css={{ ...addonStyles }}>{leftAddon}</span>}
+      {leftAddon && (
+        <ButtonAddon
+          size={size}
+          addonStyles={{
+            marginRight: MARGIN_SIZE_MAP[size || "md"],
+            ...addonStyles,
+          }}
+        >
+          {leftAddon}
+        </ButtonAddon>
+      )}
       {children}
-      {rightAddon && <span css={{ ...addonStyles }}>{rightAddon}</span>}
+      {rightAddon && (
+        <ButtonAddon
+          size={size}
+          addonStyles={{
+            marginLeft: MARGIN_SIZE_MAP[size || "md"],
+            ...addonStyles,
+          }}
+        >
+          {rightAddon}
+        </ButtonAddon>
+      )}
     </>
   );
 };
