@@ -12,7 +12,10 @@ type Args = ComponentProps<typeof Button>;
 
 export const Basic = (props: Args) => <Button {...props} />;
 Basic.argTypes = {
-  children: { type: "string" },
+  children: {
+    control: "text",
+    type: { name: "ReactNode", required: false },
+  },
 };
 Basic.args = {
   children: "Button",
