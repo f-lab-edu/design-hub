@@ -51,5 +51,10 @@ export type ButtonProps<C extends ElementType> = PolymorphicComponentProp<
      * @default 'auto'
      * */
     width?: "auto" | "full" | number;
+    /**
+     * The styles to apply to the button.
+     * @type CSSProperties
+     */
+    styles?: CSSProperties;
   }
 >;

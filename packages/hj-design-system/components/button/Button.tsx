@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
 
-import { type ElementType, forwardRef } from "react";
+import { type ElementType, forwardRef, useMemo } from "react";
 
+import { css } from "@emotion/react";
 import { type PolymorphicRef } from "components/polymorphic";
 
 import { foundations } from "../../theme/foundations";
@@ -22,18 +23,23 @@ const Button = forwardRef(function Button<C extends ElementType = "button">(
     addonStyles,
     onClick,
     disabled,
+    styles,
     ...rest
   }: ButtonProps<C>,
   ref?: PolymorphicRef<C>,
 ) {
   const Component = as || "button";
 
-  const buttonStyle = [
-    base,
-    getSize(size),
-    getWidth(width),
-    getColorScheme(colorScheme, variant),
-  ];
+  const buttonStyle = useMemo(() => {
+    const defaultStyles = [
+      base,
+      getSize(size),
+      getWidth(width),
+      getColorScheme(colorScheme, variant),
+    ];
+
+    return styles ? [...defaultStyles, css({ ...styles })] : defaultStyles;
+  }, [colorScheme, size, styles, variant, width]);
 
   const contentProps = {
     size,
