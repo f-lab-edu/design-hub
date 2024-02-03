@@ -1,7 +1,6 @@
-import React from "react";
+import React, { type ComponentProps } from "react";
 
 import Button from "./Button";
-import { type ButtonProps } from "./types";
 
 export default {
   title: "Components/Button",
@@ -9,15 +8,20 @@ export default {
   tags: ["autodocs"],
 };
 
-export const Basic = (props: ButtonProps) => <Button {...props} />;
+type Args = ComponentProps<typeof Button>;
+
+export const Basic = (props: Args) => <Button {...props} />;
 Basic.argTypes = {
-  children: { type: "string" },
+  children: {
+    control: "text",
+    type: { name: "ReactNode", required: false },
+  },
 };
 Basic.args = {
   children: "Button",
 };
 
-export const Variants = (props: ButtonProps) => (
+export const Variants = (props: Args) => (
   <>
     <Button {...props} variant="solid" colorScheme="pink">
       solid
@@ -40,7 +44,7 @@ Variants.args = {
   children: "Button",
 };
 
-export const Sizes = (props: ButtonProps) => (
+export const Sizes = (props: Args) => (
   <>
     <Button {...props} size="xs">
       xs button
@@ -57,7 +61,7 @@ export const Sizes = (props: ButtonProps) => (
   </>
 );
 
-export const ColorSchemes = (props: ButtonProps) => (
+export const ColorSchemes = (props: Args) => (
   <>
     <Button {...props} colorScheme="red">
       red
@@ -90,7 +94,7 @@ export const ColorSchemes = (props: ButtonProps) => (
   </>
 );
 
-export const Disabled = (props: ButtonProps) => (
+export const Disabled = (props: Args) => (
   <>
     <Button {...props} disabled>
       disabled
@@ -101,7 +105,7 @@ export const Disabled = (props: ButtonProps) => (
   </>
 );
 
-export const Width = (props: ButtonProps) => (
+export const Width = (props: Args) => (
   <>
     <Button {...props} width="full">
       full
@@ -110,15 +114,15 @@ export const Width = (props: ButtonProps) => (
   </>
 );
 
-export const WithIcon = (props: ButtonProps) => (
+export const WithAddon = (props: Args) => (
   <>
-    <Button {...props} leftIcon={<div>🐶</div>}>
+    <Button {...props} leftAddon={<div>🐶</div>}>
       Left Icon
     </Button>
-    <Button {...props} rightIcon={<div>🐶</div>}>
+    <Button {...props} rightAddon={<div>🐶</div>}>
       Right Icon
     </Button>
-    <Button {...props} leftIcon={<div>🐶</div>} rightIcon={<div>😾</div>}>
+    <Button {...props} leftAddon={<div>🐶</div>} rightAddon={<div>😾</div>}>
       Left Icon and Right Icon
     </Button>
   </>

@@ -1,74 +1,116 @@
-import styled from "@emotion/styled";
+/** @jsxImportSource @emotion/react */
+
+import { type ElementType, forwardRef } from "react";
+
+import { type PolymorphicRef } from "components/polymorphic";
 
 import { foundations } from "../../theme/foundations";
-import { base, getColorScheme, getWidth, SIZE_MAP } from "./styles";
+import ButtonAddon from "./ButtonAddon";
+import { base, getColorScheme, getSize, getWidth } from "./styles";
 import { type ButtonProps } from "./types";
 
-const Button = ({
-  variant = "solid",
-  size,
-  children,
-  width,
-  colorScheme,
-  as,
-  leftIcon,
-  rightIcon,
-  iconSpacing,
-  onClick,
-  disabled,
-}: ButtonProps) => {
-  const contentProps = { leftIcon, rightIcon, iconSpacing, children };
+const Button = forwardRef(function Button<C extends ElementType = "button">(
+  {
+    variant = "solid",
+    size,
+    children,
+    width,
+    colorScheme,
+    as,
+    leftAddon,
+    rightAddon,
+    addonStyles,
+    onClick,
+    disabled,
+    ...rest
+  }: ButtonProps<C>,
+  ref?: PolymorphicRef<C>,
+) {
+  const Component = as || "button";
+
+  const buttonStyle = [
+    base,
+    getSize(size),
+    getWidth(width),
+    getColorScheme(colorScheme, variant),
+  ];
+
+  const contentProps = {
+    size,
+    variant,
+    colorScheme,
+    leftAddon,
+    rightAddon,
+    addonStyles,
+    children,
+    ref,
+  };
 
   return (
-    <StyledButton
-      as={as}
+    <Component
+      css={buttonStyle}
+      ref={ref}
       size={size}
       variant={variant}
       width={width}
       colorScheme={colorScheme}
       onClick={onClick}
       disabled={disabled}
+      {...rest}
     >
       <ButtonContent {...contentProps} />
-    </StyledButton>
+    </Component>
   );
-};
+});
 
 type ButtonContentProps = Pick<
-  ButtonProps,
-  "leftIcon" | "rightIcon" | "children" | "iconSpacing"
+  ButtonProps<ElementType>,
+  | "leftAddon"
+  | "rightAddon"
+  | "children"
+  | "addonStyles"
+  | "size"
+  | "variant"
+  | "colorScheme"
 >;
 
 const ButtonContent = (props: ButtonContentProps) => {
-  const { leftIcon, rightIcon, children, iconSpacing } = props;
+  const { leftAddon, rightAddon, children, addonStyles, size } = props;
+
+  const MARGIN_SIZE_MAP = {
+    xs: foundations.space[1],
+    sm: foundations.space[2],
+    md: foundations.space[3],
+    lg: foundations.space[4],
+  };
+
   return (
     <>
-      {leftIcon && (
-        <span style={{ marginRight: foundations.space[1] || iconSpacing }}>
-          {leftIcon}
-        </span>
+      {leftAddon && (
+        <ButtonAddon
+          size={size}
+          addonStyles={{
+            marginRight: MARGIN_SIZE_MAP[size || "md"],
+            ...addonStyles,
+          }}
+        >
+          {leftAddon}
+        </ButtonAddon>
       )}
       {children}
-      {rightIcon && (
-        <span style={{ marginLeft: foundations.space[1] || iconSpacing }}>
-          {rightIcon}
-        </span>
+      {rightAddon && (
+        <ButtonAddon
+          size={size}
+          addonStyles={{
+            marginLeft: MARGIN_SIZE_MAP[size || "md"],
+            ...addonStyles,
+          }}
+        >
+          {rightAddon}
+        </ButtonAddon>
       )}
     </>
   );
 };
-
-const StyledButton = styled.button<ButtonProps>`
-  ${base};
-
-  ${({ size = "md" }) => SIZE_MAP[size]};
-
-  ${({ width = "auto" }) => getWidth(width)};
-
-  ${({ colorScheme = "blue", variant = "solid" }) =>
-    getColorScheme(colorScheme, variant)};
-
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
-`;
 
 export default Button;

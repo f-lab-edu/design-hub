@@ -1,4 +1,6 @@
-import { type ElementType, type ReactElement } from "react";
+import { type CSSProperties, type ElementType, type ReactElement } from "react";
+
+import { type PolymorphicComponentProp } from "components/polymorphic";
 
 export type ButtonSizeSet = "xs" | "sm" | "md" | "lg";
 export type ButtonVariants = "solid" | "outline" | "ghost" | "link";
@@ -13,44 +15,41 @@ export type ButtonColorScheme =
   | "purple"
   | "green";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /**
-   * The variant of the button style to use.
-   * @default "solid"
-   * */
-  variant?: ButtonVariants;
-  /**
-   * The size of the button.
-   * @default "md"
-   * */
-  size?: ButtonSizeSet;
-  /**
-   * The color scheme of the button.
-   * @default "blue"
-   * */
-  colorScheme?: ButtonColorScheme;
-  /**
-   * The left icon to display in the button.
-   * */
-  leftIcon?: ReactElement;
-  /**
-   * The right icon to display in the button.
-   * */
-  rightIcon?: ReactElement;
-  /**
-   * The space between the button icon and label.
-   * @default foundations.space[1]
-   * */
-  iconSpacing?: number;
-  /**
-   * The component used for the root node.
-   * @default "button"
-   * */
-  as?: ElementType;
-  /**
-   * The width of the button.
-   * @default 'auto'
-   * */
-  width?: "auto" | "full" | number;
-}
+export type ButtonProps<C extends ElementType> = PolymorphicComponentProp<
+  C,
+  {
+    /**
+     * The variant of the button style to use.
+     * @default "solid"
+     * */
+    variant?: ButtonVariants;
+    /**
+     * The size of the button.
+     * @default "md"
+     * */
+    size?: ButtonSizeSet;
+    /**
+     * The color scheme of the button.
+     * @default "blue"
+     * */
+    colorScheme?: ButtonColorScheme;
+    /**
+     * The left add-on to display in the button.
+     * */
+    leftAddon?: ReactElement;
+    /**
+     * The right add-on to display in the button.
+     * */
+    rightAddon?: ReactElement;
+    /**
+     * The styles to apply to the add-on.
+     * @default foundations.space[1]
+     * */
+    addonStyles?: CSSProperties;
+    /**
+     * The width of the button.
+     * @default 'auto'
+     * */
+    width?: "auto" | "full" | number;
+  }
+>;

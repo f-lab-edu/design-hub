@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
 import Button from "./Button";
@@ -22,8 +23,8 @@ describe("Button", () => {
     const onClickMock = vi.fn();
 
     render(<Button onClick={onClickMock}>Click me</Button>);
-    fireEvent.click(screen.getByText("Click me"));
 
+    userEvent.click(screen.getByText("Click me"));
     expect(onClickMock).toHaveBeenCalled();
   });
 
@@ -35,20 +36,31 @@ describe("Button", () => {
         Click me
       </Button>,
     );
-    fireEvent.click(screen.getByText("Click me"));
 
+    userEvent.click(screen.getByText("Click me"));
     expect(onClickMock).not.toHaveBeenCalled();
   });
 });
 
-describe("Button Icon", () => {
-  it("leftIcon을 렌더링한다", () => {
-    render(<Button leftIcon={<span>leftIcon</span>}>버튼임</Button>);
+describe("as", () => {
+  it("as 속성에 a를 넣으면 a 태그로 렌더링한다", () => {
+    render(
+      <Button as="a" href="https://f-lab.kr">
+        이건 링크임
+      </Button>,
+    );
+    expect(screen.getByRole("link")).toBeInTheDocument();
+  });
+});
+
+describe("ButtonAddon", () => {
+  it("leftAddon을 렌더링한다", () => {
+    render(<Button leftAddon={<span>leftIcon</span>}>버튼임</Button>);
     expect(screen.getByText("leftIcon")).toBeInTheDocument();
   });
 
-  it("rightIcon을 렌더링한다", () => {
-    render(<Button rightIcon={<span>rightIcon</span>}>버튼임</Button>);
+  it("rightAddon을 렌더링한다", () => {
+    render(<Button rightAddon={<span>rightIcon</span>}>버튼임</Button>);
     expect(screen.getByText("rightIcon")).toBeInTheDocument();
   });
 });
