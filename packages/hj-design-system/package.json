@@ -6,6 +6,7 @@
   "types": "./index.tsx",
   "scripts": {
     "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -46,6 +47,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0"
+    "@emotion/styled": "^11.11.0",
+    "@vitest/coverage-istanbul": "^1.2.2"
   }
 }
