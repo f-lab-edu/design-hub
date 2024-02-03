@@ -52,14 +52,14 @@ describe("as", () => {
   });
 });
 
-describe("Button Icon", () => {
-  it("leftIcon을 렌더링한다", () => {
-    render(<Button leftIcon={<span>leftIcon</span>}>버튼임</Button>);
+describe("ButtonAddon", () => {
+  it("leftAddon을 렌더링한다", () => {
+    render(<Button leftAddon={<span>leftIcon</span>}>버튼임</Button>);
     expect(screen.getByText("leftIcon")).toBeInTheDocument();
   });
 
-  it("rightIcon을 렌더링한다", () => {
-    render(<Button rightIcon={<span>rightIcon</span>}>버튼임</Button>);
+  it("rightAddon을 렌더링한다", () => {
+    render(<Button rightAddon={<span>rightIcon</span>}>버튼임</Button>);
     expect(screen.getByText("rightIcon")).toBeInTheDocument();
   });
 });
