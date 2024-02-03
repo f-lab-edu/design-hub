@@ -1,6 +1,6 @@
 # dependencies
 node_modules
 
-packages/playground
+packages/playground/src/pages
 
 .idea
