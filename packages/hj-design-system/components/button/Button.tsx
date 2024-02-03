@@ -1,29 +1,15 @@
 /** @jsxImportSource @emotion/react */
 
-import {
-  type ElementType,
-  forwardRef,
-  type ForwardRefExoticComponent,
-  type RefAttributes,
-} from "react";
+import { type ElementType, forwardRef } from "react";
 
-import {
-  type PolymorphicComponentPropsWithRef,
-  type PolymorphicRef,
-} from "components/polymorphic";
+import { type PolymorphicRef } from "components/polymorphic";
 
 import { foundations } from "../../theme/foundations";
 import ButtonAddon from "./ButtonAddon";
 import { base, getColorScheme, getSize, getWidth } from "./styles";
 import { type ButtonProps } from "./types";
 
-type ButtonType<C extends ElementType = "button"> = ForwardRefExoticComponent<
-  PolymorphicComponentPropsWithRef<C, ButtonProps<C>> & RefAttributes<C>
->;
-
-const Button: ButtonType = forwardRef(function Button<
-  C extends ElementType = "button",
->(
+const Button = forwardRef(function Button<C extends ElementType = "button">(
   {
     variant = "solid",
     size,
@@ -38,7 +24,7 @@ const Button: ButtonType = forwardRef(function Button<
     disabled,
     ...rest
   }: ButtonProps<C>,
-  ref?: PolymorphicRef<C>
+  ref?: PolymorphicRef<C>,
 ) {
   const Component = as || "button";
 
@@ -64,7 +50,6 @@ const Button: ButtonType = forwardRef(function Button<
     <Component
       css={buttonStyle}
       ref={ref}
-      as={as}
       size={size}
       variant={variant}
       width={width}
