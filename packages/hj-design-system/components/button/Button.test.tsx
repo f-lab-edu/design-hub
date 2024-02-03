@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
 import Button from "./Button";
@@ -22,8 +23,8 @@ describe("Button", () => {
     const onClickMock = vi.fn();
 
     render(<Button onClick={onClickMock}>Click me</Button>);
-    fireEvent.click(screen.getByText("Click me"));
 
+    userEvent.click(screen.getByText("Click me"));
     expect(onClickMock).toHaveBeenCalled();
   });
 
@@ -35,8 +36,8 @@ describe("Button", () => {
         Click me
       </Button>,
     );
-    fireEvent.click(screen.getByText("Click me"));
 
+    userEvent.click(screen.getByText("Click me"));
     expect(onClickMock).not.toHaveBeenCalled();
   });
 });
