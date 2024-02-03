@@ -35,22 +35,22 @@ type IconButtonProps<C extends ElementType = "button"> =
        */
       icon?: ReactElement;
       /**
-       * The size of the icon.
+       * The size of the button.
        * @default md
        */
       size?: ButtonSizeSet;
       /**
-       * The color scheme of the icon.
+       * The color scheme of the button.
        * @default blue
        */
       colorScheme?: ButtonColorScheme;
       /**
-       * The variant of the icon.
+       * The variant of the button.
        * @default solid
        */
       variant?: ButtonVariants;
       /**
-       * The styles of the icon.
+       * The styles of the button.
        */
       styles?: CSSProperties;
     }
