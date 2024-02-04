@@ -6,6 +6,8 @@ import {
 
 import { type SerializedStyles } from "@emotion/react";
 
+import { type InputSizeSet } from "./input";
+
 export type ValueType = InputHTMLAttributes<HTMLInputElement>["value"];
 
 export interface BaseInputProps {
@@ -14,4 +16,5 @@ export interface BaseInputProps {
   prefix?: ReactNode;
   suffix?: ReactNode;
   styles?: SerializedStyles;
+  size?: InputSizeSet;
 }

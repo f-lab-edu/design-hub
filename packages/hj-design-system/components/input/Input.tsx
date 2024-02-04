@@ -35,6 +35,7 @@ const Input = forwardRef(function Input<C extends ElementType = "input">(
 
   return (
     <BaseInput
+      size={size}
       prefix={prefix}
       suffix={suffix}
       styles={css(inputStyles)}
