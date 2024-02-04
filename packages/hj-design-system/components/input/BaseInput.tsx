@@ -8,8 +8,6 @@ import { type BaseInputProps } from "./types";
 const BaseInput: FC<BaseInputProps> = (props) => {
   const { size = "md", value, children, prefix, suffix, styles } = props;
 
-  console.log(props);
-
   const hasAffix = Boolean(prefix) || Boolean(suffix);
 
   const element = cloneElement(children, {
