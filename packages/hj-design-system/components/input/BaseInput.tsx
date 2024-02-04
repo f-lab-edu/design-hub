@@ -1,14 +1,14 @@
 /** @jsxImportSource @emotion/react */
 
-import { cloneElement, type FC } from "react";
+import { cloneElement, type FC, useMemo } from "react";
 
-import { css } from "@emotion/react";
-
-import { foundations } from "../../theme/foundations";
+import { AFFIX_SIZE, affixDefaultStyles } from "./styles/base-input";
 import { type BaseInputProps } from "./types";
 
 const BaseInput: FC<BaseInputProps> = (props) => {
-  const { value, children, prefix, suffix, styles } = props;
+  const { size = "md", value, children, prefix, suffix, styles } = props;
+
+  console.log(props);
 
   const hasAffix = Boolean(prefix) || Boolean(suffix);
 
@@ -16,38 +16,16 @@ const BaseInput: FC<BaseInputProps> = (props) => {
     value,
   });
 
-  const prefixStyle = css`
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 8px;
-    width: ${foundations.space[10]};
-    height: ${foundations.space[10]};
-    > svg {
-      width: 1em;
-      height: 1em;
-    }
-  `;
-
-  const suffixStyle = css`
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-left: 8px;
-    width: ${foundations.space[10]};
-    height: ${foundations.space[10]};
-    > svg {
-      width: 1em;
-      height: 1em;
-    }
-  `;
+  const affixStyles = useMemo(() => {
+    return [affixDefaultStyles, AFFIX_SIZE[size]];
+  }, [size]);
 
   if (hasAffix) {
     return (
       <span css={styles}>
-        {prefix && <span css={prefixStyle}>{prefix}</span>}
+        {prefix && <span css={affixStyles}>{prefix}</span>}
         {element}
-        {suffix && <span css={suffixStyle}>{suffix}</span>}
+        {suffix && <span css={affixStyles}>{suffix}</span>}
       </span>
     );
   }
