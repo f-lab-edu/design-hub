@@ -1,58 +1,13 @@
 /** @jsxImportSource @emotion/react */
 
-import {
-  type CSSProperties,
-  type ElementType,
-  forwardRef,
-  useMemo,
-} from "react";
+import { type ElementType, forwardRef, useMemo } from "react";
 
 import { css } from "@emotion/react";
-import {
-  type PolymorphicComponentPropsWithRef,
-  type PolymorphicRef,
-} from "components/polymorphic";
+import { type PolymorphicRef } from "components/polymorphic";
 
+import BaseInput from "./BaseInput";
 import { getSizeStyles, getVariantColorStyles } from "./styles";
-
-export type InputSizeSet = "xs" | "sm" | "md" | "lg";
-export type InputVariant = "outline" | "filled" | "flushed" | "unstyled";
-export type InputColorSheme =
-  | "blue"
-  | "gray"
-  | "teal"
-  | "red"
-  | "orange"
-  | "yellow"
-  | "pink"
-  | "purple"
-  | "green";
-
-type InputProps<C extends ElementType = "input"> =
-  PolymorphicComponentPropsWithRef<
-    C,
-    {
-      /**
-       * The color scheme of the input.
-       * @default blue
-       */
-      colorScheme?: InputColorSheme;
-      /**
-       * The size of the input.
-       * @default md
-       */
-      size?: InputSizeSet;
-      /**
-       * The variant of the input.
-       * @default outline
-       */
-      variant?: InputVariant;
-      /**
-       * The styles of the input.
-       */
-      styles?: CSSProperties;
-    }
-  >;
+import { type InputProps } from "./types";
 
 const Input = forwardRef(function Input<C extends ElementType = "input">(
   {
@@ -61,9 +16,11 @@ const Input = forwardRef(function Input<C extends ElementType = "input">(
     variant = "outline",
     styles,
     disabled,
+    prefix,
+    suffix,
     ...rest
   }: InputProps<C>,
-  ref: PolymorphicRef<C>
+  ref: PolymorphicRef<C>,
 ) {
   const inputStyles = useMemo(() => {
     const defaultStyles = [
@@ -72,9 +29,20 @@ const Input = forwardRef(function Input<C extends ElementType = "input">(
     ];
 
     return styles ? [defaultStyles, css({ ...styles })] : defaultStyles;
-  }, [colorScheme, styles, variant]);
+  }, [size, colorScheme, styles, variant]);
 
-  return <input ref={ref} css={inputStyles} disabled={disabled} {...rest} />;
+  const inputStyle = !prefix && !suffix ? inputStyles : null;
+
+  return (
+    <BaseInput
+      prefix={prefix}
+      suffix={suffix}
+      styles={css(inputStyles)}
+      {...rest}
+    >
+      <input ref={ref} disabled={disabled} css={inputStyle} {...rest} />
+    </BaseInput>
+  );
 });
 
 export default Input;
