@@ -5,16 +5,25 @@ import {
   type InputColorSheme,
   type InputSizeSet,
   type InputVariant,
-} from "../Input";
+} from "../types";
 
 const baseStyles = css({
   position: "relative",
-  display: "inline-block",
+  display: "inline-flex",
+  alignItems: "center",
   width: "100%",
   minWidth: "0",
   ":disabled": {
     opacity: 0.4,
     cursor: "not-allowed",
+  },
+  ">input": {
+    width: "100%",
+    flex: 1,
+    backgroundColor: "transparent",
+    ":focus": {
+      outline: "none",
+    },
   },
 });
 
@@ -38,7 +47,7 @@ const createFilledStyles = (color: InputColorSheme) => {
     backgroundColor: foundations.colors[color][100],
     ":focus": {
       backgroundColor: "transparent",
-      outlinle: `${foundations.colors[color][500]} 2px solid`,
+      outline: `${foundations.colors[color][500]} 2px solid`,
     },
   });
 };
