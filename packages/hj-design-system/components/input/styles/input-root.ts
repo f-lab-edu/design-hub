@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-export const baseStyle = css({
+export const rootBaseStyles = css({
   position: "relative",
   display: "flex",
   alignItems: "center",

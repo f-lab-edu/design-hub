@@ -7,7 +7,7 @@ import {
   type PolymorphicRef,
 } from "components/polymorphic";
 
-import { baseStyle } from "./styles";
+import { rootBaseStyles } from "./styles";
 
 type InputRootProps<C extends ElementType> = PolymorphicComponentProp<C>;
 
@@ -16,7 +16,7 @@ const InputRoot = forwardRef(function InputRoot<C extends ElementType = "div">(
   ref?: PolymorphicRef<C>,
 ) {
   const Component = props.as || "div";
-  return <Component ref={ref} css={baseStyle} {...props} />;
+  return <Component ref={ref} css={rootBaseStyles} {...props} />;
 });
 
 export default InputRoot;
