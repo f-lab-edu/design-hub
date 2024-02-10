@@ -17,8 +17,14 @@ import {
 } from "components/polymorphic";
 
 import { InputContext } from "./input-context";
-import { baseStyle, getSizeStyles } from "./styles";
-import { type InputSizeSet } from "./types";
+import {
+  baseStyle,
+  getSizeStyles,
+  getVariantStyles,
+  styleWithAddon,
+  styleWithAffix,
+} from "./styles";
+import { type InputSizeSet, type InputVariant } from "./types";
 
 export interface InputAffixProps {
   suffix?: ReactElement;
@@ -32,8 +38,9 @@ export interface InputAddonProps {
 
 type CustomInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size"> & {
   inputSize?: InputSizeSet;
-} & InputAffixProps &
-  InputAddonProps;
+} & { affix?: InputAffixProps } & { addon?: InputAddonProps } & {
+  variant?: InputVariant;
+};
 
 type InputProps<C extends ElementType = "input"> =
   PolymorphicComponentPropsWithRef<C, CustomInputProps>;
@@ -41,25 +48,32 @@ type InputProps<C extends ElementType = "input"> =
 const BaseInput = forwardRef(function BaseInput<
   C extends ElementType = "input",
 >(props: InputProps<C>, ref?: PolymorphicRef<C>) {
-  const { size: inputSize, affix, addon, ...rest } = props;
+  const { size: inputSize, affix, addon, variant, ...rest } = props;
 
   const inputContext = useContext(InputContext);
+
+  const styles = css(
+    baseStyle,
+    getSizeStyles(inputSize),
+    getVariantStyles(variant),
+    styleWithAffix(affix),
+    styleWithAddon(addon),
+  );
 
   useEffect(() => {
     if (inputSize) {
       inputContext?.setSize(inputSize);
     }
-  }, [inputSize, inputContext]);
+    if (variant) {
+      inputContext?.setVariant(variant);
+    }
+  }, [inputSize, inputContext, variant]);
 
   return (
     <>
       {addon?.before && addon.before}
       {affix?.prefix && affix.prefix}
-      <input
-        ref={ref}
-        css={css(baseStyle, getSizeStyles(inputSize))}
-        {...rest}
-      />
+      <input ref={ref} css={styles} {...rest} />
       {affix?.suffix && affix.suffix}
       {addon?.after && addon.after}
     </>
