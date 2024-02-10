@@ -1,3 +1,3 @@
 export * from "./input-root";
-export * from "./input-input";
+export * from "./base-input";
 export * from "./input-affix";

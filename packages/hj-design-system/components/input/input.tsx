@@ -1,7 +1,7 @@
+import BaseInput from "./base-input";
 import InputAddonAfter from "./input-addon-after";
 import InputAddonBefore from "./input-addon-before";
 import InputGroup from "./input-group";
-import BaseInput from "./input-input";
 import InputPrefix from "./input-prefix";
 import InputSuffix from "./input-suffix";
 
