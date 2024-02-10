@@ -12,7 +12,8 @@ import { inputAffixBaseStyle } from "./styles";
 
 type InputPrefixProps<C extends ElementType = "div"> =
   PolymorphicComponentPropsWithRef<C>;
-export const InputPrefix = forwardRef(function InputPrefix<
+
+const InputPrefix = forwardRef(function InputPrefix<
   C extends ElementType = "div",
 >(props: InputPrefixProps<C>, ref?: PolymorphicRef<C>) {
   const { as, style, ...rest } = props;
@@ -29,3 +30,5 @@ export const InputPrefix = forwardRef(function InputPrefix<
 
   return <Component css={css(prefixStyles)} ref={ref} {...rest} />;
 });
+
+export default InputPrefix;

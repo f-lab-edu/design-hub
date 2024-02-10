@@ -13,7 +13,7 @@ import { inputAffixBaseStyle } from "./styles";
 type InputSuffixProps<C extends ElementType = "div"> =
   PolymorphicComponentPropsWithRef<C>;
 
-export const InputSuffix = forwardRef(function InputSuffix<
+const InputSuffix = forwardRef(function InputSuffix<
   C extends ElementType = "div",
 >(props: InputSuffixProps<C>, ref?: PolymorphicRef<C>) {
   const { as, style, ...rest } = props;
@@ -30,3 +30,5 @@ export const InputSuffix = forwardRef(function InputSuffix<
 
   return <Component css={css(suffixStyles)} ref={ref} {...rest} />;
 });
+
+export default InputSuffix;
