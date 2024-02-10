@@ -1,16 +1,16 @@
-import InputInput from "./input-input";
-import { InputLeftAddon } from "./input-left-addon";
-import { InputPrefix } from "./input-prefix";
-import { InputRightAddon } from "./input-right-addon";
-import InputRoot from "./input-root";
-import { InputSuffix } from "./input-suffix";
+import InputAddonAfter from "./input-addon-after";
+import InputAddonBefore from "./input-addon-before";
+import InputGroup from "./input-group";
+import BaseInput from "./input-input";
+import InputPrefix from "./input-prefix";
+import InputSuffix from "./input-suffix";
 
-const Input = Object.assign(InputInput, {
-  Root: InputRoot,
+const Input = Object.assign(BaseInput, {
+  Group: InputGroup,
   Prefix: InputPrefix,
   Suffix: InputSuffix,
-  LeftAddon: InputLeftAddon,
-  RightAddon: InputRightAddon,
+  AddonBefore: InputAddonBefore,
+  AddonAfter: InputAddonAfter,
 });
 
 export default Input;

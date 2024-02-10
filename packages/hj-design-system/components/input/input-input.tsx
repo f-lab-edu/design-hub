@@ -1,6 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
-import { type ElementType, forwardRef, type InputHTMLAttributes } from "react";
+import {
+  type ElementType,
+  forwardRef,
+  type InputHTMLAttributes,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 
 import { css } from "@emotion/react";
 import {
@@ -11,25 +17,42 @@ import {
 import { baseStyle, getSizeStyles } from "./styles";
 import { type InputSizeSet } from "./types";
 
+export interface InputAffixProps {
+  suffix?: ReactElement;
+  prefix?: ReactElement;
+}
+
+export interface InputAddonProps {
+  before?: ReactNode;
+  after?: ReactNode;
+}
+
 type CustomInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size"> & {
   inputSize?: InputSizeSet;
-};
+} & InputAffixProps &
+  InputAddonProps;
 
-type InputProps<C extends ElementType = "input"> = CustomInputProps &
-  PolymorphicComponentPropsWithRef<C>;
+type InputProps<C extends ElementType = "input"> =
+  PolymorphicComponentPropsWithRef<C, CustomInputProps>;
 
-const InputInput = forwardRef(function InputInput<
+const BaseInput = forwardRef(function BaseInput<
   C extends ElementType = "input",
 >(props: InputProps<C>, ref?: PolymorphicRef<C>) {
-  const { size: inputSize } = props;
+  const { size: inputSize, affix, addon, ...rest } = props;
 
   return (
-    <input
-      ref={ref}
-      css={css(baseStyle, getSizeStyles(inputSize))}
-      {...props}
-    />
+    <>
+      {addon?.before && addon.before}
+      {affix?.prefix && affix.prefix}
+      <input
+        ref={ref}
+        css={css(baseStyle, getSizeStyles(inputSize))}
+        {...rest}
+      />
+      {affix?.suffix && affix.suffix}
+      {addon?.after && addon.after}
+    </>
   );
 });
 
-export default InputInput;
+export default BaseInput;
