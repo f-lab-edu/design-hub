@@ -8,6 +8,7 @@ import {
   type ReactNode,
   useContext,
   useEffect,
+  useMemo,
 } from "react";
 
 import { css } from "@emotion/react";
@@ -17,13 +18,7 @@ import {
 } from "components/polymorphic";
 
 import { InputContext } from "./input-context";
-import {
-  baseStyle,
-  getSizeStyles,
-  getVariantStyles,
-  styleWithAddon,
-  styleWithAffix,
-} from "./styles";
+import { baseStyle, getSizeStyles } from "./styles";
 import { type InputSizeSet, type InputVariant } from "./types";
 
 export interface InputAffixProps {
@@ -48,17 +43,21 @@ type InputProps<C extends ElementType = "input"> =
 const BaseInput = forwardRef(function BaseInput<
   C extends ElementType = "input",
 >(props: InputProps<C>, ref?: PolymorphicRef<C>) {
-  const { size: inputSize, affix, addon, variant = "outline", ...rest } = props;
+  const {
+    size: inputSize,
+    affix,
+    addon,
+    variant = "outline",
+    style,
+    ...rest
+  } = props;
 
   const inputContext = useContext(InputContext);
 
-  const styles = css(
-    baseStyle,
-    getSizeStyles(inputSize),
-    getVariantStyles(variant),
-    styleWithAffix(affix),
-    styleWithAddon(addon),
-  );
+  const styles = useMemo(() => {
+    if (!style) return [baseStyle, getSizeStyles(inputSize)];
+    return [baseStyle, getSizeStyles(inputSize), css({ ...style })];
+  }, [inputSize, style]);
 
   useEffect(() => {
     inputContext?.setSize(inputSize);
