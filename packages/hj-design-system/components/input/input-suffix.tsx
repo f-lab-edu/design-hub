@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { type ElementType, forwardRef, useMemo } from "react";
+import { type ElementType, forwardRef, useContext, useMemo } from "react";
 
 import { css } from "@emotion/react";
 import {
@@ -8,7 +8,8 @@ import {
   type PolymorphicRef,
 } from "components/polymorphic";
 
-import { inputAffixBaseStyle } from "./styles";
+import { InputContext } from "./input-context";
+import { getAffixSizeStyles, inputAffixBaseStyle } from "./styles";
 
 type InputSuffixProps<C extends ElementType = "div"> =
   PolymorphicComponentPropsWithRef<C>;
@@ -19,16 +20,23 @@ const InputSuffix = forwardRef(function InputSuffix<
   const { as, style, ...rest } = props;
   const Component = as || "div";
 
-  const placement = css({
-    right: 0,
+  const inputContext = useContext(InputContext);
+
+  const suffixStyles = css({
+    borderLeft: "none",
   });
 
-  const suffixStyles = useMemo(
-    () => [inputAffixBaseStyle, placement, style],
-    [style, placement],
+  const styles = useMemo(
+    () => [
+      inputAffixBaseStyle,
+      suffixStyles,
+      getAffixSizeStyles(inputContext?.size),
+      style,
+    ],
+    [style, inputContext?.size]
   );
 
-  return <Component css={css(suffixStyles)} ref={ref} {...rest} />;
+  return <Component css={css(styles)} ref={ref} {...rest} />;
 });
 
 export default InputSuffix;
