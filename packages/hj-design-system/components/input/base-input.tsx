@@ -48,7 +48,7 @@ type InputProps<C extends ElementType = "input"> =
 const BaseInput = forwardRef(function BaseInput<
   C extends ElementType = "input",
 >(props: InputProps<C>, ref?: PolymorphicRef<C>) {
-  const { size: inputSize, affix, addon, variant, ...rest } = props;
+  const { size: inputSize, affix, addon, variant = "outline", ...rest } = props;
 
   const inputContext = useContext(InputContext);
 
@@ -61,12 +61,8 @@ const BaseInput = forwardRef(function BaseInput<
   );
 
   useEffect(() => {
-    if (inputSize) {
-      inputContext?.setSize(inputSize);
-    }
-    if (variant) {
-      inputContext?.setVariant(variant);
-    }
+    inputContext?.setSize(inputSize);
+    inputContext?.setVariant(variant);
   }, [inputSize, inputContext, variant]);
 
   return (
