@@ -1,6 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
-import { type ElementType, forwardRef, useContext, useMemo } from "react";
+import {
+  type ElementType,
+  forwardRef,
+  useContext,
+  useEffect,
+  useMemo,
+} from "react";
 
 import { css } from "@emotion/react";
 import {
@@ -17,7 +23,7 @@ type InputAddonAfterProps<C extends ElementType = "div"> =
 const InputAddonAfter = forwardRef(function InputAddonAfter<
   C extends ElementType = "div",
 >(props: InputAddonAfterProps<C>, ref?: PolymorphicRef<C>) {
-  const { as, style, ...rest } = props;
+  const { as, style, children, ...rest } = props;
   const Component = as || "div";
 
   const inputContext = useContext(InputContext);
@@ -33,10 +39,19 @@ const InputAddonAfter = forwardRef(function InputAddonAfter<
       getAddonSizeStyles(inputContext?.size),
       style,
     ],
-    [style, inputContext?.size]
+    [style, inputContext?.size, addonBeforeStyle]
   );
 
-  return <Component css={styles} ref={ref} {...rest} />;
+  useEffect(() => {
+    inputContext?.setHasAddonAfter(Boolean(children));
+    return () => inputContext?.setHasAddonAfter(false);
+  }, [children, inputContext]);
+
+  return (
+    <Component css={styles} ref={ref} {...rest}>
+      {children}
+    </Component>
+  );
 });
 
 export default InputAddonAfter;
