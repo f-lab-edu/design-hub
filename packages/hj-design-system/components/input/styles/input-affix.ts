@@ -1,7 +1,8 @@
-import { css } from "@emotion/react";
+import { css, type SerializedStyles } from "@emotion/react";
 
 import { foundations } from "../../../theme/foundations";
-import { type InputSizeSet } from "../types";
+import { type InputSizeSet, type InputVariant } from "../types";
+import { BACKGROUND_MAP, HEIGHT_MAP, PADDING_MAP } from "./base-input";
 
 export const inputAffixBaseStyle = css({
   display: "flex",
@@ -9,7 +10,6 @@ export const inputAffixBaseStyle = css({
   justifyContent: "center",
   maxWidth: "100%",
   objectFit: "contain",
-  border: `1px solid ${foundations.colors.gray[100]}`,
   img: {
     maxWidth: "100%",
     maxHeight: "100%",
@@ -29,16 +29,23 @@ export const getAffixSizeStyles = (size: InputSizeSet = "md") => {
   });
 };
 
-const HEIGHT_MAP: Record<InputSizeSet, string> = {
-  xs: foundations.space[6],
-  sm: foundations.space[8],
-  md: foundations.space[10],
-  lg: foundations.space[12],
+export const getAffixVariantStyles = (variant: InputVariant = "outline") => {
+  const background = BACKGROUND_MAP[variant];
+  const border = BORDER_MAP[variant];
+  return css(css({ background }), border);
 };
 
-const PADDING_MAP: Record<InputSizeSet, string> = {
-  xs: `0 ${foundations.space[2]}`,
-  sm: `0 ${foundations.space[3]}`,
-  md: `0 ${foundations.space[4]}`,
-  lg: `0 ${foundations.space[5]}`,
+const BORDER_MAP: Record<InputVariant, SerializedStyles> = {
+  outline: css({
+    border: `1px solid ${foundations.colors.gray[100]}`,
+  }),
+  filled: css({
+    border: "none",
+  }),
+  flushed: css({
+    borderBottom: `1px solid ${foundations.colors.gray[100]}`,
+  }),
+  unstyled: css({
+    border: "none",
+  }),
 };

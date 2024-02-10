@@ -1,6 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
-import { type ElementType, forwardRef, useContext, useMemo } from "react";
+import {
+  type ElementType,
+  forwardRef,
+  useContext,
+  useEffect,
+  useMemo,
+} from "react";
 
 import { css } from "@emotion/react";
 import {
@@ -9,7 +15,11 @@ import {
 } from "components/polymorphic";
 
 import { InputContext } from "./input-context";
-import { getAffixSizeStyles, inputAffixBaseStyle } from "./styles";
+import {
+  getAffixSizeStyles,
+  getAffixVariantStyles,
+  inputAffixBaseStyle,
+} from "./styles";
 
 type InputSuffixProps<C extends ElementType = "div"> =
   PolymorphicComponentPropsWithRef<C>;
@@ -17,26 +27,53 @@ type InputSuffixProps<C extends ElementType = "div"> =
 const InputSuffix = forwardRef(function InputSuffix<
   C extends ElementType = "div",
 >(props: InputSuffixProps<C>, ref?: PolymorphicRef<C>) {
-  const { as, style, ...rest } = props;
+  const { as, style, children, ...rest } = props;
   const Component = as || "div";
 
   const inputContext = useContext(InputContext);
-
   const suffixStyles = css({
     borderLeft: "none",
+    borderTopRightRadius: "6px",
+    borderBottomRightRadius: "6px",
   });
+
+  const getSuffixBorderStyles = (hasAddonAfter?: boolean) => {
+    if (hasAddonAfter) {
+      return css({
+        borderTopRightRadius: "0",
+        borderBottomRightRadius: "0",
+      });
+    }
+  };
 
   const styles = useMemo(
     () => [
       inputAffixBaseStyle,
       suffixStyles,
       getAffixSizeStyles(inputContext?.size),
+      getAffixVariantStyles(inputContext?.variant),
+      getSuffixBorderStyles(inputContext?.hasAddonAfter),
       style,
     ],
-    [style, inputContext?.size]
+    [
+      suffixStyles,
+      style,
+      inputContext?.size,
+      inputContext?.variant,
+      inputContext?.hasAddonAfter,
+    ]
   );
 
-  return <Component css={css(styles)} ref={ref} {...rest} />;
+  useEffect(() => {
+    inputContext?.setHasSuffix(Boolean(children));
+    return () => inputContext?.setHasSuffix(false);
+  }, [children, inputContext]);
+
+  return (
+    <Component css={styles} ref={ref} {...rest}>
+      {children}
+    </Component>
+  );
 });
 
 export default InputSuffix;
