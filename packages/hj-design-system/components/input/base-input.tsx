@@ -68,7 +68,7 @@ const BaseInput = forwardRef(function BaseInput<
   const affix = useMemo(() => ({ prefix, suffix }), [prefix, suffix]);
   const addon = useMemo(
     () => ({ before: addonBefore, after: addonAfter }),
-    [addonBefore, addonAfter],
+    [addonBefore, addonAfter]
   );
 
   const styles = useMemo(() => {
@@ -90,11 +90,11 @@ const BaseInput = forwardRef(function BaseInput<
 
   return (
     <>
-      {addonBefore && addonBefore}
-      {prefix && prefix}
+      {addonBefore}
+      {prefix}
       <input ref={ref} css={styles} {...rest} />
-      {suffix && suffix}
-      {addonAfter && addonAfter}
+      {suffix}
+      {addonAfter}
     </>
   );
 });
