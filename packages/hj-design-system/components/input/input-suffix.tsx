@@ -31,32 +31,35 @@ const InputSuffix = forwardRef(function InputSuffix<
   const Component = as || "div";
 
   const inputContext = useContext(InputContext);
-  const suffixStyles = css({
-    borderLeft: "none",
-    borderTopRightRadius: "6px",
-    borderBottomRightRadius: "6px",
-  });
 
   const getSuffixBorderStyles = (hasAddonAfter?: boolean) => {
+    const baseBorders = css({
+      borderLeft: "none",
+      borderTopRightRadius: "6px",
+      borderBottomRightRadius: "6px",
+    });
+
     if (hasAddonAfter) {
       return css({
+        borderLeft: "none",
         borderTopRightRadius: "0",
         borderBottomRightRadius: "0",
       });
     }
+
+    return baseBorders;
   };
 
   const styles = useMemo(
     () => [
       inputAffixBaseStyle,
-      suffixStyles,
       getAffixSizeStyles(inputContext?.size),
       getAffixVariantStyles(inputContext?.variant),
       getSuffixBorderStyles(inputContext?.hasAddonAfter),
+
       style,
     ],
     [
-      suffixStyles,
       style,
       inputContext?.size,
       inputContext?.variant,

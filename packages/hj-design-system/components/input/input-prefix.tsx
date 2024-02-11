@@ -32,32 +32,32 @@ const InputPrefix = forwardRef(function InputPrefix<
 
   const inputContext = useContext(InputContext);
 
-  const prefixStyles = css({
-    borderRight: "none",
-    borderTopLeftRadius: "6px",
-    borderBottomLeftRadius: "6px",
-  });
-
   const getPrefixBorderStyles = (hasAddonBefore?: boolean) => {
+    const baseBorders = css({
+      borderRight: "none",
+      borderTopLeftRadius: "6px",
+      borderBottomLeftRadius: "6px",
+    });
+
     if (hasAddonBefore) {
       return css({
+        borderRight: "none",
         borderTopLeftRadius: "0",
         borderBottomLeftRadius: "0",
       });
     }
+    return baseBorders;
   };
 
   const styles = useMemo(
     () => [
       inputAffixBaseStyle,
-      prefixStyles,
       getAffixSizeStyles(inputContext?.size),
       getAffixVariantStyles(inputContext?.variant),
       getPrefixBorderStyles(inputContext?.hasAddonBefore),
       style,
     ],
     [
-      prefixStyles,
       style,
       inputContext?.size,
       inputContext?.variant,

@@ -10,6 +10,7 @@ export const inputAffixBaseStyle = css({
   justifyContent: "center",
   maxWidth: "100%",
   objectFit: "contain",
+  boxSizing: "border-box",
   img: {
     maxWidth: "100%",
     maxHeight: "100%",
