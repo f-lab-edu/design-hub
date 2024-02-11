@@ -29,11 +29,9 @@ describe("Input", () => {
   it("addon before, after 컴포넌트를 렌더링한다", () => {
     render(
       <Input
-        addon={{
-          before: <Input.AddonBefore>https</Input.AddonBefore>,
-          after: <Input.AddonAfter>.com</Input.AddonAfter>,
-        }}
-      />,
+        addonBefore={<Input.AddonBefore>https</Input.AddonBefore>}
+        addonAfter={<Input.AddonAfter>.com</Input.AddonAfter>}
+      />
     );
     const addonBefore = screen.getByText("https");
     const addonAfter = screen.getByText(".com");
@@ -46,19 +44,17 @@ describe("Input", () => {
     const SuffixIcon = () => <span>SuffixIcon</span>;
     render(
       <Input
-        affix={{
-          prefix: (
-            <Input.Prefix>
-              <PrefixIcon />
-            </Input.Prefix>
-          ),
-          suffix: (
-            <Input.Suffix>
-              <SuffixIcon />
-            </Input.Suffix>
-          ),
-        }}
-      />,
+        prefix={
+          <Input.Prefix>
+            <PrefixIcon />
+          </Input.Prefix>
+        }
+        suffix={
+          <Input.Suffix>
+            <SuffixIcon />
+          </Input.Suffix>
+        }
+      />
     );
     const prefix = screen.getByText("PrefixIcon");
     const suffix = screen.getByText("SuffixIcon");
