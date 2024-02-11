@@ -16,6 +16,7 @@ export const baseStyle = css({
   },
   border: `1px solid ${foundations.colors.gray[100]}`,
   outline: "none",
+  boxSizing: "border-box",
 });
 
 export const getSizeStyles = (size: InputSizeSet = "md") => {
