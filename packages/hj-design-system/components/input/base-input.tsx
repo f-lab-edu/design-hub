@@ -21,6 +21,7 @@ import { InputContext } from "./input-context";
 import {
   baseStyle,
   getSizeStyles,
+  getVariantStyles,
   styleWithAddon,
   styleWithAffix,
 } from "./styles";
@@ -63,12 +64,13 @@ const BaseInput = forwardRef(function BaseInput<
     const combiendStyles = [
       baseStyle,
       getSizeStyles(inputSize),
+      getVariantStyles(variant),
       styleWithAffix(affix),
       styleWithAddon(addon),
     ];
     if (!style) return combiendStyles;
     return [...combiendStyles, css({ ...style })];
-  }, [inputSize, style, addon, affix]);
+  }, [inputSize, style, addon, affix, variant]);
 
   useEffect(() => {
     inputContext?.setSize(inputSize);
