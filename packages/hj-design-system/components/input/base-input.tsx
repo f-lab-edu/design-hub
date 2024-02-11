@@ -39,8 +39,11 @@ export interface InputAddonProps {
 
 type CustomInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size"> & {
   inputSize?: InputSizeSet;
-} & { affix?: InputAffixProps } & { addon?: InputAddonProps } & {
   variant?: InputVariant;
+  suffix?: ReactElement;
+  prefix?: ReactElement;
+  addonBefore?: ReactNode;
+  addonAfter?: ReactNode;
 };
 
 type InputProps<C extends ElementType = "input"> =
@@ -51,14 +54,22 @@ const BaseInput = forwardRef(function BaseInput<
 >(props: InputProps<C>, ref?: PolymorphicRef<C>) {
   const {
     size: inputSize,
-    affix,
-    addon,
+    prefix,
+    suffix,
+    addonBefore,
+    addonAfter,
     variant = "outline",
     style,
     ...rest
   } = props;
 
   const inputContext = useContext(InputContext);
+
+  const affix = useMemo(() => ({ prefix, suffix }), [prefix, suffix]);
+  const addon = useMemo(
+    () => ({ before: addonBefore, after: addonAfter }),
+    [addonBefore, addonAfter],
+  );
 
   const styles = useMemo(() => {
     const combiendStyles = [
@@ -79,11 +90,11 @@ const BaseInput = forwardRef(function BaseInput<
 
   return (
     <>
-      {addon?.before && addon.before}
-      {affix?.prefix && affix.prefix}
+      {addonBefore && addonBefore}
+      {prefix && prefix}
       <input ref={ref} css={styles} {...rest} />
-      {affix?.suffix && affix.suffix}
-      {addon?.after && addon.after}
+      {suffix && suffix}
+      {addonAfter && addonAfter}
     </>
   );
 });
