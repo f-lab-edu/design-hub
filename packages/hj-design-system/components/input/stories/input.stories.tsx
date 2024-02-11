@@ -35,6 +35,17 @@ export const Sizes = (props: Args) => (
   </>
 );
 
+Sizes.args = {
+  variant: "outline",
+};
+
+Sizes.argTypes = {
+  variant: {
+    control: "select",
+    options: ["outline", "filled", "flushed", "unstyled"],
+  },
+};
+
 export const Variants = (props: Args) => (
   <>
     <Input {...props} variant="outline" placeholder="outline" />
@@ -44,14 +55,23 @@ export const Variants = (props: Args) => (
   </>
 );
 
+Variants.args = {
+  size: "md",
+};
+
+Variants.argTypes = {
+  size: {
+    control: "select",
+    options: ["xs", "sm", "md", "lg"],
+  },
+};
+
 export const WithAddon = (props: Args) => (
   <Input.Group>
     <Input
       {...props}
-      addon={{
-        before: <Input.AddonBefore>https://</Input.AddonBefore>,
-        after: <Input.AddonAfter>.com</Input.AddonAfter>,
-      }}
+      addonBefore={<Input.AddonBefore>https://</Input.AddonBefore>}
+      addonAfter={<Input.AddonAfter>.com</Input.AddonAfter>}
     />
   </Input.Group>
 );
@@ -88,27 +108,24 @@ export const WithAffix = (props: Args) => {
   return (
     <Input.Group>
       <Input
-        variant="filled"
         {...props}
-        affix={{
-          prefix: (
-            <Input.Prefix>
-              <GithubIcon />
-            </Input.Prefix>
-          ),
-          suffix: (
-            <Input.Suffix>
-              <GithubIcon />
-            </Input.Suffix>
-          ),
-        }}
+        prefix={
+          <Input.Prefix>
+            <GithubIcon />
+          </Input.Prefix>
+        }
+        suffix={
+          <Input.Suffix>
+            <GithubIcon />
+          </Input.Suffix>
+        }
       />
     </Input.Group>
   );
 };
 
 WithAffix.args = {
-  variant: "filled",
+  variant: "outline",
 };
 
 WithAffix.argTypes = {
@@ -139,22 +156,18 @@ export const WithAddonAndAffix = (props: Args) => {
   return (
     <Input.Group>
       <Input
-        affix={{
-          prefix: (
-            <Input.Prefix>
-              <GithubIcon />
-            </Input.Prefix>
-          ),
-          suffix: (
-            <Input.Suffix>
-              <GithubIcon />
-            </Input.Suffix>
-          ),
-        }}
-        addon={{
-          before: <Input.AddonBefore>https://</Input.AddonBefore>,
-          after: <Input.AddonAfter>.com</Input.AddonAfter>,
-        }}
+        prefix={
+          <Input.Prefix>
+            <GithubIcon />
+          </Input.Prefix>
+        }
+        suffix={
+          <Input.Suffix>
+            <GithubIcon />
+          </Input.Suffix>
+        }
+        addonBefore={<Input.AddonBefore>https://</Input.AddonBefore>}
+        addonAfter={<Input.AddonAfter>.com</Input.AddonAfter>}
         {...props}
       />
     </Input.Group>
