@@ -18,7 +18,12 @@ import {
 } from "components/polymorphic";
 
 import { InputContext } from "./input-context";
-import { baseStyle, getSizeStyles } from "./styles";
+import {
+  baseStyle,
+  getSizeStyles,
+  styleWithAddon,
+  styleWithAffix,
+} from "./styles";
 import { type InputSizeSet, type InputVariant } from "./types";
 
 export interface InputAffixProps {
@@ -55,9 +60,15 @@ const BaseInput = forwardRef(function BaseInput<
   const inputContext = useContext(InputContext);
 
   const styles = useMemo(() => {
-    if (!style) return [baseStyle, getSizeStyles(inputSize)];
-    return [baseStyle, getSizeStyles(inputSize), css({ ...style })];
-  }, [inputSize, style]);
+    const combiendStyles = [
+      baseStyle,
+      getSizeStyles(inputSize),
+      styleWithAffix(affix),
+      styleWithAddon(addon),
+    ];
+    if (!style) return combiendStyles;
+    return [...combiendStyles, css({ ...style })];
+  }, [inputSize, style, addon, affix]);
 
   useEffect(() => {
     inputContext?.setSize(inputSize);
