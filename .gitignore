@@ -4,3 +4,4 @@ node_modules
 packages/playground/src/pages
 
 .idea
+.DS_Store
