@@ -17,6 +17,7 @@ import {
   type PolymorphicRef,
 } from "components/polymorphic";
 
+import { useInput } from "./hooks/useInput";
 import { InputContext } from "./input-context";
 import {
   baseStyle,
@@ -44,6 +45,7 @@ type CustomInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size"> & {
   prefix?: ReactElement;
   addonBefore?: ReactNode;
   addonAfter?: ReactNode;
+  allowClear?: boolean;
 };
 
 type InputProps<C extends ElementType = "input"> =
@@ -60,15 +62,21 @@ const BaseInput = forwardRef(function BaseInput<
     addonAfter,
     variant = "outline",
     style,
+    allowClear = false,
     ...rest
   } = props;
+
+  const { value, handleChange, handleClear, showClearButton } = useInput({
+    allowClear,
+    onChange: props.onChange,
+  });
 
   const inputContext = useContext(InputContext);
 
   const affix = useMemo(() => ({ prefix, suffix }), [prefix, suffix]);
   const addon = useMemo(
     () => ({ before: addonBefore, after: addonAfter }),
-    [addonBefore, addonAfter]
+    [addonBefore, addonAfter],
   );
 
   const styles = useMemo(() => {
@@ -92,7 +100,21 @@ const BaseInput = forwardRef(function BaseInput<
     <>
       {addonBefore}
       {prefix}
-      <input ref={ref} css={styles} {...rest} />
+      <input
+        ref={ref}
+        css={styles}
+        onChange={handleChange}
+        value={value}
+        {...rest}
+      />
+      {showClearButton && (
+        <button
+          css={css(styles, css({ width: "auto", cursor: "pointer" }))}
+          onClick={handleClear}
+        >
+          x
+        </button>
+      )}
       {suffix}
       {addonAfter}
     </>
