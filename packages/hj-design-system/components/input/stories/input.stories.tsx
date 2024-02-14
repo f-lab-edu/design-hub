@@ -184,3 +184,9 @@ WithAddonAndAffix.argTypes = {
     options: ["outline", "filled", "flushed", "unstyled"],
   },
 };
+
+export const WithClearButton = (props: Args) => (
+  <Input.Group>
+    <Input {...props} allowClear placeholder="Clearable Input" />
+  </Input.Group>
+);
