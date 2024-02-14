@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
@@ -60,5 +60,15 @@ describe("Input", () => {
     const suffix = screen.getByText("SuffixIcon");
     expect(prefix).toBeInTheDocument();
     expect(suffix).toBeInTheDocument();
+  });
+
+  it("allowClear 속성이 true 이면 입력값을 지울 수 있는 버튼을 렌더링한다", () => {
+    render(<Input allowClear />);
+    const inputElement = screen.getByRole("textbox");
+    userEvent.type(inputElement, "Hello, World!");
+    const clearButton = screen.getByRole("button");
+    expect(clearButton).toBeInTheDocument();
+    fireEvent.click(clearButton);
+    expect(inputElement).toHaveValue("");
   });
 });
