@@ -15,6 +15,7 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "next",
+    "next/babel",
     "prettier",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
