@@ -13,12 +13,9 @@ import {
 } from "react";
 import {
   closeButtonBoxStyles,
-  getCloseButtonSizeStyles,
   modalHeaderBaseStyle,
 } from "./styles/modal-header";
 import { ModalContext } from "./modal-context";
-import IconButton from "../../components/button/IconButton";
-import { ModalSizeSet } from "./types";
 import { css } from "@emotion/react";
 
 type ModalHeaderProps<C extends ElementType = "div"> =

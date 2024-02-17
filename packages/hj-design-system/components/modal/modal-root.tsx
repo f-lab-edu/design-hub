@@ -75,7 +75,7 @@ export const ModalRoot = forwardRef(function ModalRoot<
   };
 
   const modalRoot = isOpen && (
-    <ModalProvider>
+    <ModalProvider onClose={onClose}>
       <AnimatePresence {...animatePresenceProps}>
         <Component
           role="dialog"
