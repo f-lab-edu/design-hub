@@ -56,7 +56,7 @@ export const ModalHeader = forwardRef(function ModalHeader<
 
 const CloseButton = ({ onClose }: { onClose?: () => void }) => {
   return (
-    <div onClick={() => onClose?.()} css={css(closeButtonBoxStyles)}>
+    <div onClick={onClose} css={css(closeButtonBoxStyles)} role="button">
       <svg
         width={18}
         height={18}
