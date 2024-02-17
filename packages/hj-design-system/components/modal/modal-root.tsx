@@ -10,9 +10,7 @@ import {
   MouseEventHandler,
   ReactElement,
   ReactNode,
-  cloneElement,
   forwardRef,
-  isValidElement,
 } from "react";
 import { useScrollLock } from "../../hooks/use-scroll-lock";
 import { Portal } from "../portal";
