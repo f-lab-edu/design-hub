@@ -15,15 +15,16 @@ describe("ModalRoot", () => {
     expect(modalElement).not.toBeInTheDocument();
   });
 
-  it("onClickDim 이 있으면 dim 이 클릭되면 호출된다", () => {
-    const onClickDim = vi.fn();
+  it("closeOnClickDim 가 true 이면 dim 을 클릭할때 모달이 닫힌다", () => {
+    const onClose = vi.fn();
+
     render(
-      <ModalRoot isOpen={true} onClickDim={onClickDim}>
+      <ModalRoot isOpen={true} onClose={onClose}>
         Modal Content
       </ModalRoot>
     );
     const dimElement = screen.getByRole("dialog");
     dimElement.click();
-    expect(onClickDim).toHaveBeenCalled();
+    expect(onClose).toHaveBeenCalled();
   });
 });
