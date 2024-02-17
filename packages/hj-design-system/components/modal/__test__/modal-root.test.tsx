@@ -19,7 +19,7 @@ describe("ModalRoot", () => {
     const onClose = vi.fn();
 
     render(
-      <ModalRoot isOpen={true} onClose={onClose}>
+      <ModalRoot isOpen={true} onClose={onClose} closeOnClickDim>
         Modal Content
       </ModalRoot>
     );
