@@ -11,13 +11,22 @@ import { ModalSizeSet } from "./types";
 interface ModalContextProps {
   size: ModalSizeSet;
   setSize: Dispatch<SetStateAction<ModalSizeSet>>;
+  onClose: () => void;
 }
 export const ModalContext = createContext<ModalContextProps | null>(null);
 
-export const ModalProvider = ({ children }: { children: ReactNode }) => {
+interface ModalProviderProps {
+  children: ReactNode;
+  onClose: () => void;
+}
+
+export const ModalProvider = ({ children, onClose }: ModalProviderProps) => {
   const [size, setSize] = useState<ModalSizeSet>("md");
 
-  const ContextValue = useMemo(() => ({ size, setSize }), [size]);
+  const ContextValue = useMemo(
+    () => ({ size, setSize, onClose }),
+    [size, onClose]
+  );
 
   return (
     <ModalContext.Provider value={ContextValue}>
