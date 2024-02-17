@@ -10,6 +10,7 @@ export const modalHeaderBaseStyle = css({
 });
 
 export const closeButtonBoxStyles = css({
+    all: 'unset',
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

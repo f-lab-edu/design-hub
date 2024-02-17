@@ -56,7 +56,7 @@ export const ModalHeader = forwardRef(function ModalHeader<
 
 const CloseButton = ({ onClose }: { onClose?: () => void }) => {
   return (
-    <div onClick={onClose} css={css(closeButtonBoxStyles)} role="button">
+    <button onClick={onClose} css={css(closeButtonBoxStyles)}>
       <svg
         width={18}
         height={18}
@@ -66,6 +66,6 @@ const CloseButton = ({ onClose }: { onClose?: () => void }) => {
       >
         <path d="M5 13L13 5M5 5L13 13" stroke="#343A40" />
       </svg>
-    </div>
+    </button>
   );
 };
