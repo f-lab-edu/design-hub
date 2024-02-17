@@ -14,9 +14,9 @@ type PortalContainerType = Element | DocumentFragment;
 interface PortalProps {
   /**
    * The children to render into the `container`.
-   * @default documnet.body
+   * @default document.body
    */
-  portalContainer?: Element | DocumentFragment;
+  portalContainer?: Element | DocumentFragment | null;
   /**
    * If `true`, the children will be rendered in place instead of being portaled.
    */
