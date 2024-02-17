@@ -11,7 +11,7 @@ export const modalContentBaseStyle = css({
     overflowY: 'scroll',
 })
 
-export const getSizeStyles = (size: ModalSizeSet): SerializedStyles => {
+export const getSizeStyles = (size: ModalSizeSet='md'): SerializedStyles => {
     const maxWidth = MAX_WIDTH_MAP[size];
     const padding = PADDING_MAP[size];
     const border = BORDER_MAP[size];
