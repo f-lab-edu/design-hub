@@ -27,7 +27,11 @@ const Template = ({ size }: { size: ModalSizeSet }) => {
             <p>Modal Body</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button size="sm" colorScheme="green">
+            <Button
+              size="sm"
+              colorScheme="green"
+              onClick={() => alert("you clicked ok")}
+            >
               ok
             </Button>
             <Button
