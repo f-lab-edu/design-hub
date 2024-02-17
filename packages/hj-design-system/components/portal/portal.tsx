@@ -9,7 +9,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 
-type PortalContainerType = Element | DocumentFragment;
+type PortalContainerType = Element | DocumentFragment | null;
 
 interface PortalProps {
   /**
@@ -27,16 +27,11 @@ const Portal = forwardRef(function Portal(
   props: PropsWithChildren<PortalProps>,
   ref?: ForwardedRef<HTMLElement>
 ) {
-  const {
-    children,
-    portalContainer = document.body,
-    disablePortal = false,
-  } = props;
-  const [container, setContainer] =
-    useState<PortalContainerType>(portalContainer);
+  const { children, portalContainer, disablePortal = false } = props;
+  const [container, setContainer] = useState<PortalContainerType>(null);
 
   useEffect(() => {
-    if (document) setContainer(portalContainer);
+    if (document) setContainer(portalContainer || document.body);
   }, [portalContainer]);
 
   if (disablePortal) {
