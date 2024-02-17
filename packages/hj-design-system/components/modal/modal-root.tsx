@@ -17,6 +17,7 @@ import { Portal } from "../portal";
 import { AnimatePresence, motion } from "framer-motion";
 import { dimVariants, dimmedStyle } from "./styles/modal-root";
 import { ModalProvider } from "./modal-context";
+import { useKeyDown } from "../../hooks/use-key-down";
 
 type AnimatePresenceMode = ComponentProps<typeof AnimatePresence>;
 
@@ -66,6 +67,8 @@ export const ModalRoot = forwardRef(function ModalRoot<
   const Component = motion(as || "div");
 
   useScrollLock(isOpen);
+
+  useKeyDown({ callBackFn: onClose });
 
   const onClickDimDefault: MouseEventHandler = (e): void => {
     if (e.target === e.currentTarget) onClose();
