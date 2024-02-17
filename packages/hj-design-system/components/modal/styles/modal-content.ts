@@ -4,9 +4,11 @@ import { ModalSizeSet } from "../types";
 
 export const modalContentBaseStyle = css({
     width: '100%',
+    maxHeight: '80dvh',
     marginTop: foundations.space[16],
     marginBottom: foundations.space[16],
     background: foundations.colors.white,
+    overflowY: 'scroll',
 })
 
 export const getSizeStyles = (size: ModalSizeSet): SerializedStyles => {
