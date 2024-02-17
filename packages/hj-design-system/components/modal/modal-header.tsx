@@ -1,8 +1,11 @@
+/** @jsxImportSource @emotion/react */
+
 import {
   PolymorphicComponentPropsWithRef,
   PolymorphicRef,
 } from "components/polymorphic";
 import { ElementType, forwardRef } from "react";
+import { modalHeaderBaseStyle } from "./styles/modal-header";
 
 type ModalHeaderProps<C extends ElementType = "div"> =
   PolymorphicComponentPropsWithRef<C>;
@@ -14,7 +17,7 @@ export const ModalHeader = forwardRef(function ModalHeader<
   const Component = as || "div";
 
   return (
-    <Component ref={ref} {...rest}>
+    <Component ref={ref} css={modalHeaderBaseStyle} {...rest}>
       {children}
     </Component>
   );
