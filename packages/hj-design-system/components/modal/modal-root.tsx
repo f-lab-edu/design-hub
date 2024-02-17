@@ -10,12 +10,15 @@ import {
   MouseEventHandler,
   ReactElement,
   ReactNode,
+  cloneElement,
   forwardRef,
+  isValidElement,
 } from "react";
 import { useScrollLock } from "../../hooks/use-scroll-lock";
 import { Portal } from "../portal";
 import { AnimatePresence, motion } from "framer-motion";
 import { dimVariants, dimmedStyle } from "./styles/modal-root";
+import { ModalProvider } from "./modal-context";
 
 type AnimatePresenceMode = ComponentProps<typeof AnimatePresence>;
 
@@ -61,6 +64,7 @@ export const ModalRoot = forwardRef(function ModalRoot<
     onClose,
     ...rest
   } = props;
+
   const Component = motion(as || "div");
 
   useScrollLock(isOpen);
@@ -70,21 +74,23 @@ export const ModalRoot = forwardRef(function ModalRoot<
   };
 
   const modalRoot = isOpen && (
-    <AnimatePresence {...animatePresenceProps}>
-      <Component
-        role="dialog"
-        animate="animate"
-        exit="exit"
-        initial="initial"
-        css={dimmedStyle}
-        variants={dimVariants}
-        ref={ref}
-        onClick={onClickDimDefault}
-        {...rest}
-      >
-        {children}
-      </Component>
-    </AnimatePresence>
+    <ModalProvider>
+      <AnimatePresence {...animatePresenceProps}>
+        <Component
+          role="dialog"
+          animate="animate"
+          exit="exit"
+          initial="initial"
+          css={dimmedStyle}
+          variants={dimVariants}
+          ref={ref}
+          onClick={onClickDimDefault}
+          {...rest}
+        >
+          {children}
+        </Component>
+      </AnimatePresence>
+    </ModalProvider>
   );
 
   return wrapper(modalRoot);

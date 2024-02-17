@@ -1,12 +1,21 @@
-import { FC, ReactNode, createContext, useMemo, useState } from "react";
+import {
+  Dispatch,
+  FC,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useMemo,
+  useState,
+} from "react";
 import { ModalSizeSet } from "./types";
 
 interface ModalContextProps {
-  size?: ModalSizeSet;
+  size: ModalSizeSet;
+  setSize: Dispatch<SetStateAction<ModalSizeSet>>;
 }
-const ModalContext = createContext<ModalContextProps>({});
+export const ModalContext = createContext<ModalContextProps | null>(null);
 
-export const ModalProvider: FC<{ children: ReactNode }> = ({ children }) => {
+export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [size, setSize] = useState<ModalSizeSet>("md");
 
   const ContextValue = useMemo(() => ({ size, setSize }), [size]);
