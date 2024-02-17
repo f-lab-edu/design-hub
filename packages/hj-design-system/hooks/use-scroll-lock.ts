@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export const useScrollLock = (shouldLock: boolean, isUseOriginalStyle = false): void => {
+export const useScrollLock = (shouldLock: boolean): void => {
   useEffect((): (() => void) => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
 
@@ -9,5 +9,5 @@ export const useScrollLock = (shouldLock: boolean, isUseOriginalStyle = false): 
     }
 
     return () => document.body.style.overflow = originalStyle;
-  }, [shouldLock, isUseOriginalStyle]);
+  }, [shouldLock]);
 };
