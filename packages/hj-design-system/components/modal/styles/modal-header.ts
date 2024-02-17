@@ -1,6 +1,5 @@
-import { SerializedStyles, css } from "@emotion/react";
+import { css } from "@emotion/react";
 import { foundations } from "../../../theme/foundations";
-import { ModalSizeSet } from "../types";
 
 export const modalHeaderBaseStyle = css({
     display: "flex",
