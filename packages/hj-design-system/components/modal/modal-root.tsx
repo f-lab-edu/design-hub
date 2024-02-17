@@ -38,9 +38,13 @@ type ModalRootProps<C extends ElementType = "div"> =
        */
       animatePresenceProps?: AnimatePresenceMode;
       /**
+       * whether to close the modal when dim is clicked
+       */
+      closeOnClickDim?: boolean;
+      /**
        * @description Callback when dim is clicked
        */
-      onClickDim?: () => void;
+      onClose: () => void;
     }
   >;
 
@@ -53,7 +57,8 @@ export const ModalRoot = forwardRef(function ModalRoot<
     isOpen,
     wrapper = (children) => <Portal>{children}</Portal>,
     animatePresenceProps,
-    onClickDim,
+    closeOnClickDim = true,
+    onClose,
     ...rest
   } = props;
   const Component = motion(as || "div");
@@ -61,7 +66,7 @@ export const ModalRoot = forwardRef(function ModalRoot<
   useScrollLock(isOpen);
 
   const onClickDimDefault: MouseEventHandler = (e): void => {
-    if (e.target === e.currentTarget) onClickDim?.();
+    if (e.target === e.currentTarget) onClose();
   };
 
   const modalRoot = isOpen && (
