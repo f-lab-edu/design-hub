@@ -1,8 +1,12 @@
+/** @jsxImportSource @emotion/react */
+
 import {
   PolymorphicComponentPropsWithRef,
   PolymorphicRef,
 } from "components/polymorphic";
-import { ElementType, forwardRef } from "react";
+import { ElementType, forwardRef, useContext, useMemo } from "react";
+import { ModalContext } from "./modal-context";
+import { getModalBodySizeStyles } from "./styles/modal-body";
 
 type ModalBodyProps<C extends ElementType = "div"> =
   PolymorphicComponentPropsWithRef<C>;
@@ -10,11 +14,18 @@ type ModalBodyProps<C extends ElementType = "div"> =
 export const ModalBody = forwardRef(function ModalBody<
   C extends ElementType = "div",
 >(props: ModalBodyProps<C>, ref?: PolymorphicRef<C>) {
-  const { as, children, ...rest } = props;
+  const { as, children, style, ...rest } = props;
   const Component = as || "div";
 
+  const modalContext = useContext(ModalContext);
+
+  const cominedStyles = useMemo(() => {
+    if (style) return [getModalBodySizeStyles(modalContext?.size), style];
+    return [getModalBodySizeStyles(modalContext?.size)];
+  }, [style, modalContext?.size]);
+
   return (
-    <Component ref={ref} {...rest}>
+    <Component ref={ref} css={cominedStyles} {...rest}>
       {children}
     </Component>
   );
