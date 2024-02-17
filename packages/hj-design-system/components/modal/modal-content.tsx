@@ -31,6 +31,9 @@ export const ModalContent = forwardRef(function ModalContent<
     modalContext?.setSize(size);
   }, [size]);
 
+  if (!modalContext)
+    throw new Error("Modal.Content must be rendered within a Modal.Root.");
+
   return (
     <Component ref={ref} css={modalContentStyles} {...rest}>
       {children}

@@ -24,6 +24,9 @@ export const ModalBody = forwardRef(function ModalBody<
     return [getModalBodySizeStyles(modalContext?.size)];
   }, [style, modalContext?.size]);
 
+  if (!modalContext)
+    throw new Error("Modal.Body must be rendered within a Modal.Root.");
+
   return (
     <Component ref={ref} css={cominedStyles} {...rest}>
       {children}
