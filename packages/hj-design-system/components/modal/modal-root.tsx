@@ -36,9 +36,9 @@ export const ModalRoot = forwardRef(function ModalRoot<
 
   useScrollLock(isOpen);
 
-  const modalRoot = (
+  const modalRoot = isOpen && (
     <Component role="dialog" ref={ref} {...rest}>
-      {isOpen && children}
+      {children}
     </Component>
   );
 
