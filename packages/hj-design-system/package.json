@@ -4,11 +4,13 @@
   "private": true,
   "main": "./index.tsx",
   "types": "./index.tsx",
+  "homepage": "https://f-lab-edu.github.io/design-hub/",
   "scripts": {
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "deploy-storybook": "gh-pages -d storybook-static"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.23.9",
@@ -36,6 +38,7 @@
     "@types/react-dom": "^18.2.18",
     "@vitest/coverage-istanbul": "^1.2.2",
     "eslint-plugin-storybook": "^0.6.15",
+    "gh-pages": "^6.1.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-docgen-typescript-loader": "^3.7.2",
