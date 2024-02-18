@@ -1,1 +1,0 @@
-# Hyungji Design System
