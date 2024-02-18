@@ -19,6 +19,9 @@ jobs:
         with:
           node-version:  ${{ env.DEFAULT_NODE_VERSION }}
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+  
       - name: Install dependencies
         run: pnpm install
 
