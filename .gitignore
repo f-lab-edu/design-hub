@@ -1,0 +1,7 @@
+# dependencies
+node_modules
+
+packages/playground
+
+.idea
+.DS_Store
