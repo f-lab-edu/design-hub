@@ -11,8 +11,8 @@ pnpm 을 사용하여 hj-design-system과 playground 두 개의 주요 디렉토
 <div>
 <img src="https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=Typescript&logoColor=white"/>
 <img src="https://img.shields.io/badge/Vitest-%236E9F18?style=flat-square&logo=Vitest&logoColor=white"/>
-<img src="https://img.shields.io/badge/Storybook-%23FF4785?style=flat-square&logo=Storybook&logoColor=white"/>
 <img src="https://img.shields.io/badge/testing_library_react-%23E33332?style=flat-square&logo=testinglibrary&logoColor=white" />
+<img src="https://img.shields.io/badge/Storybook-%23FF4785?style=flat-square&logo=Storybook&logoColor=white"/>
 </div>
 
 
