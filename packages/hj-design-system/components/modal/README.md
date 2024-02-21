@@ -45,3 +45,19 @@ Dialog 는 Modal 과 Non-Modal Dialog 를 포함한 대화 구성 요소를 나�
 - [https://developer.mozilla.org/ko/docs/Web/HTML/Element/dialog](https://developer.mozilla.org/ko/docs/Web/HTML/Element/dialog)
 - [https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/)https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/
 
+
+# Modal 컴포넌트는 Portal 컴포넌트를 확장합니다
+
+[Portal 컴포넌트](https://github.com/f-lab-edu/design-hub/blob/main/packages/hj-design-system/components/portal/portal.tsx)는 사용자가 원하는 위치에 UI 를 렌더링할 수 있게 해줍니다.    
+이는 모달 컴포넌트 같은 오버레이 요소들이 전체 페이지 위에 떠 있을 수 있도록 하면서도, 문서 흐름에서는 독립적으로 관리될 수 있게 해줍니다.   
+
+<br/>
+
+모달 컴포넌트는 사용자와의 상호작용 중에 정보를 표시하거나 사용자 입력을 받기 위해 현재 화면 위에 겹쳐서 표시되는 대화 상자입니다.   
+
+모달의 구현에 포탈을 사용함으로써, 모달이 페이지의 나머지 부분과 겹치면서도 별도의 DOM 노드에 렌더링될 수 있습니다. 이 접근 방식은 모달을 페이지의 어느 위치에나 자유롭게 렌더링할 수 있는 유연성을 제공합니다.  
+
+이러한 유연성을 더욱 확장하기 위해, 우리는 disablePortal과 portalContainer라는 두 가지 prop을 제공합니다:  
+
+- disablePortal prop은 모달이 기본적으로 포탈을 사용하지 않고, 대신 DOM의 현재 트리 내에서 직접 렌더링되도록 할 수 있습니다. 이는 특정 상황에서 모달을 페이지의 특정 부분과 더 밀접하게 통합하고 싶을 때 유용할 수 있습니다.
+- portalContainer prop은 모달이 렌더링될 DOM 노드를 명시적으로 지정할 수 있게 해줍니다. 이를 통해 개발자는 모달이 페이지 내에서 특정 위치에 렌더링되도록 세밀하게 제어할 수 있습니다.
