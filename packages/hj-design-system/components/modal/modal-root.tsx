@@ -26,6 +26,15 @@ type ModalRootProps<C extends ElementType = "div"> =
     C,
     {
       /**
+       * The children to render into the `container`.
+       * @default document.body
+       */
+      portalContainer?: Element | DocumentFragment | null;
+      /**
+       * If `true`, the children will be rendered in place instead of being portaled.
+       */
+      disablePortal?: boolean;
+      /**
        * If `true`, the modal will be open.
        */
       isOpen: boolean;
@@ -57,10 +66,11 @@ export const ModalRoot = forwardRef(function ModalRoot<
     as,
     children,
     isOpen,
-    wrapper = (children) => <Portal>{children}</Portal>,
     animatePresenceProps,
     closeOnClickDim = true,
     onClose,
+    portalContainer,
+    disablePortal,
     ...rest
   } = props;
 
@@ -74,25 +84,27 @@ export const ModalRoot = forwardRef(function ModalRoot<
     if (e.target === e.currentTarget) onClose();
   };
 
-  const modalRoot = isOpen && (
-    <ModalProvider onClose={onClose}>
-      <AnimatePresence {...animatePresenceProps}>
-        <Component
-          role="dialog"
-          animate="animate"
-          exit="exit"
-          initial="initial"
-          css={dimmedStyle}
-          variants={dimVariants}
-          ref={ref}
-          onClick={onClickDimDefault}
-          {...rest}
-        >
-          {children}
-        </Component>
-      </AnimatePresence>
-    </ModalProvider>
+  return (
+    <Portal portalContainer={portalContainer} disablePortal={disablePortal}>
+      {isOpen && (
+        <ModalProvider onClose={onClose}>
+          <AnimatePresence {...animatePresenceProps}>
+            <Component
+              role="dialog"
+              animate="animate"
+              exit="exit"
+              initial="initial"
+              css={dimmedStyle}
+              variants={dimVariants}
+              ref={ref}
+              onClick={onClickDimDefault}
+              {...rest}
+            >
+              {children}
+            </Component>
+          </AnimatePresence>
+        </ModalProvider>
+      )}
+    </Portal>
   );
-
-  return wrapper(modalRoot);
 });
