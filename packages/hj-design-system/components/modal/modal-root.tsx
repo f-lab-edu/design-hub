@@ -53,9 +53,13 @@ type ModalRootProps<C extends ElementType = "div"> =
        */
       closeOnClickDim?: boolean;
       /**
-       * @description Callback when dim is clicked
+       * Callback when dim is clicked
        */
       onClose: () => void;
+      /**
+       * Whether to disable animation
+       */
+      disableAnimation?: boolean;
     }
   >;
 
@@ -71,10 +75,11 @@ export const ModalRoot = forwardRef(function ModalRoot<
     onClose,
     portalContainer,
     disablePortal,
+    disableAnimation = false,
     ...rest
   } = props;
 
-  const Component = motion(as || "div");
+  const Component = disableAnimation ? as || "div" : motion(as || "div");
 
   useScrollLock(isOpen);
 
@@ -84,25 +89,33 @@ export const ModalRoot = forwardRef(function ModalRoot<
     if (e.target === e.currentTarget) onClose();
   };
 
+  const modalRoot = (
+    <Component
+      role="dialog"
+      animate={!disableAnimation ? "animate" : undefined}
+      exit={!disableAnimation ? "exit" : undefined}
+      initial={!disableAnimation ? "initial" : undefined}
+      css={dimmedStyle}
+      variants={!disableAnimation ? dimVariants : undefined}
+      ref={ref}
+      onClick={onClickDimDefault}
+      {...rest}
+    >
+      {children}
+    </Component>
+  );
+
   return (
     <Portal portalContainer={portalContainer} disablePortal={disablePortal}>
       {isOpen && (
         <ModalProvider onClose={onClose}>
-          <AnimatePresence {...animatePresenceProps}>
-            <Component
-              role="dialog"
-              animate="animate"
-              exit="exit"
-              initial="initial"
-              css={dimmedStyle}
-              variants={dimVariants}
-              ref={ref}
-              onClick={onClickDimDefault}
-              {...rest}
-            >
-              {children}
-            </Component>
-          </AnimatePresence>
+          {disableAnimation ? (
+            modalRoot
+          ) : (
+            <AnimatePresence {...animatePresenceProps}>
+              {modalRoot}
+            </AnimatePresence>
+          )}
         </ModalProvider>
       )}
     </Portal>
