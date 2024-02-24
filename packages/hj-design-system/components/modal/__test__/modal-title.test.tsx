@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { Modal } from "..";
 
 describe("ModalTitle", () => {
-  it("renders a title with the given children", () => {
+  it("children 을 렌더링한다", () => {
     render(
       <Modal.Root isOpen>
         <Modal.Title>제목입니다</Modal.Title>
