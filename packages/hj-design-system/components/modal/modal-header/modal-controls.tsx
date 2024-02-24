@@ -3,6 +3,7 @@
 import { PolymorphicComponentPropsWithRef } from "components/polymorphic";
 import {
   ElementType,
+  Fragment,
   ReactElement,
   forwardRef,
   useContext,
@@ -43,7 +44,9 @@ export const ModalControls = forwardRef(function ModalControls<
 
   return (
     <Component css={combinedStyles} {...rest}>
-      {elementList.map((el) => el)}
+      {elementList.map((el, idx) => (
+        <Fragment key={idx}>{el}</Fragment>
+      ))}
     </Component>
   );
 });
