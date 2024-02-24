@@ -1,5 +1,5 @@
 # Anatomy
-![image](https://github.com/f-lab-edu/design-hub/assets/84058944/5a667517-5131-4fb9-98c9-7b357cabc450)
+![image](https://github.com/f-lab-edu/design-hub/assets/84058944/6f25ed56-b2fa-490f-baee-34681bd9b726)
 
 # Usage
 ```tsx
