@@ -39,10 +39,10 @@ export const ModalControls = forwardRef(function ModalControls<
 
   const elementList: ReactElement[] = controlElements
     ? [
-        <CloseButton onClose={modalContext?.onClose} />,
+        <CloseButton onClose={modalContext?.onClose} key="close-button" />,
         ...getControlElementsWithKey(controlElements),
       ]
-    : [<CloseButton onClose={modalContext?.onClose} />];
+    : [<CloseButton onClose={modalContext?.onClose} key="close-button" />];
 
   const Component = as || "div";
 
