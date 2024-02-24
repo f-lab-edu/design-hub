@@ -17,7 +17,7 @@ describe("ModalControls", () => {
   it("controlElement 를 렌더링한다", () => {
     render(
       <Modal.Root isOpen>
-        <Modal.Controls controlElement={[<p>뒤로가기</p>]} />
+        <Modal.Controls controlElements={[<p>뒤로가기</p>]} />
       </Modal.Root>
     );
 
