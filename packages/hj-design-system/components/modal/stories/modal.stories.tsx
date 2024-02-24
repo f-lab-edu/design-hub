@@ -64,8 +64,13 @@ export const WithControlElement = () => {
           <Modal.Header>
             <Modal.Title>Modal Title</Modal.Title>
             <Modal.Controls
-              controlElement={[
-                <p onClick={() => window.history.back()}>뒤로 가기</p>,
+              controlElements={[
+                <button
+                  onClick={() => window.history.back()}
+                  aria-role="뒤로 가기"
+                >
+                  뒤로 가기
+                </button>,
               ]}
             />
           </Modal.Header>
