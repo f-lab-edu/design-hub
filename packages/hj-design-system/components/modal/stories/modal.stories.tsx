@@ -67,7 +67,7 @@ export const WithControlElement = () => {
               controlElements={[
                 <button
                   onClick={() => window.history.back()}
-                  aria-role="뒤로 가기"
+                  aria-label="뒤로 가기"
                 >
                   뒤로 가기
                 </button>,
