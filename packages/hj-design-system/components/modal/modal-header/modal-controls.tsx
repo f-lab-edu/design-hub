@@ -50,7 +50,7 @@ export const ModalControls = forwardRef(function ModalControls<
 
 const CloseButton = ({ onClose }: { onClose?: () => void }) => {
   return (
-    <button onClick={onClose} css={css(closeButtonBoxStyles)}>
+    <button onClick={onClose} aria-label="닫기" css={css(closeButtonBoxStyles)}>
       <svg
         width={18}
         height={18}
