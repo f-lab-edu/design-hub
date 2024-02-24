@@ -20,19 +20,28 @@ type ModalControlsProps<C extends ElementType = "div"> =
   PolymorphicComponentPropsWithRef<
     C,
     {
-      controlElement?: ReactElement[];
+      controlElements?: ReactElement[];
     }
   >;
 
 export const ModalControls = forwardRef(function ModalControls<
   C extends ElementType = "div",
 >(props: ModalControlsProps<C>) {
-  const { as, children, controlElement, style, ...rest } = props;
+  const { as, children, controlElements, style, ...rest } = props;
 
   const modalContext = useContext(ModalContext);
 
-  const elementList: ReactElement[] = controlElement
-    ? [<CloseButton onClose={modalContext?.onClose} />, ...controlElement]
+  const getControlElementsWithKey = (controlElements: ReactElement[]) => {
+    return controlElements.map((el, index) => (
+      <Fragment key={index}>{el}</Fragment>
+    ));
+  };
+
+  const elementList: ReactElement[] = controlElements
+    ? [
+        <CloseButton onClose={modalContext?.onClose} />,
+        ...getControlElementsWithKey(controlElements),
+      ]
     : [<CloseButton onClose={modalContext?.onClose} />];
 
   const Component = as || "div";
@@ -44,9 +53,7 @@ export const ModalControls = forwardRef(function ModalControls<
 
   return (
     <Component css={combinedStyles} {...rest}>
-      {elementList.map((el, idx) => (
-        <Fragment key={idx}>{el}</Fragment>
-      ))}
+      {elementList.map((el) => el)}
     </Component>
   );
 });
