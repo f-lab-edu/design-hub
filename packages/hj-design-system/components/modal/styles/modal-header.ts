@@ -8,19 +8,3 @@ export const modalHeaderBaseStyle = css({
     fontSize: foundations.fontSizes.xl,
    fontWeight: foundations.fontWeights.semibold,
 });
-
-export const closeButtonBoxStyles = css({
-    all: 'unset',
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: '24px',
-    height: '24px',
-    padding: foundations.space[2],
-    cursor: "pointer",
-    borderRadius: foundations.radii.md,
-    transition: "background-color 0.2s",
-    "&:hover": {
-        backgroundColor: foundations.colors.gray[100],
-    },
-});
