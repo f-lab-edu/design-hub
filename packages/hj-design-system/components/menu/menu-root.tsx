@@ -21,7 +21,7 @@ type MenuRootProps<C extends ElementType = "div"> =
 export const MenuRoot = forwardRef(function MenuRoot<
   C extends ElementType = "div",
 >(props: MenuRootProps<C>, ref?: PolymorphicRef<C>) {
-  const { as, children, style, direction = "horizontal", ...rest } = props;
+  const { as, children, style, direction = "vertical", ...rest } = props;
   const Component = as || "div";
 
   const combinedStyle = useMemo(() => {
