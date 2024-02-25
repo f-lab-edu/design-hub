@@ -32,19 +32,21 @@ export const MenuList = forwardRef(function MenuList<
   const Component = disableAnimation ? as || "ul" : motion(as || "ul");
 
   return (
-    <nav>
+    <>
       {menuContext?.isOpen && (
-        <Component
-          role="menu"
-          animate={!disableAnimation ? "animate" : undefined}
-          exit={!disableAnimation ? "exit" : undefined}
-          initial={!disableAnimation ? "initial" : undefined}
-          variants={!disableAnimation ? defaultAnimationVariants : undefined}
-          {...rest}
-        >
-          {children}
-        </Component>
+        <nav>
+          <Component
+            role="menu"
+            animate={!disableAnimation ? "animate" : undefined}
+            exit={!disableAnimation ? "exit" : undefined}
+            initial={!disableAnimation ? "initial" : undefined}
+            variants={!disableAnimation ? defaultAnimationVariants : undefined}
+            {...rest}
+          >
+            {children}
+          </Component>
+        </nav>
       )}
-    </nav>
+    </>
   );
 });
