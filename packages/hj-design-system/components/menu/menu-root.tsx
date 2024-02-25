@@ -30,7 +30,7 @@ export const MenuRoot = forwardRef(function MenuRoot<
   }, [style, rootBaseStyles, direction]);
 
   return (
-    <MenuProvider>
+    <MenuProvider direction={direction}>
       <Component ref={ref} css={combinedStyle} {...rest}>
         {children}
       </Component>
