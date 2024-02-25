@@ -40,4 +40,14 @@ describe("MenuList", () => {
     expect(screen.queryByText("Item 1")).not.toBeInTheDocument();
     expect(screen.queryByText("Item 2")).not.toBeInTheDocument();
   });
+
+  it("Menu.Root 요소로 랩핑하지 않으면 오류가 발생한다", () => {
+    expect(() =>
+      render(
+        <Menu.List>
+          <li>Item 1</li>
+        </Menu.List>
+      )
+    ).toThrowError();
+  });
 });
