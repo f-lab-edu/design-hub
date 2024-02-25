@@ -1,6 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
-import { PolymorphicComponentPropsWithRef } from "components/polymorphic";
+import {
+  PolymorphicComponentPropsWithRef,
+  PolymorphicRef,
+} from "components/polymorphic";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ComponentProps,
@@ -33,7 +36,7 @@ type MenuListProps<C extends ElementType = "ul"> =
 
 export const MenuList = forwardRef(function MenuList<
   C extends ElementType = "ul",
->(props: MenuListProps<C>) {
+>(props: MenuListProps<C>, ref?: PolymorphicRef<C>) {
   const { as, children, disableAnimation, style, ...rest } = props;
 
   const menuContext = useContext(MenuContext);
@@ -59,6 +62,7 @@ export const MenuList = forwardRef(function MenuList<
             initial={!disableAnimation ? "initial" : undefined}
             variants={!disableAnimation ? defaultAnimationVariants : undefined}
             css={combinedStyle}
+            ref={ref}
             {...rest}
           >
             {children}
