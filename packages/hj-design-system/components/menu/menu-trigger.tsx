@@ -4,18 +4,33 @@ import {
   PolymorphicComponentPropsWithRef,
   PolymorphicRef,
 } from "components/polymorphic";
-import { ElementType, forwardRef, useContext, useMemo, useRef } from "react";
+import {
+  ElementType,
+  ReactNode,
+  forwardRef,
+  useContext,
+  useMemo,
+  useRef,
+} from "react";
 import { MenuContext } from "./menu-context";
 import { triggerBaseStyle } from "./styles/menu-trigger";
 import { useClickOutSide } from "../../hooks/use-click-outside";
 
 type MenuTriggerProps<C extends ElementType = "button"> =
-  PolymorphicComponentPropsWithRef<C>;
+  PolymorphicComponentPropsWithRef<
+    C,
+    {
+      /**
+       * right addon
+       */
+      rightAddon?: ReactNode;
+    }
+  >;
 
 export const MenuTrigger = forwardRef(function MenuTrigger<
   C extends ElementType = "button",
 >(props: MenuTriggerProps<C>, ref?: PolymorphicRef<C>) {
-  const { as, children, onClick, style, ...rest } = props;
+  const { as, children, onClick, style, rightAddon, ...rest } = props;
 
   const menuContext = useContext(MenuContext);
 
@@ -52,6 +67,7 @@ export const MenuTrigger = forwardRef(function MenuTrigger<
       {...rest}
     >
       {children}
+      {rightAddon}
     </Component>
   );
 });
