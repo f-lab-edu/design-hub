@@ -19,7 +19,9 @@ export const MenuTrigger = forwardRef(function MenuTrigger<
 
   const menuContext = useContext(MenuContext);
 
-  const menuTriggerRef = ref ? ref : useRef<HTMLButtonElement>(null);
+  const originalRef = useRef<HTMLButtonElement>(null);
+
+  const menuTriggerRef = ref ? ref : originalRef;
 
   const handleClick = () => {
     onClick?.();
