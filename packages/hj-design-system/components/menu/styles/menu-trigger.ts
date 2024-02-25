@@ -2,7 +2,10 @@ import { css } from "@emotion/react";
 import { foundations } from "../../../theme/foundations";
 
 export const triggerBaseStyle = css({
-    display: "inline-block",
+    display: "flex",
+    gap: '8px',
+    alignItems: "center",
+    justifyContent: "space-between",
     height: foundations.sizes[10],
     minWidth: foundations.sizes[10],
     cursor: "pointer",
