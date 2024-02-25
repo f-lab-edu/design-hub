@@ -16,7 +16,7 @@ type ArrowIconProps<C extends ElementType = "span"> =
 export const ArrowIcon = forwardRef(function ArrowIcon<
   C extends ElementType = "span",
 >(props: ArrowIconProps<C>, ref?: PolymorphicRef<C>) {
-  const { as, direction, style, ...rest } = props;
+  const { as, direction = "down", style, ...rest } = props;
 
   const Component = as || "span";
 
