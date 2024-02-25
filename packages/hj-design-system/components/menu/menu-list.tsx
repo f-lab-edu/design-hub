@@ -31,6 +31,10 @@ export const MenuList = forwardRef(function MenuList<
 
   const Component = disableAnimation ? as || "ul" : motion(as || "ul");
 
+  if (!menuContext) {
+    throw new Error("MenuList should be used within a MenuRoot");
+  }
+
   return (
     <>
       {menuContext?.isOpen && (
