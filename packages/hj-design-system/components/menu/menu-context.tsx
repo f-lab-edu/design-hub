@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useMemo } from "react";
-import { useMenu } from "./hooks/use-menu";
+import { useMenu } from "./use-menu";
 
 interface MenuContextValue {
   isOpen: boolean;
