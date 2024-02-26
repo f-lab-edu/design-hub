@@ -38,7 +38,8 @@ export const MenuTrigger = forwardRef(function MenuTrigger<
 
   const menuTriggerRef = ref ? ref : originalRef;
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     onClick?.();
     if (menuContext) {
       menuContext.toggle();
@@ -48,11 +49,6 @@ export const MenuTrigger = forwardRef(function MenuTrigger<
   const combinedStyle = useMemo(() => {
     return style ? [triggerBaseStyle, style] : triggerBaseStyle;
   }, [style, triggerBaseStyle]);
-
-  useClickOutSide({
-    targetRef: menuTriggerRef,
-    onClickOutside: () => menuContext?.toggle(),
-  });
 
   if (!menuContext) {
     throw new Error("MenuTrigger should be used within a MenuRoot");
