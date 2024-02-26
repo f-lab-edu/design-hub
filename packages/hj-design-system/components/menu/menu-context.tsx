@@ -1,10 +1,19 @@
-import { ReactNode, createContext, useMemo } from "react";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useMemo,
+  useState,
+} from "react";
 import { useMenu } from "./use-menu";
 import { Direction } from "./menu-root";
 
 interface MenuContextValue {
   isOpen: boolean;
   toggle: () => void;
+  activeIndex: number;
+  setActiveIndex: Dispatch<SetStateAction<number>>;
 }
 
 export const MenuContext = createContext<MenuContextValue | null>(null);
@@ -17,9 +26,11 @@ interface MenuProviderProps {
 export const MenuProvider = ({ children, direction }: MenuProviderProps) => {
   const { isOpen, toggle } = useMenu();
 
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+
   const ContextValue = useMemo(
-    () => ({ isOpen, toggle, direction }),
-    [isOpen, direction]
+    () => ({ isOpen, toggle, direction, activeIndex, setActiveIndex }),
+    [isOpen, direction, activeIndex]
   );
 
   return (
