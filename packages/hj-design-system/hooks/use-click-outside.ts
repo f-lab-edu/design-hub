@@ -9,8 +9,7 @@ export const useClickOutSide = ({targetRef, onClickOutside}: UseClickContainsPro
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             
-          if (targetRef && !targetRef.current?.contains(event.target as Node)) {
-            console.log('click outside');
+          if (targetRef.current && !targetRef.current.contains(event.target as Node)) {
             onClickOutside();
           }
         };
