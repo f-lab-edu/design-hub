@@ -8,3 +8,11 @@ export const itemBaseStyles = css({
     paddingBottom: foundations.space[1.5],
     userSelect: "none",
 })
+
+export const isSelectedStyle = (isSelected:boolean) => css({
+    backgroundColor: isSelected ? foundations.colors.gray[300] : "transparent",
+    cursor: "pointer",
+    "&:hover": {
+        backgroundColor: foundations.colors.gray[200],
+    },
+})
