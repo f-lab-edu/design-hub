@@ -7,8 +7,6 @@ export const navBaseStyles = css({
 
 export const listBaseStyles = css({
     listStyle: 'none',
-    paddingTop: foundations.space[2],
-    paddingBottom: foundations.space[2],
     margin:0,
     paddingLeft: 0,
     borderRadius:foundations.radii.md,
