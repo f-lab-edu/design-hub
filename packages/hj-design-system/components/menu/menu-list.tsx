@@ -6,8 +6,11 @@ import {
 } from "components/polymorphic";
 import { AnimatePresence, motion } from "framer-motion";
 import {
+  Children,
   ComponentProps,
   ElementType,
+  ReactElement,
+  cloneElement,
   forwardRef,
   useContext,
   useMemo,
@@ -65,7 +68,12 @@ export const MenuList = forwardRef(function MenuList<
             ref={ref}
             {...rest}
           >
-            {children}
+            {Children.map(children, (child, idx) => {
+              return cloneElement(child as ReactElement, {
+                onClick: () => menuContext.setActiveItemIdx(idx),
+                isSelected: menuContext.activeItemIdx === idx,
+              });
+            })}
           </Component>
         </nav>
       )}
