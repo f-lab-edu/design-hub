@@ -26,4 +26,14 @@ describe("MenuItem", () => {
 
     expect(screen.getByRole("link")).toBeInTheDocument();
   });
+
+  it("MenuRoot 로 랩핑하지 않으면 오류가 발생한다", () => {
+    expect(() =>
+      render(
+        <Menu.Item>
+          <span>Menu Item</span>
+        </Menu.Item>
+      )
+    ).toThrowError();
+  });
 });
