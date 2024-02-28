@@ -4,7 +4,7 @@ import {
   PolymorphicComponentPropsWithRef,
   PolymorphicRef,
 } from "components/polymorphic";
-import { ElementType, forwardRef, useMemo } from "react";
+import { Children, ElementType, forwardRef, useMemo } from "react";
 import { MenuProvider } from "./menu-context";
 import { getDirectionStyles, rootBaseStyles } from "./styles/menu-root";
 
@@ -18,6 +18,8 @@ type MenuRootProps<C extends ElementType = "div"> =
     }
   >;
 
+const MINIMUM_CHILDREN_COUNT = 2;
+
 export const MenuRoot = forwardRef(function MenuRoot<
   C extends ElementType = "div",
 >(props: MenuRootProps<C>, ref?: PolymorphicRef<C>) {
@@ -28,6 +30,12 @@ export const MenuRoot = forwardRef(function MenuRoot<
     const baseStyles = [rootBaseStyles, getDirectionStyles(direction)];
     return style ? [baseStyles, style] : baseStyles;
   }, [style, rootBaseStyles, direction]);
+
+  if (Children.count(children) < MINIMUM_CHILDREN_COUNT) {
+    throw new Error(
+      "MenuRoot should have at least 3 children. Did you forget to add MenuTrigger, MenuList?"
+    );
+  }
 
   return (
     <MenuProvider direction={direction}>
