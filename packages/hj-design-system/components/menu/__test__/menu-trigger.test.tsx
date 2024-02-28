@@ -9,6 +9,9 @@ describe("Menu.Trigger", () => {
     render(
       <Menu.Root>
         <Menu.Trigger>Menu Trigger</Menu.Trigger>
+        <Menu.List>
+          <Menu.Item>Item 1</Menu.Item>
+        </Menu.List>
       </Menu.Root>
     );
 

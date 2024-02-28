@@ -6,6 +6,7 @@ describe("MenuItem", () => {
   it("children 을 렌더링한다", () => {
     render(
       <Menu.Root>
+        <Menu.Trigger>click me</Menu.Trigger>
         <Menu.Item>
           <span>Menu Item</span>
         </Menu.Item>
@@ -18,6 +19,7 @@ describe("MenuItem", () => {
   it("as prop 에 전달한 elemnt type 을 가진다", () => {
     render(
       <Menu.Root>
+        <Menu.Trigger>click me</Menu.Trigger>
         <Menu.Item as="a" href="/">
           Menu Item
         </Menu.Item>
