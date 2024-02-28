@@ -14,7 +14,8 @@ type MenuItemProps<C extends ElementType = "li"> =
 export const MenuItem = forwardRef(function MenuItem<
   C extends ElementType = "li",
 >(props: MenuItemProps<C>, ref?: PolymorphicRef<C>) {
-  const { as, children, style, isSelected, onClick, ...rest } = props;
+  const { as, children, style, isSelected, onClick, handleChange, ...rest } =
+    props;
 
   const menuContext = useContext(MenuContext);
 
@@ -31,7 +32,15 @@ export const MenuItem = forwardRef(function MenuItem<
   }
 
   return (
-    <Component ref={ref} css={combinedStyle} onClick={onClick} {...rest}>
+    <Component
+      ref={ref}
+      css={combinedStyle}
+      onClick={() => {
+        handleChange();
+        onClick?.();
+      }}
+      {...rest}
+    >
       {children}
     </Component>
   );
