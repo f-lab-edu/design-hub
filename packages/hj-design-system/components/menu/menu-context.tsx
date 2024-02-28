@@ -12,8 +12,8 @@ import { Direction } from "./menu-root";
 interface MenuContextValue {
   isOpen: boolean;
   toggle: () => void;
-  activeItemIdx: number;
-  changeActiveItemIdx: Dispatch<SetStateAction<number>>;
+  current: number;
+  changeCurrent: Dispatch<SetStateAction<number>>;
 }
 
 export const MenuContext = createContext<MenuContextValue | null>(null);
@@ -26,11 +26,11 @@ interface MenuProviderProps {
 export const MenuProvider = ({ children, direction }: MenuProviderProps) => {
   const { isOpen, toggle } = useToggle();
 
-  const [activeItemIdx, changeActiveItemIdx] = useState<number>(0);
+  const [current, changeCurrent] = useState<number>(0);
 
   const ContextValue = useMemo(
-    () => ({ isOpen, toggle, direction, activeItemIdx, changeActiveItemIdx }),
-    [isOpen, direction, activeItemIdx]
+    () => ({ isOpen, toggle, direction, current, changeCurrent }),
+    [isOpen, direction, current]
   );
 
   return (
