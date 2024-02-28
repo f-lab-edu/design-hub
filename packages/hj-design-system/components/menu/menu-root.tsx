@@ -33,7 +33,7 @@ export const MenuRoot = forwardRef(function MenuRoot<
 
   if (Children.count(children) < MINIMUM_CHILDREN_COUNT) {
     throw new Error(
-      "MenuRoot should have at least 3 children. Did you forget to add MenuTrigger, MenuList?"
+      `MenuRoot should have at least ${MINIMUM_CHILDREN_COUNT} children. Did you forget to add MenuTrigger, MenuList?`
     );
   }
 
