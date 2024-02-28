@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
+import { PolymorphicRef } from "components/polymorphic";
 import {
-  PolymorphicComponentPropsWithRef,
-  PolymorphicRef,
-} from "components/polymorphic";
-import {
+  type MouseEvent,
+  ButtonHTMLAttributes,
   ElementType,
   ReactNode,
   forwardRef,
@@ -15,22 +14,19 @@ import {
 import { MenuContext } from "./menu-context";
 import { triggerBaseStyle } from "./styles/menu-trigger";
 import { useClickOutSide } from "../../hooks/use-click-outside";
+import { css } from "@emotion/react";
 
-type MenuTriggerProps<C extends ElementType = "button"> =
-  PolymorphicComponentPropsWithRef<
-    C,
-    {
-      /**
-       * right addon
-       */
-      rightAddon?: ReactNode;
-    }
-  >;
+interface MenuTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * right addon
+   */
+  rightAddon?: ReactNode;
+}
 
 export const MenuTrigger = forwardRef(function MenuTrigger<
   C extends ElementType = "button",
->(props: MenuTriggerProps<C>, ref?: PolymorphicRef<C>) {
-  const { as, children, onClick, style, rightAddon, ...rest } = props;
+>(props: MenuTriggerProps, ref?: PolymorphicRef<C>) {
+  const { children, onClick, style, rightAddon, ...rest } = props;
 
   const menuContext = useContext(MenuContext);
 
@@ -38,15 +34,17 @@ export const MenuTrigger = forwardRef(function MenuTrigger<
 
   const menuTriggerRef = ref ? ref : originalRef;
 
-  const handleClick = () => {
-    onClick?.();
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    onClick?.(event);
     if (menuContext) {
       menuContext.toggle();
     }
   };
 
   const combinedStyle = useMemo(() => {
-    return style ? [triggerBaseStyle, style] : triggerBaseStyle;
+    return style
+      ? css([triggerBaseStyle, { ...style }])
+      : css(triggerBaseStyle);
   }, [style, triggerBaseStyle]);
 
   useClickOutSide({
@@ -58,9 +56,8 @@ export const MenuTrigger = forwardRef(function MenuTrigger<
     throw new Error("MenuTrigger should be used within a MenuRoot");
   }
 
-  const Component = as || "button";
   return (
-    <Component
+    <button
       ref={menuTriggerRef}
       onClick={handleClick}
       css={combinedStyle}
@@ -68,6 +65,6 @@ export const MenuTrigger = forwardRef(function MenuTrigger<
     >
       {children}
       {rightAddon}
-    </Component>
+    </button>
   );
 });
