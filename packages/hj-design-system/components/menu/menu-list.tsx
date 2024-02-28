@@ -70,7 +70,7 @@ export const MenuList = forwardRef(function MenuList<
           >
             {Children.map(children, (child, idx) => {
               return cloneElement(child as ReactElement, {
-                onClick: () => menuContext.changeCurrent(idx),
+                handleChange: () => menuContext.changeCurrent(idx),
                 isSelected: menuContext.current === idx,
               });
             })}
