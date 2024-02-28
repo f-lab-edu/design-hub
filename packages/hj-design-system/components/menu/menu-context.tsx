@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { useMenu } from "./use-menu";
+import { useToggle } from "./use-toggle";
 import { Direction } from "./menu-root";
 
 interface MenuContextValue {
@@ -24,7 +24,7 @@ interface MenuProviderProps {
 }
 
 export const MenuProvider = ({ children, direction }: MenuProviderProps) => {
-  const { isOpen, toggle } = useMenu();
+  const { isOpen, toggle } = useToggle();
 
   const [activeItemIdx, setActiveItemIdx] = useState<number>(0);
 

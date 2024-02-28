@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useMenu = () => {
+export const useToggle = () => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen((prev) => !prev);
 
