@@ -14,6 +14,10 @@ type MenuRootProps<C extends ElementType = "div"> =
   PolymorphicComponentPropsWithRef<
     C,
     {
+      /**
+       * The direction of the menu
+       * @default "vertical"
+       */
       direction?: Direction;
     }
   >;
