@@ -41,6 +41,21 @@ describe("MenuList", () => {
     expect(screen.queryByText("Item 2")).not.toBeInTheDocument();
   });
 
+  it("Menu.Root 요소에 defaultOpen prop 이 true 로 전달되면 children 을 렌더링한다", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>click here</Menu.Trigger>
+        <Menu.List>
+          <li>Item 1</li>
+          <li>Item 2</li>
+        </Menu.List>
+      </Menu.Root>
+    );
+
+    expect(screen.getByText("Item 1")).toBeInTheDocument();
+    expect(screen.getByText("Item 2")).toBeInTheDocument();
+  });
+
   it("Menu.Root 요소로 랩핑하지 않으면 오류가 발생한다", () => {
     expect(() =>
       render(
