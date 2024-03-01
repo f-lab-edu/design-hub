@@ -49,7 +49,6 @@ describe('useClickOutSide', () => {
 
     expect(onClickOutside).not.toHaveBeenCalled();
   });
-});
 
   it('enabled 옵션이 false 일때 target 요소 외부 영역을 클릭하면 onClickOutside 함수가 호출되지 않아야 한다', () => {
     renderHook(() => 
@@ -66,5 +65,8 @@ describe('useClickOutSide', () => {
 
     expect(onClickOutside).not.toHaveBeenCalled();
   })
+});
+
+
 
 
