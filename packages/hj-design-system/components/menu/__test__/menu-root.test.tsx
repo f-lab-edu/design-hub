@@ -2,8 +2,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { MenuRoot } from "../menu-root";
 import { describe, it, expect, vi } from "vitest";
 import { Menu } from "..";
-import exp from "constants";
-import userEvent from "@testing-library/user-event";
 
 describe("MenuRoot", () => {
   it("children 을 렌더링한다", () => {
