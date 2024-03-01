@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import { type Direction } from "../menu-root";
 
 export const rootBaseStyles = css({
+    position: "relative",
     maxWidth: 'max-content',
     display: 'flex',
     gap: '4px',

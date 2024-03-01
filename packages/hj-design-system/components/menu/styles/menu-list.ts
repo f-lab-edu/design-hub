@@ -2,6 +2,10 @@ import { css } from "@emotion/react";
 import { foundations } from "../../../theme/foundations";
 
 export const navBaseStyles = css({
+    position: 'absolute',
+    top: '100%',
+    zIndex: foundations.zIndices.dropdown,
+    margin: '4px 0',
     maxWidth: 'max-content',
 })
 
