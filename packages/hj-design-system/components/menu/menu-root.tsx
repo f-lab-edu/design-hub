@@ -24,6 +24,12 @@ type MenuRootProps<C extends ElementType = "div"> =
        * @default false
        */
       defaultOpen?: boolean;
+      /**
+       * callback to perform custom action when the menu is opened 
+       * invoked with the id of the item.
+       * @param index - the index of the selected item, starting from 0
+       */
+      onSelect?: (index: number) => void;
     }
   >;
 
@@ -38,6 +44,7 @@ export const MenuRoot = forwardRef(function MenuRoot<
     style,
     direction = "vertical",
     defaultOpen,
+    onSelect,
     ...rest
   } = props;
   const Component = as || "div";
@@ -54,7 +61,11 @@ export const MenuRoot = forwardRef(function MenuRoot<
   }
 
   return (
-    <MenuProvider direction={direction} defaultOpen={defaultOpen}>
+    <MenuProvider
+      direction={direction}
+      defaultOpen={defaultOpen}
+      onSelect={onSelect}
+    >
       <Component ref={ref} css={combinedStyle} {...rest}>
         {children}
       </Component>
