@@ -6,7 +6,7 @@ import {
 } from "components/polymorphic";
 import { Children, ElementType, forwardRef, useMemo } from "react";
 import { MenuProvider } from "./menu-context";
-import { getDirectionStyles, rootBaseStyles } from "./styles/menu-root";
+import { rootBaseStyles } from "./styles/menu-root";
 
 export type Direction = "vertical" | "horizontal";
 
@@ -27,7 +27,7 @@ export const MenuRoot = forwardRef(function MenuRoot<
   const Component = as || "div";
 
   const combinedStyle = useMemo(() => {
-    const baseStyles = [rootBaseStyles, getDirectionStyles(direction)];
+    const baseStyles = [rootBaseStyles];
     return style ? [baseStyles, style] : baseStyles;
   }, [style, rootBaseStyles, direction]);
 

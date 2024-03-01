@@ -1,11 +1,9 @@
 import { css } from "@emotion/react";
-import { type Direction } from "../menu-root";
 
 export const rootBaseStyles = css({
     position: "relative",
     maxWidth: 'max-content',
+    width: '100%',
     display: 'flex',
     gap: '4px',
 })
-
-export const getDirectionStyles = (direction: Direction) => direction === 'vertical' ? css({flexDirection: 'column'}) : css({flexDirection: 'row'})

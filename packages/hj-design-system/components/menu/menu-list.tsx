@@ -17,7 +17,11 @@ import {
 } from "react";
 import { defaultAnimationVariants } from "../../theme/foundations/animation";
 import { MenuContext } from "./menu-context";
-import { listBaseStyles, navBaseStyles } from "./styles/menu-list";
+import {
+  getNavDirectionStyles,
+  listBaseStyles,
+  navBaseStyles,
+} from "./styles/menu-list";
 
 type AnimatePresenceProps = ComponentProps<typeof AnimatePresence>;
 
@@ -46,7 +50,20 @@ export const MenuList = forwardRef(function MenuList<
 
   const Component = disableAnimation ? as || "ul" : motion(as || "ul");
 
-  const combinedStyle = useMemo(() => {
+  const combinedNavStyle = useMemo(() => {
+    return style
+      ? [
+          navBaseStyles,
+          getNavDirectionStyles(menuContext?.direction || "vertical"),
+          style,
+        ]
+      : [
+          navBaseStyles,
+          getNavDirectionStyles(menuContext?.direction || "vertical"),
+        ];
+  }, [style, navBaseStyles]);
+
+  const combinedListStyle = useMemo(() => {
     return style ? [listBaseStyles, style] : listBaseStyles;
   }, [style, listBaseStyles]);
 
@@ -57,14 +74,14 @@ export const MenuList = forwardRef(function MenuList<
   return (
     <>
       {menuContext?.isOpen && (
-        <nav css={navBaseStyles}>
+        <nav css={combinedNavStyle}>
           <Component
             role="menu"
             animate={!disableAnimation ? "animate" : undefined}
             exit={!disableAnimation ? "exit" : undefined}
             initial={!disableAnimation ? "initial" : undefined}
             variants={!disableAnimation ? defaultAnimationVariants : undefined}
-            css={combinedStyle}
+            css={combinedListStyle}
             ref={ref}
             {...rest}
           >

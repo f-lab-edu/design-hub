@@ -14,6 +14,7 @@ interface MenuContextValue {
   toggle: () => void;
   current: number;
   changeCurrent: Dispatch<SetStateAction<number>>;
+  direction?: Direction;
 }
 
 export const MenuContext = createContext<MenuContextValue | null>(null);
@@ -29,8 +30,8 @@ export const MenuProvider = ({ children, direction }: MenuProviderProps) => {
   const [current, changeCurrent] = useState<number>(0);
 
   const ContextValue = useMemo(
-    () => ({ isOpen, toggle, direction, current, changeCurrent }),
-    [isOpen, direction, current]
+    () => ({ isOpen, toggle, current, changeCurrent, direction }),
+    [isOpen, current, direction]
   );
 
   return (
