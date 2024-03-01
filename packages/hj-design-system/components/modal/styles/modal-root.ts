@@ -1,26 +1,5 @@
 import { css } from "@emotion/react";
-import { Variants } from "framer-motion";
 import  zIndices  from '../../../theme/foundations/z-index';
-
-const defaultEasing = [0.4, 0, 0.6, 1];
-
-export const dimVariants: Variants = {
-    animate: {
-      opacity: 1,
-      transition: { duration: 0.2, ease: defaultEasing },
-      willChange: 'opacity',
-    },
-    exit: {
-      opacity: 0,
-      transition: { duration: 0.2, ease: defaultEasing },
-      willChange: 'opacity',
-    },
-    initial: {
-      opacity: 0,
-      transition: { duration: 0.2, ease: defaultEasing },
-      willChange: 'opacity',
-    },
-  };
 
 export const dimmedStyle = css({
     position: 'fixed',

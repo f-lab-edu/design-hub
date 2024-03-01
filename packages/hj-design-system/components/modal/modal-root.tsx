@@ -15,9 +15,10 @@ import {
 import { useScrollLock } from "../../hooks/use-scroll-lock";
 import { Portal } from "../portal";
 import { AnimatePresence, motion } from "framer-motion";
-import { dimVariants, dimmedStyle } from "./styles/modal-root";
+import { dimmedStyle } from "./styles/modal-root";
 import { ModalProvider } from "./modal-context";
 import { useKeyDown } from "../../hooks/use-key-down";
+import { defaultAnimationVariants } from "../../theme/foundations/animation";
 
 type AnimatePresenceMode = ComponentProps<typeof AnimatePresence>;
 
@@ -96,7 +97,7 @@ export const ModalRoot = forwardRef(function ModalRoot<
       exit={!disableAnimation ? "exit" : undefined}
       initial={!disableAnimation ? "initial" : undefined}
       css={dimmedStyle}
-      variants={!disableAnimation ? dimVariants : undefined}
+      variants={!disableAnimation ? defaultAnimationVariants : undefined}
       ref={ref}
       onClick={onClickDimDefault}
       {...rest}
