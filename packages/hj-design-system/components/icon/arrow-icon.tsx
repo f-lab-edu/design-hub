@@ -35,7 +35,7 @@ export const ArrowIcon = forwardRef(function ArrowIcon<
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path d="M15 5L8 12L15 19" stroke="#343A40" stroke-width="2" />
+        <path d="M15 5L8 12L15 19" stroke="#343A40" strokeWidth="2" />
       </svg>
     </Component>
   );
