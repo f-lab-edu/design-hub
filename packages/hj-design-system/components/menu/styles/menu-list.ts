@@ -15,4 +15,5 @@ export const listBaseStyles = css({
     paddingLeft: 0,
     borderRadius:foundations.radii.md,
     border: `1px solid ${foundations.colors.gray[300]}`,
+    overflow: 'hidden', 
 })
