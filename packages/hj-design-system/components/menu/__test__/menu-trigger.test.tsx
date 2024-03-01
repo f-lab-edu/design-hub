@@ -20,8 +20,6 @@ describe("Menu.Trigger", () => {
   });
 
   it("onClick 이벤트가 발생하면 사용자가 넘겨준 onClick 이벤트 핸들러가 실행되고, 메뉴 아이템이 보여야 한다", () => {
-    const toggle = vi.fn();
-
     const userCustomOnclick = vi.fn();
 
     render(
