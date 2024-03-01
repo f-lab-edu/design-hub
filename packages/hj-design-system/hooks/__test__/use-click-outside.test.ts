@@ -17,9 +17,10 @@ describe('useClickOutSide', () => {
     document.body.removeChild(targetElement);
   });
 
-  it('target 요소 외부 영역을 클릭하면 onClickOutside 함수가 호출되어야 한다', () => {
+  it('enabled 옵션이 true 일때 target 요소 외부 영역을 클릭하면 onClickOutside 함수가 호출되어야 한다', () => {
     renderHook(() => 
       useClickOutSide({
+        enabled: true,
         targetRef: { current: targetElement },
         onClickOutside,
       })
@@ -32,10 +33,11 @@ describe('useClickOutSide', () => {
     expect(onClickOutside).toHaveBeenCalled();
   });
 
-  it('target 요소 내부 영역을 클릭하면 onClickOutside 함수는 호출되지 않는다', () => {
+  it('enalbed 옵션이 true 일때 target 요소 내부 영역을 클릭하면 onClickOutside 함수는 호출되지 않는다', () => {
 
     renderHook(() => 
       useClickOutSide({
+        enabled: true,
         targetRef: { current: targetElement },
         onClickOutside,
       })
@@ -48,3 +50,21 @@ describe('useClickOutSide', () => {
     expect(onClickOutside).not.toHaveBeenCalled();
   });
 });
+
+  it('enabled 옵션이 false 일때 target 요소 외부 영역을 클릭하면 onClickOutside 함수가 호출되지 않아야 한다', () => {
+    renderHook(() => 
+      useClickOutSide({
+        enabled: false,
+        targetRef: { current: targetElement },
+        onClickOutside,
+      })
+    );
+
+    act(() => {
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+
+    expect(onClickOutside).not.toHaveBeenCalled();
+  })
+
+
