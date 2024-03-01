@@ -10,7 +10,7 @@ export const itemBaseStyles = css({
 })
 
 export const isSelectedStyle = (isSelected:boolean) => css({
-    backgroundColor: isSelected ? foundations.colors.gray[300] : "transparent",
+    backgroundColor: isSelected ? foundations.colors.gray[300] : foundations.colors.white,
     cursor: "pointer",
     "&:hover": {
         backgroundColor: foundations.colors.gray[200],
