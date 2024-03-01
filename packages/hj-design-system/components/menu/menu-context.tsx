@@ -13,8 +13,10 @@ interface MenuContextValue {
   isOpen: boolean;
   toggle: () => void;
   current: number;
-  changeCurrent: Dispatch<SetStateAction<number>>;
+  changeCurrent: (value: number) => void;
   direction?: Direction;
+  defaultOpen?: boolean;
+  changeIsOpen: (value: boolean) => void;
 }
 
 export const MenuContext = createContext<MenuContextValue | null>(null);
@@ -22,16 +24,29 @@ export const MenuContext = createContext<MenuContextValue | null>(null);
 interface MenuProviderProps {
   children: ReactNode;
   direction?: Direction;
+  defaultOpen?: boolean;
 }
 
-export const MenuProvider = ({ children, direction }: MenuProviderProps) => {
-  const { isOpen, toggle } = useToggle();
+export const MenuProvider = ({
+  children,
+  direction,
+  defaultOpen,
+}: MenuProviderProps) => {
+  const { isOpen, toggle, changeIsOpen } = useToggle(defaultOpen || false);
 
   const [current, changeCurrent] = useState<number>(0);
 
   const ContextValue = useMemo(
-    () => ({ isOpen, toggle, current, changeCurrent, direction }),
-    [isOpen, current, direction]
+    () => ({
+      isOpen,
+      toggle,
+      changeIsOpen,
+      current,
+      changeCurrent,
+      direction,
+      defaultOpen,
+    }),
+    [isOpen, current, direction, defaultOpen]
   );
 
   return (

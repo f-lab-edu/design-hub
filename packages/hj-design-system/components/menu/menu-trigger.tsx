@@ -48,9 +48,9 @@ export const MenuTrigger = forwardRef(function MenuTrigger<
   }, [style, triggerBaseStyle]);
 
   useClickOutSide({
-    enabled: menuContext?.isOpen,
+    enabled: menuContext?.isOpen || !!menuContext?.defaultOpen,
     targetRef: menuTriggerRef,
-    onClickOutside: () => menuContext?.toggle(),
+    onClickOutside: () => menuContext?.changeIsOpen(false),
   });
 
   if (!menuContext) {

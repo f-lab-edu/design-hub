@@ -19,6 +19,11 @@ type MenuRootProps<C extends ElementType = "div"> =
        * @default "vertical"
        */
       direction?: Direction;
+      /**
+       * If ture, the menu will be opened by default
+       * @default false
+       */
+      defaultOpen?: boolean;
     }
   >;
 
@@ -27,7 +32,14 @@ const MINIMUM_CHILDREN_COUNT = 2;
 export const MenuRoot = forwardRef(function MenuRoot<
   C extends ElementType = "div",
 >(props: MenuRootProps<C>, ref?: PolymorphicRef<C>) {
-  const { as, children, style, direction = "vertical", ...rest } = props;
+  const {
+    as,
+    children,
+    style,
+    direction = "vertical",
+    defaultOpen,
+    ...rest
+  } = props;
   const Component = as || "div";
 
   const combinedStyle = useMemo(() => {
@@ -42,7 +54,7 @@ export const MenuRoot = forwardRef(function MenuRoot<
   }
 
   return (
-    <MenuProvider direction={direction}>
+    <MenuProvider direction={direction} defaultOpen={defaultOpen}>
       <Component ref={ref} css={combinedStyle} {...rest}>
         {children}
       </Component>
