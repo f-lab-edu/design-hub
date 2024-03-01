@@ -1,6 +1,6 @@
 import { renderHook, act } from "@testing-library/react-hooks";
 import {describe, it, expect} from 'vitest'
-import { useToggle } from "../use-toggle";
+import { useToggle } from "../../../hooks/use-toggle";
 
 describe("useMenu", () => {
     it("isOpen 의 초기값은 false 이다", () => {
