@@ -1,8 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Menu } from "../index";
 import { describe, it, expect, vi } from "vitest";
-import userEvent from "@testing-library/user-event";
-import { MenuContext, MenuProvider } from "../menu-context";
 
 describe("Menu.Trigger", () => {
   it("children 을 렌더링한다", () => {
