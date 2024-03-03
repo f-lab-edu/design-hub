@@ -18,11 +18,6 @@ type TabsRootProps = HTMLAttributes<HTMLDivElement> & {
    */
   onChangeCurrent?: (index: number) => void;
   /**
-   * Default tab index.
-   * @default 0
-   */
-  defaultIndex?: number;
-  /**
    * The direction of the tabs.
    * @default "horizontal"
    */
@@ -38,7 +33,6 @@ export const TabsRoot = forwardRef(function TabsRoot(
     size = "md",
     current,
     onChangeCurrent,
-    defaultIndex,
     direction = "horizontal",
     ...rest
   } = props;
@@ -48,7 +42,6 @@ export const TabsRoot = forwardRef(function TabsRoot(
       size={size}
       current={current}
       onChangeCurrent={onChangeCurrent}
-      defaultIndex={defaultIndex}
       direction={direction}
     >
       <div ref={ref} {...rest}>
