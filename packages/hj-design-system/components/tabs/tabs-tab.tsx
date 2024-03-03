@@ -30,6 +30,7 @@ export const TabsTab = forwardRef(function TabsTab(
   return (
     <button
       role="tab"
+      tabIndex={tabsContext?.current === index ? 0 : -1}
       aria-selected={tabsContext?.current === index}
       id={id}
       ref={ref}
