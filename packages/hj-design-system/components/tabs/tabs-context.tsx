@@ -7,8 +7,8 @@ export const TabsContext = createContext<TabsContextProps | null>(null);
 
 interface TabsProviderProps {
   children: ReactNode;
-  size: TabsSizeSet;
-  defaultIndex: number;
+  size?: TabsSizeSet;
+  defaultIndex?: number;
   current?: number;
   onChangeCurrent?: (index: number) => void;
   direction?: TabsDirection;
