@@ -1,11 +1,16 @@
+/** @jsxImportSource @emotion/react */
+
 import {
   ComponentProps,
   ForwardedRef,
   HTMLAttributes,
   forwardRef,
   useContext,
+  useMemo,
 } from "react";
 import { TabsContext, TabsProvider } from "./tabs-context";
+import { getSizeStyle, tabBaseStyle } from "./styles/tabs-tab";
+import { css } from "@emotion/react";
 
 type TabChangeHandler = ComponentProps<typeof TabsProvider>["onChangeCurrent"];
 
@@ -20,9 +25,15 @@ export const TabsTab = forwardRef(function TabsTab(
   props: TabsTabProps,
   ref?: ForwardedRef<HTMLButtonElement>
 ) {
-  const { handleChange, index, onClick, id, disabled, ...rest } = props;
+  const { handleChange, index, onClick, id, disabled, style, ...rest } = props;
 
   const tabsContext = useContext(TabsContext);
+
+  const combinedStyles = useMemo(() => {
+    return style
+      ? css(tabBaseStyle, getSizeStyle(tabsContext?.size), { ...style })
+      : [tabBaseStyle, getSizeStyle(tabsContext?.size)];
+  }, [style, tabsContext?.size]);
 
   if (!tabsContext) {
     throw new Error("Tabs.Tab must be rendered within a Tabs.Root.");
@@ -43,6 +54,7 @@ export const TabsTab = forwardRef(function TabsTab(
         }
         onClick?.(e);
       }}
+      css={combinedStyles}
       {...rest}
     />
   );
