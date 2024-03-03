@@ -11,14 +11,15 @@ type TabChangeHandler = ComponentProps<typeof TabsProvider>["onChangeCurrent"];
 
 type TabsTabProps = HTMLAttributes<HTMLButtonElement> & {
   handleChange?: TabChangeHandler;
-  index: number;
+  index?: number;
+  id?: string;
 };
 
 export const TabsTab = forwardRef(function TabsTab(
   props: TabsTabProps,
   ref?: ForwardedRef<HTMLButtonElement>
 ) {
-  const { handleChange, index, onClick, ...rest } = props;
+  const { handleChange, index, onClick, id, ...rest } = props;
 
   const tabsContext = useContext(TabsContext);
 
@@ -30,9 +31,12 @@ export const TabsTab = forwardRef(function TabsTab(
     <button
       role="tab"
       aria-selected={tabsContext?.current === index}
+      id={id}
       ref={ref}
       onClick={(e) => {
-        handleChange?.(index);
+        if (index !== undefined) {
+          handleChange?.(index);
+        }
         onClick?.(e);
       }}
       {...rest}
