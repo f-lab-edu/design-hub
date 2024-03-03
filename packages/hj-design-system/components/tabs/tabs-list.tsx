@@ -42,6 +42,7 @@ export const TabsList = forwardRef(function TabsList<
             if (tabsContext?.onChangeCurrent) tabsContext?.onChangeCurrent(idx);
           },
           index: idx,
+          id: `tab-${idx}`,
         });
       })}
     </Component>
