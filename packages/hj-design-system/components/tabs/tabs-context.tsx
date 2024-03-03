@@ -22,9 +22,25 @@ export const TabsProvider = ({
   onChangeCurrent,
   direction,
 }: TabsProviderProps) => {
+  const [internalCurrent, changeInternalCurrent] = useState(defaultIndex ?? 0);
+
   const ContextValue = useMemo(
-    () => ({ size, defaultIndex, current, onChangeCurrent, direction }),
-    [size, defaultIndex, current, direction]
+    () => ({
+      size,
+      defaultIndex,
+      current: defaultIndex ?? current ?? internalCurrent,
+      onChangeCurrent: onChangeCurrent ?? changeInternalCurrent,
+      direction,
+    }),
+    [
+      size,
+      defaultIndex,
+      current,
+      direction,
+      current,
+      onChangeCurrent,
+      internalCurrent,
+    ]
   );
 
   return (
