@@ -25,6 +25,4 @@ describe("TabsList", () => {
       render(<TabsList />);
     }).toThrowError();
   });
-
-  // Add more test cases as needed
 });
