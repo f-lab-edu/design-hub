@@ -1,5 +1,6 @@
 import { ForwardedRef, HTMLAttributes, forwardRef } from "react";
 import { TabsSizeSet, TabsDirection } from "./types";
+import { TabsProvider } from "./tabs-context";
 
 type TabsRootProps = HTMLAttributes<HTMLDivElement> & {
   /**
@@ -32,11 +33,27 @@ export const TabsRoot = forwardRef(function TabsRoot(
   props: TabsRootProps,
   ref?: ForwardedRef<HTMLDivElement>
 ) {
-  const { children, size = "md", direction = "horizontal", ...rest } = props;
+  const {
+    children,
+    size = "md",
+    current,
+    onChangeCurrent,
+    defaultIndex,
+    direction = "horizontal",
+    ...rest
+  } = props;
 
   return (
-    <div ref={ref} {...rest}>
-      {children}
-    </div>
+    <TabsProvider
+      size={size}
+      current={current}
+      onChangeCurrent={onChangeCurrent}
+      defaultIndex={defaultIndex}
+      direction={direction}
+    >
+      <div ref={ref} {...rest}>
+        {children}
+      </div>
+    </TabsProvider>
   );
 });
