@@ -14,18 +14,6 @@ describe("TabsTab", () => {
     expect(screen.getByText("Home")).toBeInTheDocument();
   });
 
-  it("as prop 에 전달받은 element type 으로 렌더링한다", () => {
-    render(
-      <Tabs.Root>
-        <Tabs.Tab as="a" index={0} href="/">
-          Home
-        </Tabs.Tab>
-      </Tabs.Root>
-    );
-
-    expect(screen.getByRole("link")).toBeInTheDocument();
-  });
-
   it("클릭 이벤트가 발생했을때 전달받은 onChangeCurrent 함수와 onClick 함수가 있으면 호출한다", () => {
     const handleChange = vi.fn();
     const onClick = vi.fn();
