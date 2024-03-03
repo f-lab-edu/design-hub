@@ -1,8 +1,5 @@
 import { ForwardedRef, HTMLAttributes, forwardRef } from "react";
-
-type TabsSizeSet = "sm" | "md" | "lg";
-
-type TabsDirection = "horizontal" | "vertical";
+import { TabsSizeSet, TabsDirection } from "./types";
 
 type TabsRootProps = HTMLAttributes<HTMLDivElement> & {
   /**
