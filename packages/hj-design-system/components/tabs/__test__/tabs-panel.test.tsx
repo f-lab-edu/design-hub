@@ -19,7 +19,7 @@ describe("TabsPanel", () => {
     expect(screen.getByText("panel 3")).toBeInTheDocument();
   });
 
-  it("throws an error when rendered outside of Tabs.Root", () => {
+  it("Tabs.Root 로 감싸지 않으면 오류를 뱉는다.", () => {
     expect(() => render(<Tabs.Panel />)).toThrow(
       "Tabs.Panel must be rendered within a Tabs.Root."
     );
