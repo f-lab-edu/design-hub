@@ -4,6 +4,7 @@ import {
 } from "components/polymorphic";
 import {
   Children,
+  ComponentProps,
   ElementType,
   ReactElement,
   cloneElement,
@@ -12,6 +13,9 @@ import {
   useContext,
 } from "react";
 import { TabsContext } from "./tabs-context";
+import { TabsTab } from "./tabs-tab";
+
+type TabsTab = ComponentProps<typeof TabsTab>;
 
 type TabsListProps<C extends ElementType = "div"> =
   PolymorphicComponentPropsWithRef<C>;
@@ -33,7 +37,7 @@ export const TabsList = forwardRef(function TabsList<
     <Component ref={ref} role="tablist" {...rest}>
       {Children.map(children, (child, idx) => {
         if (!isValidElement(child)) return child;
-        return cloneElement(child as ReactElement, {
+        return cloneElement(child as ReactElement<TabsTab>, {
           handleChange: () => {
             if (tabsContext?.onChangeCurrent) tabsContext?.onChangeCurrent(idx);
           },
