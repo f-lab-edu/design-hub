@@ -1,6 +1,9 @@
-import { ForwardedRef, HTMLAttributes, forwardRef } from "react";
+/** @jsxImportSource @emotion/react */
+
+import { ForwardedRef, HTMLAttributes, forwardRef, useMemo } from "react";
 import { TabsSizeSet, TabsDirection } from "./types";
 import { TabsProvider } from "./tabs-context";
+import { css } from "@emotion/react";
 
 type TabsRootProps = HTMLAttributes<HTMLDivElement> & {
   /**
@@ -34,8 +37,14 @@ export const TabsRoot = forwardRef(function TabsRoot(
     current,
     onChangeCurrent,
     direction = "horizontal",
+    style,
     ...rest
   } = props;
+
+  const combinedStyles = useMemo(
+    () => (style ? css({ ...style }) : []),
+    [style]
+  );
 
   return (
     <TabsProvider
@@ -44,7 +53,7 @@ export const TabsRoot = forwardRef(function TabsRoot(
       onChangeCurrent={onChangeCurrent}
       direction={direction}
     >
-      <div ref={ref} {...rest}>
+      <div ref={ref} css={combinedStyles} {...rest}>
         {children}
       </div>
     </TabsProvider>

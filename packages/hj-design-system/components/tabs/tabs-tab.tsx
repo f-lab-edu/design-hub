@@ -13,13 +13,14 @@ type TabsTabProps = HTMLAttributes<HTMLButtonElement> & {
   handleChange?: TabChangeHandler;
   index?: number;
   id?: string;
+  disabled?: boolean;
 };
 
 export const TabsTab = forwardRef(function TabsTab(
   props: TabsTabProps,
   ref?: ForwardedRef<HTMLButtonElement>
 ) {
-  const { handleChange, index, onClick, id, ...rest } = props;
+  const { handleChange, index, onClick, id, disabled, ...rest } = props;
 
   const tabsContext = useContext(TabsContext);
 
@@ -29,9 +30,11 @@ export const TabsTab = forwardRef(function TabsTab(
 
   return (
     <button
+      disabled={disabled}
       role="tab"
       tabIndex={tabsContext?.current === index ? 0 : -1}
       aria-selected={tabsContext?.current === index}
+      aria-disabled={disabled}
       id={id}
       ref={ref}
       onClick={(e) => {
