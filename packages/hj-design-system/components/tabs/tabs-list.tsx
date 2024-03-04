@@ -74,6 +74,23 @@ export const TabsList = forwardRef(function TabsList<
         }
       }
 
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        const moveForward = event.key === "ArrowDown";
+        let newPotentialIndex = tabsContext.current || 0;
+
+        for (let i = 0; i < tabElements.length; i++) {
+          newPotentialIndex =
+            (newPotentialIndex + (moveForward ? 1 : -1) + tabElements.length) %
+            tabElements.length;
+
+          const potentialTab = tabElements[newPotentialIndex];
+          if (!potentialTab.hasAttribute("disabled")) {
+            newTabIndex = newPotentialIndex;
+            break;
+          }
+        }
+      }
+
       if (newTabIndex !== tabsContext.current && tabsContext.onChangeCurrent) {
         tabsContext.onChangeCurrent(newTabIndex);
         tabElements[newTabIndex].focus();
