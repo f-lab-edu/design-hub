@@ -1,19 +1,21 @@
 import { SerializedStyles, css } from "@emotion/react";
 import { TabsDirection } from "../types";
 
-export const listBaseStyle = css({
+export const rootBaseStyle = css({
     display: "flex",
-    boxSizing: "border-box",
-})
+});
 
-export const getDirectionStyle = (direction: TabsDirection='horizontal') => {
+export const getDirectionStyle = (direction: TabsDirection = 'horizontal') => {
     const DIRECTION_MAP: Record<TabsDirection, SerializedStyles> = {
         horizontal: css({
-            flexDirection: "row",
+            flexDirection: "column",
+        
         }),
         vertical: css({
-            flexDirection: "column",
+            flexDirection: "row",
         })
+    
     }
-    return DIRECTION_MAP[direction];
+    return css(DIRECTION_MAP[direction]);
+
 }

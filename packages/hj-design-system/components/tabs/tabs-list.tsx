@@ -19,7 +19,7 @@ import {
 } from "react";
 import { TabsContext } from "./tabs-context";
 import { TabsTab } from "./tabs-tab";
-import { listBaseStyle } from "./styles/tabs-list";
+import { getDirectionStyle, listBaseStyle } from "./styles/tabs-list";
 import { css } from "@emotion/react";
 
 type TabsTab = ComponentProps<typeof TabsTab>;
@@ -37,8 +37,13 @@ export const TabsList = forwardRef(function TabsList<
   const Component = as || "div";
 
   const combinedStyles = useMemo(
-    () => (style ? css(listBaseStyle, { ...style }) : [listBaseStyle]),
-    [style]
+    () =>
+      style
+        ? css(listBaseStyle, getDirectionStyle(tabsContext?.direction), {
+            ...style,
+          })
+        : [listBaseStyle, getDirectionStyle(tabsContext?.direction)],
+    [style, tabsContext?.direction]
   );
 
   const handleKeyDown = useCallback(

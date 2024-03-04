@@ -18,7 +18,7 @@ export const TabsProvider = ({
   size,
   current,
   onChangeCurrent,
-  direction,
+  direction = "horizontal",
 }: TabsProviderProps) => {
   const [internalCurrent, changeInternalCurrent] = useState(current ?? 0);
 
