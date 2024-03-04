@@ -12,7 +12,6 @@ export const tabBaseStyle = css({
     whiteSpace: "nowrap",
     textDecoration: "none",
     color: foundations.colors.gray[700],
-    height: "100%",
     transition: "color 0.2s",
     backgroundColor: "transparent",
     borderBottom: `2px solid ${foundations.colors.gray[200]}`,
