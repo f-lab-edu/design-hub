@@ -5,7 +5,7 @@ import { describe, expect, test, vi } from "vitest";
 
 import { TabsContext, TabsProvider } from "../tabs-context";
 
-describe("fds/components/tabs/tabs-context", () => {
+describe("TabsContext", () => {
   test("TabsProvider 는 children을 렌더링한다", () => {
     render(<TabsProvider>children</TabsProvider>);
 
