@@ -1,13 +1,21 @@
-import React from "react";
+import React, { ComponentProps } from "react";
 import { Tabs } from "../index";
 
 export default {
   title: "Components/Tabs",
   component: Tabs.Root,
+  argTypes: {
+    direction: {
+      control: "select",
+      options: ["horizontal", "vertical"],
+    },
+  },
 };
 
-const Template = () => (
-  <Tabs.Root>
+type Args = Pick<ComponentProps<typeof Tabs.Root>, "size" | "direction">;
+
+const Template = ({ size, direction }: Args) => (
+  <Tabs.Root size={size} direction={direction}>
     <Tabs.List>
       <Tabs.Tab>Tab 1</Tabs.Tab>
       <Tabs.Tab>Tab 2</Tabs.Tab>
