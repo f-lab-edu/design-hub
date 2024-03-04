@@ -12,8 +12,10 @@ import {
   cloneElement,
   forwardRef,
   isValidElement,
+  useCallback,
   useContext,
   useMemo,
+  type KeyboardEvent,
 } from "react";
 import { TabsContext } from "./tabs-context";
 import { TabsTab } from "./tabs-tab";
@@ -39,12 +41,54 @@ export const TabsList = forwardRef(function TabsList<
     [style]
   );
 
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (!tabsContext) return;
+
+      const tabElements = Array.from(
+        event.currentTarget.children
+      ) as HTMLElement[];
+      let newTabIndex = tabsContext.current || 0;
+
+      if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+        const moveForward = event.key === "ArrowRight";
+
+        for (let i = 1; i < tabElements.length; i++) {
+          const potentialIndex =
+            ((tabsContext.current || 0) +
+              (moveForward ? i : -i) +
+              tabElements.length) %
+            tabElements.length;
+
+          const potentialTab = tabElements[potentialIndex];
+
+          if (!potentialTab.hasAttribute("disabled")) {
+            newTabIndex = potentialIndex;
+            break;
+          }
+        }
+      }
+
+      if (newTabIndex !== tabsContext.current && tabsContext.onChangeCurrent) {
+        tabsContext.onChangeCurrent(newTabIndex);
+        tabElements[newTabIndex].focus();
+      }
+    },
+    [tabsContext]
+  );
+
   if (!tabsContext) {
     throw new Error("Tabs.List must be rendered within a Tabs.Root.");
   }
 
   return (
-    <Component ref={ref} role="tablist" css={combinedStyles} {...rest}>
+    <Component
+      ref={ref}
+      role="tablist"
+      onKeyDown={handleKeyDown}
+      css={combinedStyles}
+      {...rest}
+    >
       {Children.map(children, (child, idx) => {
         if (!isValidElement(child)) return child;
         return cloneElement(child as ReactElement<TabsTab>, {
