@@ -12,7 +12,7 @@ import { TabsContext, TabsProvider } from "./tabs-context";
 import { getSizeStyle, tabBaseStyle } from "./styles/tabs-tab";
 import { css } from "@emotion/react";
 
-type TabChangeHandler = ComponentProps<typeof TabsProvider>["onChangeCurrent"];
+type TabChangeHandler = ComponentProps<typeof TabsProvider>["onCurrentChange"];
 
 type TabsTabProps = HTMLAttributes<HTMLButtonElement> & {
   handleChange?: TabChangeHandler;

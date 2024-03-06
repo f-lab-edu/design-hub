@@ -19,27 +19,28 @@ describe("TabsRoot", () => {
     expect(screen.getByText("Tab 3")).toBeInTheDocument();
   });
 
-  it("current, onChangeCurrent, direction, size 등의 props를 컨텍스트 value 로 전달할 수 있다", () => {
+  it("current, onCurrentChange, direction, size 등의 props를 컨텍스트 value 로 전달할 수 있다", () => {
     const TestComponent: FC = () => {
-      const context = useContext(TabsContext);
-      expect(context).toMatchObject({ onChangeCurrent, current: 1 });
+      const current = useContext(TabsContext)?.current;
+      expect(current).toBe(1);
+
+      const direction = useContext(TabsContext)?.direction;
+      expect(direction).toBe("vertical");
+
+      const size = useContext(TabsContext)?.size;
+      expect(size).toBe("sm");
 
       return null;
     };
 
-    const onChangeCurrent = vi.fn();
+    const onCurrentChange = vi.fn();
 
     render(
-      <TabsRoot
-        current={1}
-        onChangeCurrent={onChangeCurrent}
-        direction="vertical"
-        size="sm"
-      >
+      <TabsRoot current={1} direction="vertical" size="sm">
         <TestComponent />
       </TabsRoot>
     );
 
-    expect(onChangeCurrent).not.toHaveBeenCalled();
+    expect(onCurrentChange).not.toHaveBeenCalled();
   });
 });

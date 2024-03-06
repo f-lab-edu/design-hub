@@ -14,7 +14,7 @@ describe("TabsTab", () => {
     expect(screen.getByText("Home")).toBeInTheDocument();
   });
 
-  it("클릭 이벤트가 발생했을때 전달받은 onChangeCurrent 함수와 onClick 함수가 있으면 호출한다", () => {
+  it("클릭 이벤트가 발생했을때 전달받은 handleChange 함수와 onClick 함수가 있으면 호출한다", () => {
     const handleChange = vi.fn();
     const onClick = vi.fn();
 

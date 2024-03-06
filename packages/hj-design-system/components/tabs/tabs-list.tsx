@@ -87,8 +87,8 @@ export const TabsList = forwardRef(function TabsList<
         }
       }
 
-      if (newTabIndex !== tabsContext.current && tabsContext.onChangeCurrent) {
-        tabsContext.onChangeCurrent(newTabIndex);
+      if (newTabIndex !== tabsContext.current && tabsContext.onCurrentChange) {
+        tabsContext.onCurrentChange(newTabIndex);
         tabElements[newTabIndex].focus();
       }
     },
@@ -111,7 +111,7 @@ export const TabsList = forwardRef(function TabsList<
         if (!isValidElement(child)) return child;
         return cloneElement(child as ReactElement, {
           handleChange: () => {
-            if (tabsContext?.onChangeCurrent) tabsContext?.onChangeCurrent(idx);
+            if (tabsContext?.onCurrentChange) tabsContext?.onCurrentChange(idx);
           },
           index: idx,
           id: `tab-${idx}`,

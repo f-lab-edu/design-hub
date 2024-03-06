@@ -27,15 +27,12 @@ describe("TabsContext", () => {
     );
   });
 
-  test("TabsProvider 는 onChangeCurrent 와 current prop 을 받을 수 있다.", () => {
-    const onChangeCurrent = vi.fn();
-
+  test("TabsProvider 는  current prop 을 받을 수 있다.", () => {
     render(
-      <TabsProvider onChangeCurrent={onChangeCurrent} current={4}>
+      <TabsProvider current={4}>
         <TabsContext.Consumer>
           {(context): null => {
             expect(context).not.toBeNull();
-            expect(context?.onChangeCurrent).toBe(onChangeCurrent);
             expect(context?.current).toBe(4);
             return null;
           }}

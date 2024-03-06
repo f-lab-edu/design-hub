@@ -37,7 +37,7 @@ export const Controlled = () => {
   const [current, setCurrent] = React.useState(0);
 
   return (
-    <Tabs.Root current={current} onChangeCurrent={setCurrent}>
+    <Tabs.Root current={current}>
       <Tabs.List>
         <Tabs.Tab>Tab 1</Tabs.Tab>
         <Tabs.Tab>Tab 2</Tabs.Tab>
