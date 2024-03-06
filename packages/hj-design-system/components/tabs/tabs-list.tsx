@@ -6,7 +6,6 @@ import {
 } from "components/polymorphic";
 import {
   Children,
-  ComponentProps,
   ElementType,
   ReactElement,
   cloneElement,
@@ -18,11 +17,8 @@ import {
   type KeyboardEvent,
 } from "react";
 import { TabsContext } from "./tabs-context";
-import { TabsTab } from "./tabs-tab";
 import { getDirectionStyle, listBaseStyle } from "./styles/tabs-list";
 import { css } from "@emotion/react";
-
-type TabsTab = ComponentProps<typeof TabsTab>;
 
 type TabsListProps<C extends ElementType = "div"> =
   PolymorphicComponentPropsWithRef<C>;
@@ -113,7 +109,7 @@ export const TabsList = forwardRef(function TabsList<
     >
       {Children.map(children, (child, idx) => {
         if (!isValidElement(child)) return child;
-        return cloneElement(child as ReactElement<TabsTab>, {
+        return cloneElement(child as ReactElement, {
           handleChange: () => {
             if (tabsContext?.onChangeCurrent) tabsContext?.onChangeCurrent(idx);
           },
