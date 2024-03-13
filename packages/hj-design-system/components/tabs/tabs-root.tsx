@@ -18,10 +18,6 @@ type TabsRootProps = HTMLAttributes<HTMLDivElement> & {
    */
   current?: number;
   /**
-   * The callback function that is called when the tab is clicked.
-   */
-  onChangeCurrent?: (index: number) => void;
-  /**
    * The direction of the tabs.
    * @default "horizontal"
    */
@@ -36,7 +32,6 @@ export const TabsRoot = forwardRef(function TabsRoot(
     children,
     size = "md",
     current,
-    onChangeCurrent,
     direction = "horizontal",
     style,
     ...rest
@@ -51,12 +46,7 @@ export const TabsRoot = forwardRef(function TabsRoot(
   );
 
   return (
-    <TabsProvider
-      size={size}
-      current={current}
-      onChangeCurrent={onChangeCurrent}
-      direction={direction}
-    >
+    <TabsProvider size={size} current={current} direction={direction}>
       <div ref={ref} css={combinedStyles} {...rest}>
         {children}
       </div>

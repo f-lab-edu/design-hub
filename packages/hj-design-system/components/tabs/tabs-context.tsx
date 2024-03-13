@@ -9,7 +9,6 @@ interface TabsProviderProps {
   children: ReactNode;
   size?: TabsSizeSet;
   current?: number;
-  onChangeCurrent?: (index: number) => void;
   direction?: TabsDirection;
 }
 
@@ -17,19 +16,18 @@ export const TabsProvider = ({
   children,
   size,
   current,
-  onChangeCurrent,
   direction = "horizontal",
 }: TabsProviderProps) => {
-  const [internalCurrent, changeInternalCurrent] = useState(current ?? 0);
+  const [internalCurrent, onCurrentChange] = useState(current ?? 0);
 
   const ContextValue = useMemo(
     () => ({
       size,
       current: current ?? internalCurrent,
-      onChangeCurrent: onChangeCurrent ?? changeInternalCurrent,
+      onCurrentChange,
       direction,
     }),
-    [size, current, direction, current, onChangeCurrent, internalCurrent]
+    [size, current, direction, current, onCurrentChange, internalCurrent]
   );
 
   return (
