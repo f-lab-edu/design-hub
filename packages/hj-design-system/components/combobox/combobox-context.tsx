@@ -43,7 +43,6 @@ export const ComboboxProvider = ({
 }: ComboboxProviderProps) => {
   const [currentValue, changeCurrent] = useState(current ?? "");
 
-  console.log(currentValue);
   const { isOpen, toggle, changeIsOpen } = useToggle();
 
   const ContextValue = useMemo(
