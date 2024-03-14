@@ -57,9 +57,13 @@ export const ComboboxList = forwardRef(function ComboboxList<
         >
           {Children.map(children, (child) => {
             if (!isValidElement(child)) return null;
-            return cloneElement(child as ReactElement, {
-              handleChange: comboboxContext.changeCurrent,
-            });
+            return child.props.value
+              .toLowerCase()
+              .includes(comboboxContext.current?.toLowerCase())
+              ? cloneElement(child as ReactElement, {
+                  handleChange: comboboxContext.changeCurrent,
+                })
+              : null;
           })}
         </Copmonent>
       )}

@@ -19,6 +19,7 @@ export const ComboboxInput = forwardRef(function ComboboxInput(
       ref={ref}
       role="combobox"
       onFocus={() => comboboxContext.changeIsOpen(true)}
+      onChange={(e) => comboboxContext.changeCurrent(e.target.value)}
       aria-expanded={comboboxContext.isOpen}
       value={comboboxContext.current}
     />
