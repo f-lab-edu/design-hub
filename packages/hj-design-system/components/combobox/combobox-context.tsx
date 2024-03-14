@@ -3,9 +3,10 @@ import { ReactNode, createContext, useMemo, useState } from "react";
 
 interface ComboboxContextProps {
   /**
-   * The current selected option index.
+   * The current selected option value
+   * @type string
    */
-  current?: number;
+  current?: string;
   /**
    * The open satet of the combobox
    */
@@ -19,9 +20,10 @@ interface ComboboxContextProps {
    */
   changeIsOpen: (value: boolean) => void;
   /**
-   * Change the current selected option index.
+   * Change the current selected option value
+   * @param value - the value of the selected option
    */
-  changeCurrent: (value: number) => void;
+  changeCurrent: (value: string) => void;
 }
 
 export const ComboboxContext = createContext<ComboboxContextProps | null>(null);
@@ -29,17 +31,19 @@ export const ComboboxContext = createContext<ComboboxContextProps | null>(null);
 interface ComboboxProviderProps {
   children: ReactNode;
   /**
-   * The current selected option index.
+   * The current selected option value.
+   * @type string
    */
-  current?: number;
+  current?: string;
 }
 
 export const ComboboxProvider = ({
   children,
   current,
 }: ComboboxProviderProps) => {
-  const [currentValue, changeCurrent] = useState(current ?? 0);
+  const [currentValue, changeCurrent] = useState(current ?? "");
 
+  console.log(currentValue);
   const { isOpen, toggle, changeIsOpen } = useToggle();
 
   const ContextValue = useMemo(

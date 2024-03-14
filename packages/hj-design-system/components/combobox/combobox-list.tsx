@@ -53,16 +53,12 @@ export const ComboboxList = forwardRef(function ComboboxList<
           role="listbox"
           animate={!disableAnimation ? "animate" : undefined}
           variants={!disableAnimation ? defaultAnimationVariants : undefined}
-          animatePresenceProps={animatePresenceProps}
           {...rest}
         >
-          {Children.map(children, (child, idx) => {
+          {Children.map(children, (child) => {
             if (!isValidElement(child)) return null;
             return cloneElement(child as ReactElement, {
-              handleChange: () => {
-                comboboxContext.changeCurrent(idx);
-              },
-              index: idx,
+              handleChange: comboboxContext.changeCurrent,
             });
           })}
         </Copmonent>

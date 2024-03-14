@@ -6,14 +6,25 @@ import { ElementType, forwardRef, useContext } from "react";
 import { ComboboxContext } from "./combobox-context";
 
 type ComboboxItemProps<C extends ElementType = "li"> =
-  PolymorphicComponentPropsWithRef<C>;
+  PolymorphicComponentPropsWithRef<
+    C,
+    {
+      /**
+       * The value of the option
+       */
+      value: string;
+      /**
+       * change handler
+       */
+      handleChange?: (index: string) => void;
+    }
+  >;
 
 export const ComboboxItem = forwardRef(function ComboboxItem<
   C extends ElementType = "li",
 >(props: ComboboxItemProps<C>, ref?: PolymorphicRef<C>) {
-  const { as, children, handleChange, onClick, index, ...rest } = props;
+  const { as, children, handleChange, onClick, value, index, ...rest } = props;
   const Component = as || "li";
-
   const comboboxContext = useContext(ComboboxContext);
 
   if (!comboboxContext) {
@@ -24,14 +35,14 @@ export const ComboboxItem = forwardRef(function ComboboxItem<
     <Component
       ref={ref}
       role="option"
-      onClick={() => {
-        handleChange();
+      onClick={(e) => {
+        handleChange?.(value);
+        onClick?.(e);
         comboboxContext.changeIsOpen(false);
-        onClick?.();
       }}
-      aria-selectd={comboboxContext.current === index}
       {...rest}
     >
+      {value}
       {children}
     </Component>
   );
