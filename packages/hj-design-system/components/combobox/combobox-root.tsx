@@ -5,7 +5,7 @@ type ComboboxRootProps = HTMLAttributes<HTMLDivElement> & {
   /**
    * The current selected option index.
    */
-  current?: number;
+  current?: string;
 };
 
 export const ComboboxRoot = forwardRef(function ComboboxRoot(
