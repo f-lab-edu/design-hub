@@ -1,4 +1,5 @@
 import { ForwardedRef, HTMLAttributes, forwardRef } from "react";
+import { ComboboxProvider } from "./combobox-context";
 
 type ComboboxRootProps = HTMLAttributes<HTMLDivElement> & {
   /**
@@ -14,8 +15,10 @@ export const ComboboxRoot = forwardRef(function ComboboxRoot(
   const { children, current, ...rest } = props;
 
   return (
-    <div ref={ref} {...rest}>
-      {children}
-    </div>
+    <ComboboxProvider current={current}>
+      <div ref={ref} {...rest}>
+        {children}
+      </div>
+    </ComboboxProvider>
   );
 });
