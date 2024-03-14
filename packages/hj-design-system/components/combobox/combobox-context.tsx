@@ -14,6 +14,10 @@ interface ComboboxContextProps {
    * Change the open state of the combobox
    */
   toggle: () => void;
+  /**
+   * Change the open state of the combobox
+   */
+  changeIsOpen: (value: boolean) => void;
 }
 
 export const ComboboxContext = createContext<ComboboxContextProps | null>(null);
@@ -32,10 +36,16 @@ export const ComboboxProvider = ({
 }: ComboboxProviderProps) => {
   const [currentValue, changeCurrent] = useState(current ?? 0);
 
-  const { isOpen, toggle } = useToggle();
+  const { isOpen, toggle, changeIsOpen } = useToggle();
 
   const ContextValue = useMemo(
-    () => ({ current: currentValue, changeCurrent, isOpen, toggle }),
+    () => ({
+      current: currentValue,
+      changeCurrent,
+      isOpen,
+      toggle,
+      changeIsOpen,
+    }),
     [currentValue, current, isOpen]
   );
 
