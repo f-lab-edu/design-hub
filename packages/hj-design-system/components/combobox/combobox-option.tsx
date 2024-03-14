@@ -5,7 +5,7 @@ import {
 import { ElementType, forwardRef, useContext } from "react";
 import { ComboboxContext } from "./combobox-context";
 
-type ComboboxItemProps<C extends ElementType = "li"> =
+type ComboboxOptionProps<C extends ElementType = "li"> =
   PolymorphicComponentPropsWithRef<
     C,
     {
@@ -20,9 +20,9 @@ type ComboboxItemProps<C extends ElementType = "li"> =
     }
   >;
 
-export const ComboboxItem = forwardRef(function ComboboxItem<
+export const ComboboxOption = forwardRef(function ComboboxOption<
   C extends ElementType = "li",
->(props: ComboboxItemProps<C>, ref?: PolymorphicRef<C>) {
+>(props: ComboboxOptionProps<C>, ref?: PolymorphicRef<C>) {
   const { as, children, handleChange, onClick, value, index, ...rest } = props;
   const Component = as || "li";
   const comboboxContext = useContext(ComboboxContext);
