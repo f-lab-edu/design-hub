@@ -18,6 +18,10 @@ interface ComboboxContextProps {
    * Change the open state of the combobox
    */
   changeIsOpen: (value: boolean) => void;
+  /**
+   * Change the current selected option index.
+   */
+  changeCurrent: (value: number) => void;
 }
 
 export const ComboboxContext = createContext<ComboboxContextProps | null>(null);
