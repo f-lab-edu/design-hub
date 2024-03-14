@@ -19,8 +19,8 @@ export const ComboboxInput = forwardRef(function ComboboxInput(
       ref={ref}
       role="combobox"
       onFocus={() => comboboxContext.changeIsOpen(true)}
-      onBlur={() => comboboxContext.changeIsOpen(false)}
       aria-expanded={comboboxContext.isOpen}
+      value={comboboxContext.current}
     />
   );
 });
