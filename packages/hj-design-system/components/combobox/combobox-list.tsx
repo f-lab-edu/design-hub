@@ -71,13 +71,14 @@ export const ComboboxList = forwardRef(function ComboboxList<
           css={styles}
           {...rest}
         >
-          {Children.map(children, (child) => {
+          {Children.map(children, (child, index) => {
             if (!isValidElement(child)) return null;
             return child.props.value
               .toLowerCase()
               .includes(comboboxContext.current?.toLowerCase())
               ? cloneElement(child as ReactElement, {
                   handleChange: comboboxContext.changeCurrent,
+                  index,
                 })
               : null;
           })}
