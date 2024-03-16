@@ -10,3 +10,9 @@ export const optionBaseStyle = css({
         background: foundations.colors.blue[200],
     },
 })
+
+export const getSelectedStyle = (isSelected: boolean) => {
+    return css({
+        background: isSelected ? foundations.colors.blue[400] : "transparent",
+    })
+}

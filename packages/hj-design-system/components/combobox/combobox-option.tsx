@@ -4,9 +4,9 @@ import {
   PolymorphicComponentPropsWithRef,
   PolymorphicRef,
 } from "components/polymorphic";
-import { ElementType, forwardRef, useContext, useMemo } from "react";
+import { ElementType, forwardRef, useContext, useEffect, useMemo } from "react";
 import { ComboboxContext } from "./combobox-context";
-import { optionBaseStyle } from "./styles/combobox-option";
+import { getSelectedStyle, optionBaseStyle } from "./styles/combobox-option";
 
 type ComboboxOptionProps<C extends ElementType = "li"> =
   PolymorphicComponentPropsWithRef<
@@ -32,7 +32,11 @@ export const ComboboxOption = forwardRef(function ComboboxOption<
   const comboboxContext = useContext(ComboboxContext);
 
   const combinedStyles = useMemo(() => {
-    return style ? [optionBaseStyle, style] : optionBaseStyle;
+    const baseStyles = [
+      optionBaseStyle,
+      getSelectedStyle(comboboxContext?.currentIndex === index),
+    ];
+    return style ? [baseStyles, style] : baseStyles;
   }, [optionBaseStyle, style]);
 
   if (!comboboxContext) {
