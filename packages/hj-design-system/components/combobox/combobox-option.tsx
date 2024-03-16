@@ -39,6 +39,18 @@ export const ComboboxOption = forwardRef(function ComboboxOption<
     return style ? [baseStyles, style] : baseStyles;
   }, [optionBaseStyle, style]);
 
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      const optionElements = document.querySelectorAll("[role='option']");
+      const activeElement = comboboxContext
+        ? optionElements[comboboxContext.currentIndex]
+        : null;
+      if (activeElement) {
+        activeElement.scrollIntoView({ behavior: "auto", block: "nearest" });
+      }
+    });
+  }, []);
+
   if (!comboboxContext) {
     throw new Error("Combobox.Item should be used within a Combobox.Root");
   }
