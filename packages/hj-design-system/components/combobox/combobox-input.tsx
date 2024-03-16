@@ -1,5 +1,15 @@
-import { ForwardedRef, HTMLAttributes, forwardRef, useContext } from "react";
+/** @jsxImportSource @emotion/react */
+
+import {
+  ForwardedRef,
+  HTMLAttributes,
+  forwardRef,
+  useContext,
+  useMemo,
+} from "react";
 import { ComboboxContext } from "./combobox-context";
+import { inputBaseStyle } from "./styles/combobox-input";
+import { css } from "@emotion/react";
 
 type ComboboxInput = HTMLAttributes<HTMLInputElement>;
 
@@ -7,7 +17,13 @@ export const ComboboxInput = forwardRef(function ComboboxInput(
   props: ComboboxInput,
   ref: ForwardedRef<HTMLInputElement>
 ) {
+  const { style, ...rest } = props;
+
   const comboboxContext = useContext(ComboboxContext);
+
+  const styles = useMemo(() => {
+    return style ? [inputBaseStyle, css({ ...style })] : inputBaseStyle;
+  }, [style, inputBaseStyle]);
 
   if (!comboboxContext) {
     throw new Error("Combobox.Input should be used within a Combobox.Root");
@@ -15,13 +31,14 @@ export const ComboboxInput = forwardRef(function ComboboxInput(
 
   return (
     <input
-      {...props}
+      {...rest}
       ref={ref}
       role="combobox"
       onFocus={() => comboboxContext.changeIsOpen(true)}
       onChange={(e) => comboboxContext.changeCurrent(e.target.value)}
       aria-expanded={comboboxContext.isOpen}
       value={comboboxContext.current}
+      css={styles}
     />
   );
 });
