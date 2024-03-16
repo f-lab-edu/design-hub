@@ -53,6 +53,7 @@ export const ComboboxList = forwardRef(function ComboboxList<
           role="listbox"
           animate={!disableAnimation ? "animate" : undefined}
           variants={!disableAnimation ? defaultAnimationVariants : undefined}
+          tabIndex={0}
           {...rest}
         >
           {Children.map(children, (child) => {

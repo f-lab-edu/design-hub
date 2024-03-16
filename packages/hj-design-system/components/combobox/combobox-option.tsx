@@ -40,6 +40,7 @@ export const ComboboxOption = forwardRef(function ComboboxOption<
         onClick?.(e);
         comboboxContext.changeIsOpen(false);
       }}
+      tabIndex={-1}
       {...rest}
     >
       {value}
