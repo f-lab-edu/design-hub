@@ -3,6 +3,7 @@
 import {
   ForwardedRef,
   HTMLAttributes,
+  KeyboardEvent,
   forwardRef,
   useContext,
   useMemo,
@@ -21,6 +22,13 @@ export const ComboboxInput = forwardRef(function ComboboxInput(
 
   const comboboxContext = useContext(ComboboxContext);
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "ArrowDown")
+      comboboxContext?.changeCurrentIndex(comboboxContext.currentIndex + 1);
+    else if (e.key === "ArrowUp")
+      comboboxContext?.changeCurrentIndex(comboboxContext.currentIndex - 1);
+  };
+
   const styles = useMemo(() => {
     return style ? [inputBaseStyle, css({ ...style })] : inputBaseStyle;
   }, [style, inputBaseStyle]);
@@ -36,6 +44,7 @@ export const ComboboxInput = forwardRef(function ComboboxInput(
       role="combobox"
       onFocus={() => comboboxContext.changeIsOpen(true)}
       onChange={(e) => comboboxContext.changeCurrent(e.target.value)}
+      onKeyDown={handleKeyDown}
       aria-expanded={comboboxContext.isOpen}
       value={comboboxContext.current}
       css={styles}
