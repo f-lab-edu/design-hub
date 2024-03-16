@@ -24,6 +24,16 @@ interface ComboboxContextProps {
    * @param value - the value of the selected option
    */
   changeCurrent: (value: string) => void;
+  /**
+   * The current selected option index
+   * @type number
+   */
+  currentIndex: number;
+  /**
+   * Change the current selected option index
+   * @param index - the index of the selected option
+   */
+  changeCurrentIndex: (index: number) => void;
 }
 
 export const ComboboxContext = createContext<ComboboxContextProps | null>(null);
@@ -43,6 +53,8 @@ export const ComboboxProvider = ({
 }: ComboboxProviderProps) => {
   const [currentValue, changeCurrent] = useState(current ?? "");
 
+  const [currentIndex, changeCurrentIndex] = useState(-1);
+
   const { isOpen, toggle, changeIsOpen } = useToggle();
 
   const ContextValue = useMemo(
@@ -52,8 +64,10 @@ export const ComboboxProvider = ({
       isOpen,
       toggle,
       changeIsOpen,
+      currentIndex,
+      changeCurrentIndex,
     }),
-    [currentValue, current, isOpen]
+    [currentValue, current, isOpen, currentIndex]
   );
 
   return (
