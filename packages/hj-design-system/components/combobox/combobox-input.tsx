@@ -23,10 +23,22 @@ export const ComboboxInput = forwardRef(function ComboboxInput(
   const comboboxContext = useContext(ComboboxContext);
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "ArrowDown")
-      comboboxContext?.changeCurrentIndex(comboboxContext.currentIndex + 1);
-    else if (e.key === "ArrowUp")
-      comboboxContext?.changeCurrentIndex(comboboxContext.currentIndex - 1);
+    if (!comboboxContext) return;
+    const inputTarget = e.target as HTMLInputElement;
+    if (!inputTarget.nextSibling) return;
+    const optionsLength = (inputTarget.nextSibling as HTMLElement).children
+      .length;
+
+    if (e.key === "ArrowDown") {
+      const nextIndex = (comboboxContext.currentIndex + 1) % optionsLength;
+      comboboxContext?.changeCurrentIndex(nextIndex);
+    } else if (e.key === "ArrowUp") {
+      if (comboboxContext.currentIndex === 0) {
+        comboboxContext?.changeCurrentIndex(optionsLength - 1);
+      } else {
+        comboboxContext?.changeCurrentIndex(comboboxContext.currentIndex - 1);
+      }
+    }
   };
 
   const styles = useMemo(() => {
