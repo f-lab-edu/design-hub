@@ -11,9 +11,28 @@ export const CarouselTrigger = forwardRef(function CarouselTrigger(
   props: CarouselTriggerProps,
   ref: ForwardedRef<HTMLButtonElement>
 ) {
-  const { type, ...rest } = props;
+  const { type, onClick, ...rest } = props;
 
   const context = useCarousel();
 
-  return <button ref={ref} {...rest} />;
+  const handleClick = () => {
+    if (type === "prev") {
+      context.changeCurrent(Math.max(0, context.current - 1));
+    } else {
+      context.changeCurrent(Math.min(context.total - 1, context.current + 1));
+    }
+  };
+
+  return (
+    <button
+      ref={ref}
+      onClick={(e) => {
+        handleClick();
+        if (onClick) {
+          onClick(e);
+        }
+      }}
+      {...rest}
+    />
+  );
 });
