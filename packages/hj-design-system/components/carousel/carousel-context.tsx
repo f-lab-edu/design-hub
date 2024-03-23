@@ -1,10 +1,14 @@
-import { ReactNode, createContext, useContext, useMemo } from "react";
+import { ReactNode, createContext, useContext, useMemo, useState } from "react";
 
 interface CarouselContext {
   /**
    * Current index of the carousel
    */
   current?: number;
+  /**
+   * Set the current index of the carousel
+   */
+  handleCurrent: (index: number) => void;
 }
 
 const CarouselContext = createContext<CarouselContext | null>(null);
@@ -18,7 +22,15 @@ interface ContextProvider {
 }
 
 export const CarouselProvider = ({ children, current }: ContextProvider) => {
-  const ContextValue = useMemo(() => ({ current }), [current]);
+  const [currentIndex, setCurrentIndex] = useState(current || 0);
+
+  const ContextValue = useMemo(
+    () => ({
+      current: current || currentIndex,
+      handleCurrent: setCurrentIndex,
+    }),
+    [current]
+  );
 
   return (
     <CarouselContext.Provider value={ContextValue}>
