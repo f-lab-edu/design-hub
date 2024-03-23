@@ -25,6 +25,7 @@ export const CarouselItemGroup = forwardRef(function CarouselItemGroup(
         if (!isValidElement(child)) {
           return null;
         }
+        context.changeTotal(Children.count(children));
         return cloneElement(child as ReactElement, {
           index,
         });
