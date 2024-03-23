@@ -1,4 +1,12 @@
-import { ForwardedRef, HTMLAttributes, forwardRef } from "react";
+import {
+  Children,
+  ForwardedRef,
+  HTMLAttributes,
+  ReactElement,
+  cloneElement,
+  forwardRef,
+  isValidElement,
+} from "react";
 import { useCarousel } from "./carousel-context";
 
 type CarouselIndicatorGroupProps = HTMLAttributes<HTMLDivElement>;
@@ -8,8 +16,21 @@ export const CarouselIndicatorGroup = forwardRef(
     props: CarouselIndicatorGroupProps,
     ref?: ForwardedRef<HTMLDivElement>
   ) {
+    const { children, ...rest } = props;
+
     const context = useCarousel();
 
-    return <div ref={ref} {...props} />;
+    return (
+      <div ref={ref} {...rest}>
+        {Children.map(children, (child, index) => {
+          if (!isValidElement(child)) {
+            return null;
+          }
+          return cloneElement(child as ReactElement, {
+            index,
+          });
+        })}
+      </div>
+    );
   }
 );
