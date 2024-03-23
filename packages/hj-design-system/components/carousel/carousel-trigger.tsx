@@ -1,4 +1,5 @@
 import { ForwardedRef, HTMLAttributes, forwardRef } from "react";
+import { useCarousel } from "./carousel-context";
 
 type ControlType = "prev" | "next";
 
@@ -11,6 +12,8 @@ export const CarouselTrigger = forwardRef(function CarouselTrigger(
   ref: ForwardedRef<HTMLButtonElement>
 ) {
   const { type, ...rest } = props;
+
+  const context = useCarousel();
 
   return <button ref={ref} {...rest} />;
 });
