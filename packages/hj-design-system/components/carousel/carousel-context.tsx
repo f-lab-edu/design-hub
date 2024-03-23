@@ -9,6 +9,14 @@ interface CarouselContext {
    * Set the current index of the carousel
    */
   changeCurrent: (index: number) => void;
+  /**
+   * Total number of items in the carousel
+   */
+  total: number;
+  /**
+   * Set the total number of items in the carousel
+   */
+  changeTotal: (total: number) => void;
 }
 
 const CarouselContext = createContext<CarouselContext | null>(null);
@@ -23,11 +31,14 @@ interface ContextProvider {
 
 export const CarouselProvider = ({ children, current }: ContextProvider) => {
   const [currentIndex, setCurrentIndex] = useState(current || 0);
+  const [total, setTotal] = useState(0);
 
   const ContextValue = useMemo(
     () => ({
       current: current || currentIndex,
       changeCurrent: setCurrentIndex,
+      total,
+      changeTotal: setTotal,
     }),
     [currentIndex]
   );
