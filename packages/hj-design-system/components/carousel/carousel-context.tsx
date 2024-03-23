@@ -4,7 +4,7 @@ interface CarouselContext {
   /**
    * Current index of the carousel
    */
-  current?: number;
+  current: number;
   /**
    * Set the current index of the carousel
    */
