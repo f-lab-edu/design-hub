@@ -1,9 +1,13 @@
+/** @jsxImportSource @emotion/react */
+
 import {
   PolymorphicComponentPropsWithRef,
   PolymorphicRef,
 } from "components/polymorphic";
-import { ElementType, HTMLAttributes, forwardRef } from "react";
+import { ElementType, HTMLAttributes, forwardRef, useMemo } from "react";
 import { useCarousel } from "./carousel-context";
+import { itemBaseStyle } from "./style/carousel-item";
+import { css } from "@emotion/react";
 
 type CarouselItemProps<C extends ElementType = "div"> = HTMLAttributes<C> &
   PolymorphicComponentPropsWithRef<
@@ -19,9 +23,14 @@ type CarouselItemProps<C extends ElementType = "div"> = HTMLAttributes<C> &
 export const CarouselItem = forwardRef(function CarouselItem<
   C extends ElementType = "div",
 >(props: CarouselItemProps<C>, ref?: PolymorphicRef<C>) {
-  const { index, ...rest } = props;
+  const { index, style, ...rest } = props;
 
   const context = useCarousel();
+
+  const styles = useMemo(() => {
+    if (style) return css(itemBaseStyle, { ...style });
+    return itemBaseStyle;
+  }, [style]);
 
   return (
     <div
@@ -29,6 +38,7 @@ export const CarouselItem = forwardRef(function CarouselItem<
       role="tabpanel"
       aria-label={index}
       ref={ref}
+      css={styles}
       {...rest}
     />
   );
