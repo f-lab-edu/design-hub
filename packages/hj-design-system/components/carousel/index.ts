@@ -4,6 +4,7 @@ import {CarouselTrigger as Trigger} from './carousel-trigger';
 import { CarouselItemGroup as ItemGroup } from './carousel-item-group';
 import {CarouselItem as Item} from './carousel-item';
 import {CarouselIndicatorGroup as IndicatorGroup} from './carousel-indicator-group';
+import { CarouselIndicator as Indicator } from './carousel-indicator';
 
 export const Carousel = {
     Root,
@@ -11,5 +12,6 @@ export const Carousel = {
     Trigger,
     ItemGroup,
     Item,
-    IndicatorGroup
+    IndicatorGroup,
+    Indicator
 }
