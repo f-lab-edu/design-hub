@@ -1,4 +1,4 @@
-import { ReactNode, createContext } from "react";
+import { ReactNode, createContext, useMemo } from "react";
 
 interface CarouselContext {
   /**
@@ -18,8 +18,10 @@ interface ContextProvider {
 }
 
 export const CarouselProvider = ({ children, current }: ContextProvider) => {
+  const ContextValue = useMemo(() => ({ current }), [current]);
+
   return (
-    <CarouselContext.Provider value={{ current }}>
+    <CarouselContext.Provider value={ContextValue}>
       {children}
     </CarouselContext.Provider>
   );
