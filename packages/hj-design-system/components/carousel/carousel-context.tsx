@@ -8,7 +8,7 @@ interface CarouselContext {
   /**
    * Set the current index of the carousel
    */
-  handleCurrent: (index: number) => void;
+  changeCurrent: (index: number) => void;
 }
 
 const CarouselContext = createContext<CarouselContext | null>(null);
@@ -27,7 +27,7 @@ export const CarouselProvider = ({ children, current }: ContextProvider) => {
   const ContextValue = useMemo(
     () => ({
       current: current || currentIndex,
-      handleCurrent: setCurrentIndex,
+      changeCurrent: setCurrentIndex,
     }),
     [current]
   );
