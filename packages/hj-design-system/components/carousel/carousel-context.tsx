@@ -29,7 +29,7 @@ export const CarouselProvider = ({ children, current }: ContextProvider) => {
       current: current || currentIndex,
       changeCurrent: setCurrentIndex,
     }),
-    [current]
+    [currentIndex]
   );
 
   return (
