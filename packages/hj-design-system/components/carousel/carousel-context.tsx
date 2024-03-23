@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useMemo } from "react";
+import { ReactNode, createContext, useContext, useMemo } from "react";
 
 interface CarouselContext {
   /**
@@ -25,4 +25,16 @@ export const CarouselProvider = ({ children, current }: ContextProvider) => {
       {children}
     </CarouselContext.Provider>
   );
+};
+
+export const useCarousel = () => {
+  const context = useContext(CarouselContext);
+
+  if (!context) {
+    throw new Error(
+      "useCarousel must be used within a CarouselProvider. Did you forget to wrap your component in a Carousel.Root?"
+    );
+  }
+
+  return context;
 };
