@@ -25,7 +25,7 @@ export const CarouselItem = forwardRef(function CarouselItem<
 >(props: CarouselItemProps<C>, ref?: PolymorphicRef<C>) {
   const { index, style, ...rest } = props;
 
-  const context = useCarousel();
+  useCarousel();
 
   const styles = useMemo(() => {
     if (style) return css(itemBaseStyle, { ...style });

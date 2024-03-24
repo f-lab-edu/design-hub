@@ -18,7 +18,7 @@ export const CarouselIndicatorGroup = forwardRef(
   ) {
     const { children, ...rest } = props;
 
-    const context = useCarousel();
+    useCarousel();
 
     return (
       <div ref={ref} {...rest}>

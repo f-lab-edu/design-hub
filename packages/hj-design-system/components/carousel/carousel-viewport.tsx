@@ -23,7 +23,7 @@ export const CarouselViewport = forwardRef(function CarouselViewport(
 ) {
   const { children, style, ...rest } = props;
 
-  const context = useCarousel();
+  useCarousel();
 
   const { carouselRef, carouselWidth } = useViewport();
 

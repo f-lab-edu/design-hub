@@ -12,7 +12,7 @@ export const CarouselControl = forwardRef(function CarouselControl(
   ref?: ForwardedRef<HTMLDivElement>
 ) {
   const { children, style, ...rest } = props;
-  const context = useCarousel();
+  useCarousel();
 
   const styles = useMemo(() => {
     if (style) return css(controlBaseStyle, { ...style });
