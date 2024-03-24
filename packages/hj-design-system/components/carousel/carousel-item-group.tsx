@@ -8,6 +8,7 @@ import {
   cloneElement,
   forwardRef,
   isValidElement,
+  useContext,
   useMemo,
 } from "react";
 import { useCarousel } from "./carousel-context";
@@ -16,6 +17,7 @@ import {
   itemGroupBaseStyle,
 } from "./style/carousel-item-group";
 import { css } from "@emotion/react";
+import { CarouselViewportContext } from "./carousel-viewport-context";
 
 type CarouselItemGroupProps = HTMLAttributes<HTMLDivElement>;
 
@@ -26,7 +28,8 @@ export const CarouselItemGroup = forwardRef(function CarouselItemGroup(
   const { children, style, ...rest } = props;
 
   const context = useCarousel();
-  const itemWidth = 200;
+  const viewport = useContext(CarouselViewportContext);
+  const itemWidth = viewport?.width || 0;
 
   const styles = useMemo(() => {
     const baseStyles = css(
