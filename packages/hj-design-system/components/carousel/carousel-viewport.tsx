@@ -13,7 +13,7 @@ import { useCarousel } from "./carousel-context";
 import { css } from "@emotion/react";
 import { viewportBaseStyle } from "./style/carousel-viewport";
 import { CarouselViewportProvider } from "./carousel-viewport-context";
-import { mergeRefs } from "utils/mergeRefs";
+import { mergeRefs } from "../../utils/mergeRefs";
 
 type CarouselViewportProps = HTMLAttributes<HTMLDivElement>;
 
