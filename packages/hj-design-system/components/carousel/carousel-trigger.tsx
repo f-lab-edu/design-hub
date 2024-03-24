@@ -1,5 +1,9 @@
-import { ForwardedRef, HTMLAttributes, forwardRef } from "react";
+/** @jsxImportSource @emotion/react */
+
+import { ForwardedRef, HTMLAttributes, forwardRef, useMemo } from "react";
 import { useCarousel } from "./carousel-context";
+import { css } from "@emotion/react";
+import { triggerBaseStyle } from "./style/carousel-trigger";
 
 type ControlType = "prev" | "next";
 
@@ -11,7 +15,7 @@ export const CarouselTrigger = forwardRef(function CarouselTrigger(
   props: CarouselTriggerProps,
   ref: ForwardedRef<HTMLButtonElement>
 ) {
-  const { type, onClick, ...rest } = props;
+  const { type, onClick, style, ...rest } = props;
 
   const context = useCarousel();
 
@@ -23,8 +27,14 @@ export const CarouselTrigger = forwardRef(function CarouselTrigger(
     }
   };
 
+  const styles = useMemo(() => {
+    if (style) return css(triggerBaseStyle, { ...style });
+    return triggerBaseStyle;
+  }, [style]);
+
   return (
     <button
+      css={styles}
       ref={ref}
       onClick={(e) => {
         handleClick();
